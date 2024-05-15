@@ -45,7 +45,7 @@ export default {
     },
     async signIn(){
       try {
-        await pb.collections("users").authWithPassword(
+        await pb.collections('users').authWithPassword(
           document.getElementById('email').value,
           document.getElementById('password').value
         );
