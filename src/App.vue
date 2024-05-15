@@ -1,5 +1,6 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from './components/HelloWorld.vue';
+import Pocketbase from 'pocketbase';
 </script>
 
 <template>
@@ -40,9 +41,20 @@ export default {
         passwordConfirm:document.getElementById('password').value,
         name:document.getElementById('name').value
       });
+      document.getElementById('status').innerText="You are registred, please sign in";
     },
-    signIn(){
-
+    async signIn(){
+      try {
+        await pb.collections("users").authWithPassword(
+          document.getElementById('email').value,
+          document.getElementById('password').value
+        );
+        if (pb.authStore.baseToken !== null) {
+          document.getElementById('status').innerHTML = 'You are now connected !';
+        }
+      } catch (error) {
+        document.getElementById('status').innerHTML = 'Connexion problem, please try again !';
+      }
     },
     signOut(){
 
