@@ -4,10 +4,21 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="300" height="125" />
 
     <div class="wrapper">
       <HelloWorld msg="Connexion !" />
+    </div>
+    <div>
+      <p><label>Email :</label><input type="email" id="email"/></p>
+      <p><label>Password :</label><input type="password" id="password"/></p>
+      <p><label>Name :</label><input type="text" id="name"/></p>
+      <p>
+        <button v-on:click="signUp()">Sign Up</button>
+        <button v-on:click="signIn()">Sign In</button>
+        <button v-on:click="signOut()">Sign Out</button>
+      </p>
+      <label id="status">You are not yet connected !</label>
     </div>
   </header>
 
@@ -15,7 +26,30 @@ import HelloWorld from './components/HelloWorld.vue'
     <TheWelcome />
   </main>
 </template>
+<script>
+const pb=new Pocketbase("http://127.0.0.1:8090");
+export default {
+  components: {
+    HelloWorld
+  },
+  methods: {
+    async signUp() {
+      await pb.collection('users').create({
+        email:document.getElementById('email').value,
+        password:document.getElementById('password').value,
+        passwordConfirm:document.getElementById('password').value,
+        name:document.getElementById('name').value
+      });
+    },
+    signIn(){
 
+    },
+    signOut(){
+
+    }
+  }
+}
+</script>
 <style scoped>
 header {
   line-height: 1.5;
