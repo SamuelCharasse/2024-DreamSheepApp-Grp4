@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "http-server": "^14.1.1",
     "pocketbase": "^0.21.2",
     "vue": "^3.4.21"
   },

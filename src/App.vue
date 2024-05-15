@@ -28,7 +28,12 @@ import Pocketbase from 'pocketbase';
   </main>
 </template>
 <script>
-const pb=new Pocketbase("http://127.0.0.1:8090");
+var pocketbase_ip = "";
+if (import.meta.env.MODE === "production")
+pocketbase_ip = "http://45.155.169.177:8090";
+else pocketbase_ip = "http://127.0.0.1:8090";
+alert("pocketbase_ip =" + pocketbase_ip);
+const pb=new Pocketbase(pocketbase_ip);
 export default {
   components: {
     HelloWorld
