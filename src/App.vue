@@ -19,7 +19,7 @@ import Pocketbase from 'pocketbase';
         <button v-on:click="signIn()">Sign In</button>
         <button v-on:click="signOut()">Sign Out</button>
       </p>
-      <label id="status">You are not yet connected</label>
+      <label id="status">You are not yet connected ! C'est de la merde</label>
     </div>
   </header>
 
