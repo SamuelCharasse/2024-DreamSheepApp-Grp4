@@ -19,7 +19,7 @@ import Pocketbase from 'pocketbase';
         <button v-on:click="signIn()">Sign In</button>
         <button v-on:click="signOut()">Sign Out</button>
       </p>
-      <label id="status">You are not yet connected ! C'est de la merde</label>
+      <label id="status">You are not yet connected !</label>
     </div>
   </header>
 
@@ -57,7 +57,8 @@ export default {
       }
     },
     signOut(){
-
+      pb.authStore.clear();
+      document.getElementById('status').innerHTML = 'You are not connected';
     }
   }
 }
