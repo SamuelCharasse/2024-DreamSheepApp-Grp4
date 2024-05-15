@@ -29,41 +29,44 @@ import Pocketbase from 'pocketbase';
 </template>
 <script>
 var pocketbase_ip = "";
-if (import.meta.env.MODE === "production")
-pocketbase_ip = "http://45.155.169.177:8090";
-else pocketbase_ip = "http://127.0.0.1:8090";
-alert("pocketbase_ip =" + pocketbase_ip);
-const pb=new Pocketbase(pocketbase_ip);
+if (import.meta.env.MODE === "production") 
+pocketbase_ip = "http://45.155.169.177:8090/";
+else pocketbase_ip = "http://127.0.0.1:8090/";
+alert("pocketbase_ip = " + pocketbase_ip);
+const pb = new Pocketbase(pocketbase_ip);
+
 export default {
   components: {
     HelloWorld
   },
   methods: {
     async signUp() {
-      await pb.collection('users').create({
-        email:document.getElementById('email').value,
-        password:document.getElementById('password').value,
-        passwordConfirm:document.getElementById('password').value,
-        name:document.getElementById('name').value
+     await pb.collection('users').create({
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        passwordConfirm: document.getElementById('password').value,
+        name: document.getElementById('name').value
       });
-      document.getElementById('status').innerText="You are registred, please sign in";
+      document.getElementById('status').innerText="You are registred, please sign in !";
     },
-    async signIn(){
+    async signIn() {
       try {
-        await pb.collections('users').authWithPassword(
+        await pb.collection('users').authWithPassword(
           document.getElementById('email').value,
           document.getElementById('password').value
         );
         if (pb.authStore.baseToken !== null) {
-          document.getElementById('status').innerHTML = 'You are now connected !';
+          document.getElementById('status').innerHTML = "You are now connected !";
         }
       } catch (error) {
-        document.getElementById('status').innerHTML = 'Connexion problem, please try again !';
+        document.getElementById('status').innerHTML = "Connexion problem, please try again ! ";
       }
+
     },
-    signOut(){
+    signOut() {
       pb.authStore.clear();
-      document.getElementById('status').innerHTML = 'You are not connected';
+      document.getElementById('status').innerHTML = "You are not connected !";
+
     }
   }
 }
