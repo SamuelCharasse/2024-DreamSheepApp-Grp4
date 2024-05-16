@@ -4,4 +4,5 @@ import Menu from './components/Menu.vue';
 </script>
 <template>
   <Menu/>
+  <Login/>
 </template>
