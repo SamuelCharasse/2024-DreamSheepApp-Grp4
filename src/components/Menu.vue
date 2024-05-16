@@ -1,8 +1,8 @@
 <script setup lang="ts">
 </script>
 <template>
-  <nav>
-    <ul>
+  <nav class="fixed bottom-0 inset-x-0 flex justify-around bg-white">
+    <ul class="flex justify-around w-full">
       <li>
         <router-link to="/">
           <i class="fa fa-home"></i> Home
