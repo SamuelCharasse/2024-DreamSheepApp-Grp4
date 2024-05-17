@@ -1,8 +1,12 @@
 <script setup>
-import Login from './components/Login.vue';
 import Menu from './components/Menu.vue';
+import { RouterView } from 'vue-router';
 </script>
 <template>
-  <Menu/>
-  <Login/>
+  <header>
+    <Menu />
+  </header>
+  <main>
+    <RouterView />
+  </main>
 </template>
