@@ -3,8 +3,8 @@ import {RouterLink} from 'vue-router';
 </script>
 
 <template>
-    <nav class="fixed bottom-0 inset-x-0 bg-indigo-500">
-        <ul class="flex flex-row gap-1">
+    <nav class="fixed bottom-0 inset-x-0 bg-indigo-900 rounded-t-lg">
+        <ul class="flex flex-row justify-between p-4 text-slate-50">
             <li><router-link to="/">Home</router-link></li>
             <li><router-link to="/diary">Diary</router-link></li>
             <li><router-link to="/profile">Profile</router-link></li>
