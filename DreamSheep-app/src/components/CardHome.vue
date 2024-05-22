@@ -17,7 +17,7 @@ import TagIcon from '@/components/icons/TagIcon.vue';
             <p class="text-black text-base overflow-auto">j'ai rêvé que je me promenais dans une forêt mystérieuse. Les arbres  s'inclinaient gracieusement sous le poids de la lune brillante, et le  sol était tapissé de pétales de fleurs lumineuses. Alors que [...]</p>
         </div>
 
-        <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-4">
+        <div class="flex justify-self-start flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-4">
         <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative">
             <CommentIcon/>
             <p class="text-black text-sm pl-0.5">Nbr Commentaires</p>
