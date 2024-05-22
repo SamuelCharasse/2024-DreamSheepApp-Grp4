@@ -7,7 +7,9 @@ export default {
     './components/**/*.{html,js,vue}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {customPurple:'#B8B7EE',
+    },
   },
   plugins: [],
 } satisfies Config
