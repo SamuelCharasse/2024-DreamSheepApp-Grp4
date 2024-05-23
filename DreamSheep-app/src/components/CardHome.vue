@@ -2,14 +2,14 @@
 import CommentIcon from './icons/CommentIcon.vue';
 import HeartIcon from './icons/HeartIcon.vue';
 import FlagIcon from './icons/FlagIcon.vue';
-import ProfilIcon1 from './icons/ProfilIcon1.vue';
+import ProfileIcon from './icons/ProfileIcon.vue';
 import TagIcon from '@/components/icons/TagIcon.vue';
 </script>
 
 <template>
     <div class="bg-LightPurple overflow-hidden pt-2 rounded-lg mx-4 mt-4">
         <div class="flex flex-grow-0 flex-shrink-0 py-3 pl-4">
-            <ProfilIcon1/>
+            <ProfileIcon/>
             <p class="text-indigo-900 font-normal text-xl pl-4 pt-3">Pseudonyme utilisateur</p>
         </div>
         <div class="p-3">
