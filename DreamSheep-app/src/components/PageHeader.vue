@@ -13,7 +13,6 @@ import NotificationIcon from './icons/NotificationIcon.vue';
             <NewDreamIcon/>
             <NotificationIcon/>
         </div>
-    </div>
     <div v-if="$route.path === '/diary'" class="flex p-2 bg-blue-950 text-slate-50 justify-around items-center">
         <h2>diary page</h2>
         <NewDreamIcon/>
