@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import {RouterLink} from 'vue-router';
+import DiaryIcon from '@/components/icons/DiaryIcon.vue';
+import EllipseMenu from '@/components/icons/EllipseMenu.vue';
+import HomeIcon from '@/components/icons/HomeIcon.vue';
+import ProfileIcon from '@/components/icons/ProfileIcon.vue';
+import ShopIcon from '@/components/icons/ShopIcon.vue';
+import SettingsIcon from '@/components/icons/SettingsIcon.vue';
 </script>
 
 <template>
@@ -7,36 +13,36 @@ import {RouterLink} from 'vue-router';
         <ul class="flex flex-row justify-between items-center p-4 text-slate-50">
             <li>
                 <router-link to="/" class="flex flex-col items-center">
-                <img src="./icons/HomeIcon.svg" alt="Icon" class="h-6 w-6 text-slate-50">
-                <img v-if="$route.path === '/'" src="./icons/EllipseMenu.svg" alt="Ellispe" class="h-4 w-4">
+                <HomeIcon class="h-6 w-6 text-slate-50"/>
+                <EllipseMenu v-if="$route.path === '/'" class="h-4 w-4"/>
                 <span v-else>Home</span>
                 </router-link>
             </li>
             <li>
                 <router-link to="/diary" class="flex flex-col items-center">
-                <img src="./icons/DiaryIcon.svg" alt="Icon" class="h-6 w-6 text-slate-50">
-                <img v-if="$route.path === '/diary'" src="./icons/EllipseMenu.svg" alt="Ellispe" class="h-4 w-4">
+                <DiaryIcon class="h-6 w-6 text-slate-50"/>
+                <EllipseMenu v-if="$route.path === '/diary'" class="h-4 w-4"/>
                 <span v-else>Diary</span>
                 </router-link>
             </li>
             <li>
                 <router-link to="/profile" class="flex flex-col items-center">
-                <img src="./icons/ProfileIcon.svg" alt="Icon" class="h-6 w-6 text-slate-50">
-                <img v-if="$route.path === '/profile'" src="./icons/EllipseMenu.svg" alt="Ellispe" class="h-4 w-4">
+                <ProfileIcon class="h-6 w-6 text-slate-50"/>
+                <EllipseMenu v-if="$route.path === '/profile'" class="h-4 w-4"/>
                 <span v-else>Profile</span>
                 </router-link>
             </li>
             <li>
                 <router-link to="/shop" class="flex flex-col items-center">
-                <img src="./icons/ShopIcon.svg" alt="Icon" class="h-6 w-6 text-slate-50">
-                <img v-if="$route.path === '/shop'" src="./icons/EllipseMenu.svg" alt="Ellispe" class="h-4 w-4">
+                <ShopIcon class="h-6 w-6 text-slate-50"/>
+                <EllipseMenu v-if="$route.path === '/shop'" class="h-4 w-4"/>
                 <span v-else>Shop</span>
                 </router-link>
             </li>
             <li>
                 <router-link to="/settings" class="flex flex-col items-center">
-                <img src="./icons/SettingsIcon.svg" alt="Icon" class="h-6 w-6 text-slate-50">
-                <img v-if="$route.path === '/settings'" src="./icons/EllipseMenu.svg" alt="Ellispe" class="h-4 w-4">
+                <SettingsIcon class="h-6 w-6 text-slate-50"/>
+                <EllipseMenu v-if="$route.path === '/settings'" class="h-4 w-4"/>
                 <span v-else>Settings</span>
                 </router-link>
             </li>
