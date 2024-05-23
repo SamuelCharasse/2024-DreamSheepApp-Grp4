@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import CardHome from '@/components/CardHome.vue';
 import CardDreamFav from '@/components/CardDreamFav.vue';
-import HomeHeader from '@/components/HomeHeader.vue';
+import PageHeader from '@/components/PageHeader.vue';
 </script>
 <template>
     <div class="login">
-      <HomeHeader/>
+      <PageHeader/>
       <CardDreamFav/>
       <CardHome/>
     </div>
