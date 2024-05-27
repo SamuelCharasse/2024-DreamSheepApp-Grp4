@@ -27,7 +27,7 @@ import Star_1Icon from './icons/Star_1Icon.vue';
         <!-- les icons là -->
         <Star_1Icon/>
     </div>
-    <div v-if="$route.path === '/shop'" class="flex p-2 h-16 bg-blue-950 text-slate-50 justify-around items-center">
+    <div v-if="$route.path === '/shop'" class="sticky flex p-2 h-16 bg-blue-950 text-slate-50 justify-around items-center">
         <h2>shop page</h2>
         <!-- les icons là -->
         <Star_1Icon/>
