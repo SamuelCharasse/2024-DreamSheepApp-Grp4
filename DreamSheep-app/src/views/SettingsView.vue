@@ -4,7 +4,7 @@ import { RouterLink } from 'vue-router';
 
 <template>
     <nav>
-        <ul class="text-slate-50 h-screen flex flex-col justify-between">
+        <ul class="text-slate-50 h-screen flex flex-col justify-between p-4">
             <li>
                 <router-link class="font-bold text-lg" to="/">Informations du compte</router-link>
                 <p>Affichez les informations de votre compte, comme votre numéro de téléphone et votre adresse mail.</p>
