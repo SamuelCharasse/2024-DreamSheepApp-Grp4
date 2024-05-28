@@ -42,7 +42,12 @@ const router = createRouter({
       path: '/info',
       name: 'info',
       component: () => import('../views/InformationsAccountView.vue')
-    }
+    },
+    {
+      path: '/newdream',
+      name: 'newdream',
+      component: () => import('../views/NewDreamView.vue')
+    },
   ]
 })
 
