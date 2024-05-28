@@ -26,13 +26,11 @@ import Button from "@/components/Button.vue";
       </div>
     </div>
 
-    <div class="bg-DarkPurple rounded-lg mt-5">
+    <div class="bg-DarkPurple rounded-lg mt-5 pb-2">
       <div class="m-2">
-        <h3 class="text-white text-2xl">Contenu</h3>
-        <div class="p-2">
-          <p class="text-black bg-white p-3 overflow-auto">
-            Décrivez votre rêve
-          </p>
+        <h3 class="text-white text-2xl pb-2">Contenu</h3>
+        <div class="px-2">
+          <label for="content" class="text-black bg-white justify-satrt py-2 flex pl-3">Décrivez votre rêve</label>
         </div>
       </div>
     </div>
@@ -67,7 +65,9 @@ import Button from "@/components/Button.vue";
         
       </div>
     </div>
-    <button class="bg-yellow-200 text-black">Ajouter</button>
+    <div class="flex justify-center py-2">
+    <Button  variant="yellow" text="Enregistrer" size="small"/>
+</div>
     <div class="flex gap-3 justify-center">
       <SquareIcon />
       <p class="text-white text-xs pt-2">Partager ce rêve à la communauté</p>
