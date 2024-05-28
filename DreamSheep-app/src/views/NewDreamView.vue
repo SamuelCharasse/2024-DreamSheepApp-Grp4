@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BackArrowIconsvg from "@/components/icons/BackArrowIconsvg.vue";
-import StarIcon_1 from "@/components/icons/StarIcon.vue";
+import FavouriteIcon from "@/components/icons/FavouriteIcon.vue";
 import DownArrowIcon from "@/components/icons/DownArrowIcon.vue";
 import SquareIcon from "@/components/icons/SquareIcon.vue";
 import Button from "@/components/Button.vue";
@@ -10,7 +10,7 @@ import Button from "@/components/Button.vue";
     <div class="flex justify justify-between">
       <BackArrowIconsvg />
       <div class="flex gap-2">
-        <StarIcon_1 class="text-white" />
+        <FavouriteIcon class="text-white" />
         <p class="text-white text-sm">Ajouter aux favoris</p>
       </div>
     </div>

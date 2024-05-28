@@ -48,6 +48,11 @@ const router = createRouter({
       name: 'newdream',
       component: () => import('../views/NewDreamView.vue')
     },
+    {
+      path: '/CGU',
+      name: 'CGU',
+      component: () => import('../views/CguView.vue')
+    },
   ]
 })
 
