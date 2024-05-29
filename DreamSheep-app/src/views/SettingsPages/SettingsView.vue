@@ -24,7 +24,7 @@ import RightArrowIcon from '@/components/icons/RightArrowIcon.vue';
             <li>
                 <div class="flex gap-2 items-center">
                     <KeyIcon/>
-                    <router-link class="flex gap-2 items-center font-bold text-lg" to="/">Changer de mot de passe
+                    <router-link class="flex gap-2 items-center font-bold text-lg" to="/password">Changer de mot de passe
                         <RightArrowIcon/>
                     </router-link>                    
                 </div>
