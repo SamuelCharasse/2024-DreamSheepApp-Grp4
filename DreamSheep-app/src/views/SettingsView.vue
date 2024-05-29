@@ -5,7 +5,7 @@ import KeyIcon from '@/components/icons/KeyIcon.vue';
 import MoneyIcon from '@/components/icons/MoneyIcon.vue';
 import MoreIcon from '@/components/icons/MoreIcon.vue';
 import LogOutIcon from '@/components/icons/LogOutIcon.vue';
-import CrossIcon from '@/components/icons/CrossIcon.vue';
+import CrossSettingsIcon from '@/components/icons/CrossSettingsIcon.vue';
 </script>
 
 <template>
@@ -48,7 +48,7 @@ import CrossIcon from '@/components/icons/CrossIcon.vue';
             </li>
             <li>
                 <div class="flex gap-2">
-                    <CrossIcon/>
+                    <CrossSettingsIcon/>
                     <router-link class="font-bold text-lg" to="/">Supprimer le compte</router-link>
                 </div>
                 <p>Supprimez votre compte. Vos données et vos informations seront supprimées</p>
