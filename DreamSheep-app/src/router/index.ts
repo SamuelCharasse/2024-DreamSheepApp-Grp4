@@ -58,6 +58,11 @@ const router = createRouter({
       name: 'Cookies',
       component: () => import('../views/CookiesView.vue')
     },
+    {
+      path: '/PrivacyPolicy',
+      name: 'PrivacyPolicy',
+      component: () => import('../views/PrivacyPolicyView.vue')
+    },
   ]
 })
 
