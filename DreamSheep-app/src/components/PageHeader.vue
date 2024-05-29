@@ -14,6 +14,8 @@ import Star_1Icon from './icons/Star_1Icon.vue';
             <NewDreamIcon/>
             <NotificationIcon/>
         </div>
+    </div>
+    <div v-if="$route.path === '/diary'" class="flex p-2 h-16 bg-blue-950 text-slate-50 justify-around items-center">
         <h2>diary page</h2>
         <div class="flex items-center gap-4">
             <NewDreamIcon/>
