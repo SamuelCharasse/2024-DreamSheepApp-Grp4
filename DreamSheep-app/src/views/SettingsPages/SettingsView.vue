@@ -15,7 +15,7 @@ import RightArrowIcon from '@/components/icons/RightArrowIcon.vue';
             <li>
                 <div class="flex gap-2 items-center">
                     <ProfileSettingsIcon/>
-                    <router-link class="font-bold text-lg" to="/">Informations du compte</router-link>
+                    <router-link class="font-bold text-lg" to="/info">Informations du compte</router-link>
                     <RightArrowIcon/>
                 </div>
                 <p>Affichez les informations de votre compte, comme votre numéro de téléphone et votre adresse mail.</p>
