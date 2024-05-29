@@ -32,4 +32,3 @@ import Button from '@/components/Button.vue';
         <Button class="w-full justify-center font-bold" text="Changer de mot de passe" url="/"></Button>
         </div>
     </main>
-</template>
