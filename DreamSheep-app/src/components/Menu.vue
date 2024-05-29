@@ -14,36 +14,36 @@ import SettingsIcon from '@/components/icons/SettingsIcon.vue';
             <li>
                 <router-link to="/" class="flex flex-col items-center">
                 <HomeIcon class="h-6 w-6 text-slate-50"/>
+                <span>Home</span>
                 <EllipseMenu v-if="$route.path === '/'" class="h-4 w-4"/>
-                <span v-else>Home</span>
-                </router-link>
+            </router-link>
             </li>
             <li>
                 <router-link to="/diary" class="flex flex-col items-center">
                 <DiaryIcon class="h-6 w-6 text-slate-50"/>
+                <span>Diary</span>
                 <EllipseMenu v-if="$route.path === '/diary'" class="h-4 w-4"/>
-                <span v-else>Diary</span>
                 </router-link>
             </li>
             <li>
                 <router-link to="/profile" class="flex flex-col items-center">
                 <ProfileIcon class="h-6 w-6 text-slate-50"/>
+                <span>Profile</span>
                 <EllipseMenu v-if="$route.path === '/profile'" class="h-4 w-4"/>
-                <span v-else>Profile</span>
                 </router-link>
             </li>
             <li>
                 <router-link to="/shop" class="flex flex-col items-center">
                 <ShopIcon class="h-6 w-6 text-slate-50"/>
+                <span>Shop</span>
                 <EllipseMenu v-if="$route.path === '/shop'" class="h-4 w-4"/>
-                <span v-else>Shop</span>
                 </router-link>
             </li>
             <li>
                 <router-link to="/settings" class="flex flex-col items-center">
                 <SettingsIcon class="h-6 w-6 text-slate-50"/>
+                <span>Settings</span>
                 <EllipseMenu v-if="$route.path === '/settings'" class="h-4 w-4"/>
-                <span v-else>Settings</span>
                 </router-link>
             </li>
         </ul>
