@@ -1,8 +1,3 @@
-<script setup lang="ts">
-import BackArrowIconsvg from "@/components/icons/BackArrowIconsvg.vue";
-// import Avatar from "@/compnents/Avater.vue";
-</script>
-
 <template>
   <main class="settings mx-3 py-5 overflow-auto">
     <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 pb-4">
