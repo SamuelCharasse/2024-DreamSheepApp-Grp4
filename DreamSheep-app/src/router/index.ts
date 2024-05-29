@@ -53,21 +53,6 @@ const router = createRouter({
       name: 'CGU',
       component: () => import('../views/CguView.vue')
     },
-    {
-      path: '/Cookies',
-      name: 'Cookies',
-      component: () => import('../views/CookiesView.vue')
-    },
-    {
-      path: '/PrivacyPolicy',
-      name: 'PrivacyPolicy',
-      component: () => import('../views/PrivacyPolicyView.vue')
-    },
-    {
-      path: '/About',
-      name: 'About',
-      component: () => import('../views/AboutView.vue')
-    },
   ]
 })
 
