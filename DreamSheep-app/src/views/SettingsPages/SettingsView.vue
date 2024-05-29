@@ -42,7 +42,7 @@ import RightArrowIcon from '@/components/icons/RightArrowIcon.vue';
             <li>
                 <div class="flex gap-2 items-center">
                     <MoreIcon/>
-                    <router-link class="flex gap-2 items-center font-bold text-lg" to="/">Ressources supplémentaires
+                    <router-link class="flex gap-2 items-center font-bold text-lg" to="/more-info">Ressources supplémentaires
                         <RightArrowIcon/>
                     </router-link>                   
                 </div>

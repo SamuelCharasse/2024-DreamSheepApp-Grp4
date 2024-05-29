@@ -3,6 +3,7 @@ import { RouterLink } from "vue-router";
 import BackArrowIconsvg from "@/components/icons/BackArrowIconsvg.vue";
 import ExitIcon from "@/components/icons/ExitIcon.vue";
 import RightArrowIcon from "@/components/icons/RightArrowIcon.vue";
+import Button from "@/components/Button.vue";
 </script>
 
 <template>
@@ -15,42 +16,27 @@ import RightArrowIcon from "@/components/icons/RightArrowIcon.vue";
     </div>
 
     <div class="border-y border-slate-100 py-5">
-      <p class="pb-2.5">Prénom</p>
-      <p class="bg-white text-black rounded-md p-2.5">
-        Prénom de l'utilisateur
-      </p>
+        <p class="pb-2.5 text-slate-50">Prénom</p>
+        <input type="text" placeholder="Votre prénom" class="bg-white text-black rounded-md p-2.5 w-full" />
     </div>
 
     <div class="border-y border-slate-100 py-5">
-      <p class="pb-2.5">Nom</p>
-      <p class="bg-white text-black rounded-md p-2.5">Nom de l'utilisateur</p>
+        <p class="pb-2.5 text-slate-50">Nom</p>
+        <input type="text" placeholder="Votre nom" class="bg-white text-black rounded-md p-2.5 w-full" />
     </div>
 
     <div class="border-y border-slate-100 py-5">
-      <p class="pb-2.5">Email</p>
-      <p class="bg-white text-black rounded-md p-2.5">Email de l'utilisateur</p>
+        <p class="pb-2.5 text-slate-50">Email</p>
+        <input type="email" placeholder="Votre adresse mail" class="bg-white text-black rounded-md p-2.5 w-full" />
     </div>
 
     <div class="border-y border-slate-100 py-5">
-      <p class="pb-2.5">Téléphone</p>
-      <p class="bg-white text-black rounded-md p-2.5">
-        Num tel de l'utilisateur
-      </p>
+        <p class="pb-2.5 text-slate-50">Téléphone</p>
+        <input type="text" placeholder="Votre numéro de téléphone" class="bg-white text-black rounded-md p-2.5 w-full" />
     </div>
 
     <div class="pt-5">
-      <div class="flex px-2.5 pb-2.5 justify-between">
-        <div class="flex-grow flex items-center">
-          <ExitIcon class="items-start" />
-          <h3 class="text-left ml-2">Se déconnecter</h3>
-        </div>
-        <RightArrowIcon class="items-end" />
-      </div>
-      <div class="px-2.5 flex-grow">
-        <p class="ml-8">
-          Déconnectez-vous, vos données et vos informations seront conservées.
-        </p>
-      </div>
+        <Button class="w-full justify-center font-bold" text="Sauvegarder les changements" url="/"></Button>
     </div>
 
   </main>
