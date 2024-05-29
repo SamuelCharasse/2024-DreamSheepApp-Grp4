@@ -53,6 +53,11 @@ const router = createRouter({
       name: 'CGU',
       component: () => import('../views/CguView.vue')
     },
+  {
+    path: '/password',
+    name: 'password',
+    component: () => import('../views/SettingsPages/PasswordChangeView.vue')
+  },
   ]
 })
 
