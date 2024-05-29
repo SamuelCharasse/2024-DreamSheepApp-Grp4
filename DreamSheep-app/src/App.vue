@@ -8,6 +8,26 @@ import PageHeader from '@/components/PageHeader.vue';
 <template>
   <Header/>
   <PageHeader/>
-  <main><RouterView /></main>
+  <main>
+    <RouterView v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+        <component :is="Component"/>
+      </transition>
+    </RouterView>
+  </main>
   <Menu/>
 </template>
+
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: all .3s ease-in-out;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+  transform: translateX(100%);
+}
+.fade-enter-to, .fade-leave {
+  opacity: 1;
+  transform: translateX(0);
+}
+</style>
