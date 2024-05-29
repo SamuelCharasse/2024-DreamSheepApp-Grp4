@@ -63,11 +63,11 @@ const router = createRouter({
     name: 'more-info',
     component: () => import('../views/SettingsPages/SettingsMoreView.vue')
   },
-  {
-    path: '/shop-premium',
-    name: 'shop-premium',
-    component: () => import('../views/ShopPremiumView.vue')
-  },
+  // {
+  //   path: '/shop-premium',
+  //   name: 'shop-premium',
+  //   component: () => import('../views/ShopPremiumView.vue')
+  // },
   ]
 })
 
