@@ -26,7 +26,31 @@ import BackArrowIconsvg from '@/components/icons/BackArrowIconsvg.vue';
                         <RouterLink to="/">Contact</RouterLink>
                         <RightArrowIcon/>
                     </div>
-                    <p>Vous avez une question ? Contactez-nous !</p>
+                    <p>Contactez-nous en cas de problème ou de questions</p>
+                </li>
+                <li>
+                    <div>
+                        <RouterLink to="/">Mentions légales</RouterLink>
+                        <RightArrowIcon/>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <RouterLink to="/">Conditions d'utilisation</RouterLink>
+                        <RightArrowIcon/>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <RouterLink to="/">Politique de confidentialité</RouterLink>
+                        <RightArrowIcon/>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <RouterLink to="/">Utilisation des cookies</RouterLink>
+                        <RightArrowIcon/>
+                    </div>
                 </li>
             </ul>
         </nav>
