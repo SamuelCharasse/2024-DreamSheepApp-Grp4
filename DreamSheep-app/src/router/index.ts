@@ -32,7 +32,27 @@ const router = createRouter({
       path: '/diary',
       name: 'diary',
       component: () => import('../views/DiaryView.vue')
-    }
+    },
+    {
+      path: '/legal',
+      name: 'legal',
+      component: () => import('../views/LegalNoticeView.vue')
+    },
+    {
+      path: '/info',
+      name: 'info',
+      component: () => import('../views/InformationsAccountView.vue')
+    },
+    {
+      path: '/newdream',
+      name: 'newdream',
+      component: () => import('../views/NewDreamView.vue')
+    },
+    {
+      path: '/CGU',
+      name: 'CGU',
+      component: () => import('../views/CguView.vue')
+    },
   ]
 })
 
