@@ -8,7 +8,7 @@ import BackArrowIconsvg from "@/components/icons/BackArrowIconsvg.vue";
     <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 pb-4">
       <BackArrowIconsvg class="flex" />
       <p class="text-base text-center text-white flex-grow pb-5 pt-2 font-bold">
-        A propos
+        À propos
       </p>
     </div>
     <!-- <div class="flex">
