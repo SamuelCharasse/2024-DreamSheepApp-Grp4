@@ -5,8 +5,8 @@ import BackArrowIconsvg from '@/components/icons/BackArrowIconsvg.vue';
 </script>
 
 <template>
-    <main class="flex flex-col text-slate-50 p-4 mb-20">
-        <div class="flex gap-2 items-center">
+    <main class="flex flex-col items-center text-slate-50 p-4 mb-20">
+        <div class="flex gap-2 items-center self-start">
             <RouterLink to="/settings">
                 <BackArrowIconsvg/>
             </RouterLink> 
@@ -54,5 +54,6 @@ import BackArrowIconsvg from '@/components/icons/BackArrowIconsvg.vue';
                 </li>
             </ul>
         </nav>
+        <p>version 0.1</p>
     </main>
 </template>
