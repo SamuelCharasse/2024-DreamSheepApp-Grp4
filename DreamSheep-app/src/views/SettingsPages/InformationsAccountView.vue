@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RouterLink } from "vue-router";
 import BackArrowIconsvg from "@/components/icons/BackArrowIconsvg.vue";
 import ExitIcon from "@/components/icons/ExitIcon.vue";
 import RightArrowIcon from "@/components/icons/RightArrowIcon.vue";
@@ -7,7 +8,7 @@ import RightArrowIcon from "@/components/icons/RightArrowIcon.vue";
 <template>
   <main class="settings mx-3 py-5 overflow-auto">
     <div class="flex justify-center items-center pb-5">
-      <BackArrowIconsvg class="flex-grow-0" />
+      <RouterLink to="/settings"><BackArrowIconsvg class="flex-grow-0" /></RouterLink> 
       <h2 class="text-white text-sm font-norma px-7 justify-center">
         Informations du compte
       </h2>

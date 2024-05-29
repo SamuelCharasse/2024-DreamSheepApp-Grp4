@@ -19,15 +19,14 @@ import PageHeader from '@/components/PageHeader.vue';
 </template>
 
 <style scoped>
-.fade-enter-active, .fade-leave-active {
-  transition: all .3s ease-in-out;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
 }
-.fade-enter, .fade-leave-to {
+
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
-  transform: translateX(100%);
 }
-.fade-enter-to, .fade-leave {
-  opacity: 1;
-  transform: translateX(0);
-}
+
 </style>

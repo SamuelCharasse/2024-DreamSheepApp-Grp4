@@ -26,7 +26,7 @@ const router = createRouter({
     {
       path: '/settings',
       name: 'settings',
-      component: () => import('../views/SettingsView.vue')
+      component: () => import('../views/SettingsPages/SettingsView.vue')
     },
     {
       path: '/diary',
@@ -41,7 +41,7 @@ const router = createRouter({
     {
       path: '/info',
       name: 'info',
-      component: () => import('../views/InformationsAccountView.vue')
+      component: () => import('../views/SettingsPages/InformationsAccountView.vue')
     },
     {
       path: '/newdream',
