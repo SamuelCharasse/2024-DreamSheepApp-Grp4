@@ -5,54 +5,55 @@ import BackArrowIconsvg from '@/components/icons/BackArrowIconsvg.vue';
 </script>
 
 <template>
-    <main class="flex flex-col text-slate-50 p-4 mb-20">
-        <div>
+    <main class="flex flex-col items-center text-slate-50 p-4 mb-20">
+        <div class="flex gap-2 items-center self-start">
             <RouterLink to="/settings">
                 <BackArrowIconsvg/>
             </RouterLink> 
-            <h2>Ressources supplémentaires</h2>
+            <h3>Ressources supplémentaires</h3>
         </div>
         <nav>
-            <ul>
+            <ul class="flex flex-col m-4 gap-10">
                 <li>
-                    <div>
-                        <RouterLink to="/">Conditions d'utilisation</RouterLink>
+                    <div class="flex gap-2">
+                        <RouterLink to="/" class="font-bold">Conditions d'utilisation</RouterLink>
                         <RightArrowIcon/>
                     </div>
                     <p>Apprenez-en plus sur DreamSheep et son équipe !</p>
                 </li>
                 <li>
-                    <div>
-                        <RouterLink to="/">Contact</RouterLink>
+                    <div class="flex gap-2">
+                        <RouterLink to="/" class="font-bold">Contact</RouterLink>
                         <RightArrowIcon/>
                     </div>
                     <p>Contactez-nous en cas de problème ou de questions</p>
                 </li>
                 <li>
-                    <div>
-                        <RouterLink to="/">Mentions légales</RouterLink>
+                    <div class="flex gap-2">
+                        <RouterLink to="/" class="font-bold">Mentions légales</RouterLink>
                         <RightArrowIcon/>
                     </div>
                 </li>
                 <li>
-                    <div>
-                        <RouterLink to="/">Conditions d'utilisation</RouterLink>
+                    <div class="flex gap-2">
+                        <RouterLink to="/" class="font-bold">Conditions d'utilisation</RouterLink>
                         <RightArrowIcon/>
                     </div>
                 </li>
                 <li>
-                    <div>
-                        <RouterLink to="/">Politique de confidentialité</RouterLink>
+                    <div class="flex gap-2">
+                        <RouterLink to="/" class="font-bold">Politique de confidentialité</RouterLink>
                         <RightArrowIcon/>
                     </div>
                 </li>
                 <li>
-                    <div>
-                        <RouterLink to="/">Utilisation des cookies</RouterLink>
+                    <div class="flex gap-2">
+                        <RouterLink to="/" class="font-bold">Utilisation des cookies</RouterLink>
                         <RightArrowIcon/>
                     </div>
                 </li>
             </ul>
         </nav>
+        <p>version 0.1</p>
     </main>
 </template>
