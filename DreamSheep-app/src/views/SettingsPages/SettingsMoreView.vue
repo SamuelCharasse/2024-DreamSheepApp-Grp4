@@ -34,7 +34,7 @@ import BackArrowIconsvg from '@/components/icons/BackArrowIconsvg.vue';
                 </li>
                 <li>
                     <div class="flex gap-2">
-                        <RouterLink to="/" class="font-bold">Conditions d'utilisation</RouterLink>
+                        <RouterLink to="/cgu" class="font-bold">Conditions d'utilisation</RouterLink>
                         <RightArrowIcon/>
                     </div>
                 </li>

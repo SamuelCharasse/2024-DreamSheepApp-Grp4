@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import BackArrowIconsvg from "@/components/icons/BackArrowIconsvg.vue";
+import { RouterLink } from "vue-router";
 </script>
 <template>
   <main class="settings mx-3 py-5 overflow-auto">
     <div class="flex justify-center items-center pb-5">
-      <BackArrowIconsvg />
+      <RouterLink to="/more-info"><BackArrowIconsvg /></RouterLink>
       <p class="text-base text-white px-7">
         Conditions générales d'utilisation
       </p>
