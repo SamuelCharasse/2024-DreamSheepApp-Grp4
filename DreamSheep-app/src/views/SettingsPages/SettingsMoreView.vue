@@ -19,14 +19,12 @@ import BackArrowIconsvg from '@/components/icons/BackArrowIconsvg.vue';
                         <RouterLink to="/" class="font-bold">Conditions d'utilisation</RouterLink>
                         <RightArrowIcon/>
                     </div>
-                    <p>Apprenez-en plus sur DreamSheep et son équipe !</p>
                 </li>
                 <li>
                     <div class="flex gap-2">
                         <RouterLink to="/" class="font-bold">Contact</RouterLink>
                         <RightArrowIcon/>
                     </div>
-                    <p>Contactez-nous en cas de problème ou de questions</p>
                 </li>
                 <li>
                     <div class="flex gap-2">
