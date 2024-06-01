@@ -87,6 +87,10 @@ const router = createRouter({
     path: '/cookies',
     name: 'cookies',
     component: () => import('../views/CookiesView.vue')
+  },{
+    path: '/contact',
+    name: 'contact',
+    component: () => import('../views/SettingsPages/ContactView.vue')
   },
   ]
 })

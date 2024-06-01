@@ -16,7 +16,7 @@ import BackArrowIconsvg from '@/components/icons/BackArrowIconsvg.vue';
             <ul class="flex flex-col m-4 gap-10">
                 <li>
                     <div class="flex gap-2">
-                        <RouterLink to="/" class="font-bold">Contact</RouterLink>
+                        <RouterLink to="/contact" class="font-bold">Contact</RouterLink>
                         <RightArrowIcon/>
                     </div>
                 </li>
