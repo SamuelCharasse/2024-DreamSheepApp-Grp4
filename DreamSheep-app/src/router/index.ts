@@ -68,6 +68,11 @@ const router = createRouter({
     name: 'shop-premium',
     component: () => import('../views/ShopPremiumView.vue')
   },
+  {
+    path: '/privacy-policy',
+    name: 'privacy-policy',
+    component: () => import('../views/PrivacyPolicyView.vue')
+  },
   ]
 })
 

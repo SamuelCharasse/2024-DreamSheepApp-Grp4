@@ -40,7 +40,7 @@ import BackArrowIconsvg from '@/components/icons/BackArrowIconsvg.vue';
                 </li>
                 <li>
                     <div class="flex gap-2">
-                        <RouterLink to="/" class="font-bold">Politique de confidentialité</RouterLink>
+                        <RouterLink to="/privacy-policy" class="font-bold">Politique de confidentialité</RouterLink>
                         <RightArrowIcon/>
                     </div>
                 </li>
