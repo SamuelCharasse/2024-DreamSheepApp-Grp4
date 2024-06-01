@@ -78,6 +78,11 @@ const router = createRouter({
     name: 'cgu',
     component: () => import('../views/CguView.vue')
   },
+  {
+    path: '/legal',
+    name: 'legal',
+    component: () => import('../views/LegalNoticeView.vue')
+  },
   ]
 })
 
