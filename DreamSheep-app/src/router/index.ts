@@ -83,6 +83,11 @@ const router = createRouter({
     name: 'legal',
     component: () => import('../views/LegalNoticeView.vue')
   },
+  {
+    path: '/cookies',
+    name: 'cookies',
+    component: () => import('../views/CookiesView.vue')
+  },
   ]
 })
 

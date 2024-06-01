@@ -40,7 +40,7 @@ import BackArrowIconsvg from '@/components/icons/BackArrowIconsvg.vue';
                 </li>
                 <li>
                     <div class="flex gap-2">
-                        <RouterLink to="/" class="font-bold">Utilisation des cookies</RouterLink>
+                        <RouterLink to="/cookies" class="font-bold">Utilisation des cookies</RouterLink>
                         <RightArrowIcon/>
                     </div>
                 </li>
