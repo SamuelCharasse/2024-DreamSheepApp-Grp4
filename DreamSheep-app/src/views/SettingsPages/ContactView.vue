@@ -15,22 +15,22 @@ import Button from '@/components/Button.vue';
 
     <div class="border-y border-slate-100 py-5">
         <p class="pb-2.5 text-slate-50">Prénom</p>
-        <input type="text" placeholder="Votre prénom" class="bg-white text-black rounded-md p-2.5 w-full" />
+        <input type="text" required placeholder="Votre prénom" class="bg-white text-black rounded-md p-2.5 w-full" />
     </div>
 
     <div class="border-y border-slate-100 py-5">
         <p class="pb-2.5 text-slate-50">Nom</p>
-        <input type="text" placeholder="Votre nom" class="bg-white text-black rounded-md p-2.5 w-full" />
+        <input type="text" required placeholder="Votre nom" class="bg-white text-black rounded-md p-2.5 w-full" />
     </div>
 
     <div class="border-y border-slate-100 py-5">
         <p class="pb-2.5 text-slate-50">Email</p>
-        <input type="email" placeholder="Votre adresse mail" class="bg-white text-black rounded-md p-2.5 w-full" />
+        <input type="email" required placeholder="Votre adresse mail" class="bg-white text-black rounded-md p-2.5 w-full" />
     </div>
 
     <div class="border-y border-slate-100 py-5">
         <p class="pb-2.5 text-slate-50">Message</p>
-        <textarea placeholder="Votre message" class="bg-white text-black rounded-md p-2.5 w-full" rows="4" maxlength="500"></textarea>
+        <textarea required placeholder="Votre message" class="bg-white text-black rounded-md p-2.5 w-full" rows="4" maxlength="500"></textarea>
     </div>
 
     <div class="pt-5">
