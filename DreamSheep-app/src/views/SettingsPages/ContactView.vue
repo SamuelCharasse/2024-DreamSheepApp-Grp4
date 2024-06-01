@@ -5,7 +5,7 @@ import Button from '@/components/Button.vue';
 </script>
 
 <template>
-    <form action="/more-info" class="settings mb-20 mx-3 py-5 overflow-auto">
+    <form action="" class="settings mb-20 mx-3 py-5 overflow-auto">
     <div class="flex justify-center items-center pb-5">
       <RouterLink to="/settings"><BackArrowIconsvg/></RouterLink> 
       <h2 class="text-white text-sm font-norma px-7 justify-center">
@@ -34,7 +34,7 @@ import Button from '@/components/Button.vue';
     </div>
 
     <div class="pt-5">
-        <Button class="w-full justify-center font-bold" text="Envoyer" url="/"></Button>
+      <Button class="w-full justify-center font-bold" text="Envoyer"/>
     </div>
 
   </form>
