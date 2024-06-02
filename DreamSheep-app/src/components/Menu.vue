@@ -9,7 +9,7 @@ import SettingsIcon from '@/components/icons/SettingsIcon.vue';
 </script>
 
 <template>
-    <nav class="fixed bottom-0 inset-x-0 bg-indigo-900 rounded-t-lg h-15">
+    <nav class="fixed bottom-0 inset-x-0 bg-indigo-900 rounded-t-lg h-15" v-if="$route.path !== '/signup' && $route.path !== '/login'">
         <ul class="grid grid-cols-5 justify-between items-center p-4 text-slate-50">
             <li>
                 <router-link to="/" class="flex flex-col items-center">

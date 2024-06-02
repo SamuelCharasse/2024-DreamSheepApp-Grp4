@@ -2,7 +2,7 @@ import PocketBase from 'pocketbase';
 
 export const pb = new PocketBase('https://dreamsheep-app.scharasse.fr:443');
 
-export async function addUser(event: { email: string; password: string; passwordConfirm: string; username: string; name: string  }) {
+export async function addUser(event: { email: string; password: string; passwordConfirm: string; username: string }) {
     if (event.password !== event.passwordConfirm) {
         throw new Error('Les mots de passe ne correspondent pas.');
     }
@@ -11,7 +11,7 @@ export async function addUser(event: { email: string; password: string; password
         const record = await pb.collection('users').create({
             email: event.email,
             username: event.username,
-            name: event.name,
+
             password: event.password,
             passwordConfirm: event.passwordConfirm
         });
