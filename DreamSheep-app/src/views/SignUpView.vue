@@ -115,7 +115,7 @@ const handleSignUp = async () => {
       <div class="flex justify-center pt-8 pb-5">
         <button class="text-white" type="submit" >S'inscrire</button>
       </div>
-      
+      <p class="text-white text-sm">Vous avez déjà un compte ? <router-link to="/login">Connectez-vous</router-link></p>
     </form>
     <div class="flex  justify-center pt-6">
 <CloudIcon class="m-2"/>

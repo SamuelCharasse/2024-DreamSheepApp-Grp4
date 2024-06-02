@@ -34,7 +34,7 @@ export async function logIn(email: string, password: string) {
 }
 
 
-export async function NewDream(event: { title: string; description: string; tags: string; date: Date; recurrent: boolean; type:boolean; }) {
+export async function NewDream(event: { title: string; description: string; tags: string; date: string; recurrent: boolean; type:boolean; }) {
     try {
         const record = await pb.collection('dreams').create({
             title: event.title,
