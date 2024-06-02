@@ -5,5 +5,6 @@ const pb = new Pocketbase("http://127.0.0.1:8090");
 
 <template>
     <div class="login">
+        <h2 class="text-slate-50">Login</h2>
     </div>
 </template>
