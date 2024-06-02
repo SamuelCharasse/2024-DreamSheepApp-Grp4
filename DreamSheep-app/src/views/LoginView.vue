@@ -25,9 +25,9 @@ const handleSignIn = async () => {
         const authData = await logIn(email.value, password.value);
         console.log('authData:', authData); // Ajout de log pour diagnostiquer le problème
         if (authData && authData.token) {
-            localStorage.setItem('authToken', authData.token); // permet de restez en ligne après
+            localStorage.setItem('authToken', authData.token);
             localStorage.setItem('userId', authData.record.id); // Utilisez authData.record.id
-            router.push('/'); //envoie l'utiliseateur à la page d'accueil  si c'est good
+            router.push('/diary');
         } else {
             throw new Error('Les données de session sont manquantes.');
         }
@@ -41,28 +41,19 @@ const handleSignIn = async () => {
 
 <template>
     <div class="m-5">
-    <form @submit.prevent="handleSignIn">
-        <div class="pb-7 flex flex-col  rounded-lg">
-            <label class="text-white text-base font-medium pb-1" for="email">Email:</label>
-            <input class="text-black rounded-md p-2" type="email" id="email" v-model="email" required>
+        <form @submit.prevent="handleSignIn">
+        <div>
+            <label for="email">Email:</label>
+            <input class="text-black" type="email" id="email" v-model="email" required>
         </div>
-        <div class="pb-4 flex flex-col  rounded-lg">
-            <label class="text-white text-base font-medium pb-1" for="password">Mot de passe:</label>
-            <input class="text-black rounded-md p-2" type="password" id="password" v-model="password" required>
+        <div>
+            <label for="password">Mot de passe:</label>
+            <input class="text-black" type="password" id="password" v-model="password" required>
         </div>
         <div v-if="errorMessage" class="error-message">
             {{ errorMessage }}
         </div>
-        <div class="flex justify-center pt-8 pb-5">
-        <Button type="submit" :disabled="isLoading" variant="yellow" size="small" text="Se connecter"/>
-    </div>
+        <button type="submit" :disabled="isLoading">Se connecter</button>
     </form>
-    <div>
-        <p class="text-white text-center">Pas encore de compte ? <router-link to="/signup" class="text-LightPurple font-medium">Inscrivez-vous !</router-link></p>
-    </div>
-    <div class="flex  justify-center pt-6">
-<CloudIcon class="m-2"/>
-<MoonIcon class="m-12"/>
-    </div>
 </div>
 </template>

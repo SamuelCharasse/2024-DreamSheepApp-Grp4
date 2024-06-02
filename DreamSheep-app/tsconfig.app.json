@@ -6,6 +6,7 @@
     "src/**/*.vue",
     "src/views/*.vue",
     "src/components/icons/*.svg",
+    "src/components/icons/CloudIcon.vue", // Add the missing path here
     "pocketbase/backend.mjs"
   ],
   "exclude": ["src/**/__tests__/*"],

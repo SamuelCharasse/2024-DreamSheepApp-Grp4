@@ -4,6 +4,9 @@ import FavouriteIcon from "@/components/icons/FavouriteIcon.vue";
 import DownArrowIcon from "@/components/icons/DownArrowIcon.vue";
 import SquareIcon from "@/components/icons/SquareIcon.vue";
 import Button from "@/components/Button.vue";
+
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
 </script>
 <template>
   <div class="m-4 ">
