@@ -42,18 +42,24 @@ const handleSignIn = async () => {
 <template>
     <div class="m-5">
         <form @submit.prevent="handleSignIn">
-        <div>
-            <label for="email">Email:</label>
-            <input class="text-black" type="email" id="email" v-model="email" required>
+        <div  class="pb-7 flex flex-col  rounded-lg">
+            <label class="text-white text-base font-medium pb-1" for="email">Email:</label>
+            <input class="text-black rounded-md p-2" type="email" id="email" v-model="email" required>
         </div>
-        <div>
-            <label for="password">Mot de passe:</label>
-            <input class="text-black" type="password" id="password" v-model="password" required>
+        <div  class="pb-7 flex flex-col  rounded-lg">
+            <label class="text-white text-base font-medium pb-1" for="password">Mot de passe:</label>
+            <input class="text-black rounded-md p-2" type="password" id="password" v-model="password" required>
         </div>
         <div v-if="errorMessage" class="error-message">
             {{ errorMessage }}
         </div>
-        <button type="submit" :disabled="isLoading">Se connecter</button>
+        <div class="flex justify-center pt-8 pb-5">
+        <button class="text-white" type="submit" :disabled="isLoading">Se connecter</button>
+    </div>
     </form>
+    <div class="flex  justify-center pt-6">
+<CloudIcon class="m-2"/>
+<MoonIcon class="m-12"/>
+    </div>
 </div>
 </template>

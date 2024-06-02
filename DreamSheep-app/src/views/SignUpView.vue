@@ -113,9 +113,13 @@ const handleSignUp = async () => {
         {{ errorMessage }}
       </div>
       <div class="flex justify-center pt-8 pb-5">
-        <button type="submit" >S'inscrire</button>
+        <button class="text-white" type="submit" >S'inscrire</button>
       </div>
       
     </form>
+    <div class="flex  justify-center pt-6">
+<CloudIcon class="m-2"/>
+<MoonIcon class="m-12"/>
+    </div>
   </div>
 </template>
