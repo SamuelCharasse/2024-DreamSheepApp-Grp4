@@ -22,7 +22,9 @@ import Star_1Icon from './icons/Star_1Icon.vue';
         <div class="flex justify-around items-center">
             <h2>diary page</h2>
             <div class="flex items-center gap-4">
+                <RouterLink to="/newdream">
                 <NewDreamIcon/>
+            </RouterLink>
                 <StatisticIcon/>
             </div>
         </div>
