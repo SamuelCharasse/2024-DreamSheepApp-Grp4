@@ -63,6 +63,7 @@ export type DreamsRecord = {
 	title?: string
 	type?: DreamsTypeOptions
 	userId?: RecordIdString
+	favoris?: boolean
 }
 
 export type UsersRecord = {
