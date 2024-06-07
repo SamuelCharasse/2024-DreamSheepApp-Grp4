@@ -74,3 +74,14 @@ function generateExcerpt(text: string, charLimit: number): string {
     }
     return text.slice(0, charLimit) + '...';
 }
+
+export async function getDreams() {
+  try {
+      const record = await pb.collection('dreams').getFullList(1, { perPage: 10, sort: '-created', expand: 'user'});
+      console.log(record);
+      
+      return record;
+  } catch (error) {
+      return error;
+  }
+}
