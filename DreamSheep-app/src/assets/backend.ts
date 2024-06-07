@@ -52,7 +52,7 @@ export async function createDream(dreamData: { title: string; description: strin
             throw new Error('ID utilisateur non disponible');
         }
 
-        const extrait = generateExcerpt(dreamData.description, 147);
+        const extrait = generateExcerpt(dreamData.description, 20);
 
         const newDream = await pb.collection('dreams').create({
             ...dreamData,
