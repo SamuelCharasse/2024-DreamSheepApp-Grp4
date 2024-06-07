@@ -1,78 +1,117 @@
 <script setup lang="ts">
-import BackArrowIconsvg from "@/components/icons/BackArrowIconsvg.vue";
+import { ref} from 'vue';
 import FavouriteIcon from "@/components/icons/FavouriteIcon.vue";
 import DownArrowIcon from "@/components/icons/DownArrowIcon.vue";
 import SquareIcon from "@/components/icons/SquareIcon.vue";
 import Button from "@/components/Button.vue";
+import { createDream } from "@/assets/backend";
+import { useRouter } from "vue-router";
+
+const router = useRouter()
+const title = ref('')
+const description = ref('')
+const date = ref('')
+const recurrent = ref(false)
+const type = ref('') // 'cauchemar' ou 'reve'
+const tags = ref('')
+const isLoading = ref(false)
+const errorMessage = ref('')
+
+const handleCreateDream = async () => {
+  isLoading.value = true
+  errorMessage.value = ''
+  try {
+    const newDream = await createDream({
+      title: title.value,
+      description: description.value,
+      date: date.value,
+      recurrent: recurrent.value,
+      type: type.value,
+      tags: tags.value
+    })
+    router.push('/diary')
+  } catch (error) {
+    errorMessage.value = 'Erreur lors de la création du rêve: ' + (error as Error).message
+  } finally {
+    isLoading.value = false
+  }
+}
 </script>
 <template>
-  <div class="m-4 ">
-    <div class="flex justify justify-between">
-      <BackArrowIconsvg />
-      <div class="flex gap-2">
-        <FavouriteIcon class="text-white" />
-        <p class="text-white text-sm">Ajouter aux favoris</p>
+  <form method="post" @submit.prevent="handleCreateDream">
+    <div class="pb-4 flex flex-col">
+      <label class="text-white text-base font-medium pb-1" for="title"
+        >Titre du rêve</label
+      >
+      <input
+        class="text-black rounded-md p-2 border border-black border-1"
+        type="text"
+        id="title"
+        v-model="title"
+        required
+      />
+    </div>
+    <div class="pb-4 flex flex-col">
+      <label class="text-white text-base font-medium pb-1" for="description"
+        >Contenu du rêve</label
+      >
+      <textarea
+        class="text-black rounded-md p-2 border border-black border-1"
+        id="description"
+        v-model="description"
+        required
+      />
+      <div class="pb-4 flex flex-col">
+        <label class="text-white text-base font-medium pb-1" for="date"
+          >Date du rêve</label
+        >
+        <input
+          class="text-black rounded-md p-2 border border-black border-1"
+          type="date"
+          id="date"
+          v-model="date"
+          required
+        />
       </div>
     </div>
-
-    <div class="bg-DarkPurple rounded-lg mt-5">
-      <div class="m-2">
-        <h3 class="text-white text-2xl">Titre</h3>
-        <div class="p-2">
-          <p class="text-black bg-white p-3 overflow-auto">
-            Donnez un titre à votre rêve
-          </p>
-        </div>
-      </div>
+    <div class="pb-4 flex flex-col">
+      <label for="tags">Tags :</label>
+      <select class="text-black" id="tags" v-model="tags" required>
+        <option value="humour">humour</option>
+        <option value="amour">Amour</option>
+        <option value="drôle">Drôle</option>
+        <option value="étrange">Etrange</option>
+        <option value="joyeux">Joyeux</option>
+        <option value="peur">Peur</option>
+        <option value="horreur">Horreur</option>
+      </select>
+    </div>
+    <div class="pb-4 flex flex-col">
+      <label class="text-white text-base font-medium pb-1" for="type"
+        >type</label
+      >
+      <select class="text-black" id="type" v-model="type" required>
+        <option value="reve">Rêve</option>
+        <option value="cauchemar">Cauchemar</option>
+      </select>
+    </div>
+    <div>
+      <label for="recurent">Rêve récurrent :</label>
+      <input
+        class="text-black"
+        type="checkbox"
+        id="recurent"
+        v-model="recurrent"
+      />
+    </div>
+    <div v-if="errorMessage" class="error-message">
+      {{ errorMessage }}
     </div>
 
-    <div class="bg-DarkPurple rounded-lg mt-5 pb-2">
-      <div class="m-2">
-        <h3 class="text-white text-2xl pb-2">Contenu</h3>
-        <div class="px-2">
-          <label for="content" class="text-black bg-white justify-satrt py-2 flex pl-3">Décrivez votre rêve</label>
-        </div>
-      </div>
+    <div class="flex justify-center pb-4">
+      <button class="text-white bg-teal-700 rounded-md px-3 py-2" type="submit" :disabled="isLoading">
+        Créer
+      </button>
     </div>
-
-    <div class="bg-DarkPurple rounded-lg mt-5">
-      <div class="m-2">
-        <h3 class="text-white text-2xl">Type</h3>
-        <div class="p-2 flex justify-center gap-3  ">
-            <Button variant="purple" text="Rêve" size="large"/>
-          <Button variant="purple" text="Cauchemar" size="medium"/>
-        </div>
-      </div>
-    </div>
-
-    <div class="bg-DarkPurple rounded-lg mt-5">
-      <div class="pb-2 m-2">
-        <h3 class="text-white text-2xl">Date</h3>
-        <div class="flex bg-white m-2 p-2 justify-between">
-          <p class="text-black overflow-auto">Cette nuit</p>
-          <DownArrowIcon />
-        </div>
-      </div>
-    </div>
-
-    <div class="bg-DarkPurple rounded-lg mt-5">
-      <div class="m-2">
-        <h3 class="text-white text-2xl">Récurrent</h3>
-        <div class="p-2 flex justify-center gap-3 ">
-          <Button variant="purple" text="Oui" size="large"/>
-          <Button variant="purple" text="Non" size="large"/>
-        </div>
-        
-      </div>
-    </div>
-    <div class="flex justify-center py-2">
-    <Button  variant="yellow" text="Enregistrer" size="small"/>
-</div>
-    <div class="flex gap-3 justify-center">
-      <SquareIcon />
-      <p class="text-white text-xs pt-2">Partager ce rêve à la communauté</p>
-    </div>
-  </div>
-
- 
+  </form>
 </template>
