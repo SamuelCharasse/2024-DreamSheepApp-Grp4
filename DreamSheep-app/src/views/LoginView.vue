@@ -40,6 +40,12 @@ const handleSignIn = async () => {
 </script>
 
 <template>
+    <section>
+    <div class="text-white text-center py-8">
+      <h2>Bienvenue sur</h2>
+      <h1>DreamSheep</h1>
+    </div>
+  </section>
     <div class="m-5">
         <form @submit.prevent="handleSignIn">
         <div  class="pb-7 flex flex-col  rounded-lg">
@@ -54,8 +60,14 @@ const handleSignIn = async () => {
             {{ errorMessage }}
         </div>
         <div class="flex justify-center pt-8 pb-5">
-        <button class="text-white" type="submit" :disabled="isLoading">Se connecter</button>
+        <button class="text-black bg-yellow-200 px-3 py-2 rounded-md" type="submit" :disabled="isLoading">Se connecter</button>
     </div>
+    <p class="text-white text-sm text-center">
+        Vous n'avez pas de compte ?
+        <router-link to="/signup" class="text-LightPurple font-bold"
+          >Inscrivez-vous</router-link
+        >
+      </p>
     </form>
     <div class="flex  justify-center pt-6">
 <CloudIcon class="m-2"/>

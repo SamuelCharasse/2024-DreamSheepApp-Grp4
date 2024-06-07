@@ -20,7 +20,7 @@ import Star_1Icon from './icons/Star_1Icon.vue';
     </div>
     <div v-if="$route.path === '/diary'" class="flex flex-col gap-4 p-2 h-16 bg-blue-950 text-slate-50">
         <div class="flex justify-around items-center">
-            <h2>diary page</h2>
+            <h2>Vos rêves</h2>
             <div class="flex items-center gap-4">
                 <RouterLink to="/newdream">
                 <NewDreamIcon/>
@@ -45,20 +45,7 @@ import Star_1Icon from './icons/Star_1Icon.vue';
         </div>
         <span class="border border-slate-50 w-full"></span>
     </div>
-    <div v-if="$route.path === '/signup'" class="flex flex-col gap-4 p-2 h-16 bg-blue-950 text-slate-50">
-        <div class="flex justify-around items-center">
-            <h2>Inscription</h2>
-            <Star_1Icon/>
-        </div>
-        <span class="border border-slate-50 w-full"></span>
-    </div>
-    <div v-if="$route.path === '/login'" class="flex flex-col gap-4 p-2 h-16 bg-blue-950 text-slate-50">
-        <div class="flex justify-around items-center">
-            <h2>Connexion</h2>
-            <Star_1Icon/>
-        </div>
-        <span class="border border-slate-50 w-full"></span>
-    </div>
+    
     <div v-if="$route.path === '/settings'" class="flex flex-col gap-4 p-2 h-16 bg-blue-950 text-slate-50">
         <div class="flex justify-around items-center">
             <h2>settings page</h2>
