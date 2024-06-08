@@ -36,7 +36,8 @@ const handleDelete = async () => {
 
 <template>
     <div class="overflow-hidden px-2">
-    <div class="bg-LightPurple pt-2 rounded-lg mx-4 mt-4">
+    <div class="bg-LightPurple pt-2 rounded-lg mx-4 mt-4 px-1">
+        <div class="mx-1">
         <div class="text-center">
             <p class="text-xs text-black ">{{ formattedDate }}</p>
         </div>
@@ -66,5 +67,6 @@ const handleDelete = async () => {
             </div>
         </div>
     </div>
+</div>
 </div>
 </template>

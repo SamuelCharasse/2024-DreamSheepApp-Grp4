@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import DreamSheep_Logo_Vector from '@/components/icons/DreamSheep_Logo_vector.vue';
 import {RouterLink} from 'vue-router';
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+const route = useRoute();
+import NotificationIcon from './icons/NotificationIcon.vue';
+const isDreamDetails = computed(() => route.params.id !== undefined);
 </script>
 
 <template>
@@ -61,6 +66,10 @@ import {RouterLink} from 'vue-router';
         <h1 class="text-slate-50">Dreamsheep</h1>
     </div>
     <div v-if="$route.path === '/privacy-policy'" class="flex items-center justify-center p-4 gap-4 bg-indigo-900">
+        <DreamSheep_Logo_Vector/>
+        <h1 class="text-slate-50">Dreamsheep</h1>
+    </div>
+    <div v-if="isDreamDetails" class="flex items-center justify-center p-4 gap-4 bg-indigo-900">
         <DreamSheep_Logo_Vector/>
         <h1 class="text-slate-50">Dreamsheep</h1>
     </div>
