@@ -133,7 +133,9 @@ const handleSignUp = async () => {
           >Connectez-vous</router-link
         >
       </p>
+    
     </form>
+  </div>
   </main>
     <div class="flex justify-center pt-6">
       <CloudIcon class="m-2" />

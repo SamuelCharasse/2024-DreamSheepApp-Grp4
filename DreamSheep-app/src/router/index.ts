@@ -5,6 +5,10 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      redirect: '/signup'  // Rediriger vers la page de signup
+    },
+    {
+      path: '/',
       name: 'home',
       component: () => import('../views/HomeView.vue')
     },
@@ -37,6 +41,11 @@ const router = createRouter({
       path: '/diary',
       name: 'diary',
       component: () => import('../views/DiaryView.vue')
+    },
+    {
+      path: '/dreams/:id',
+      name: 'dream-details',
+      component: () => import('../views/DreamDetailsView.vue')
     },
     {
       path: '/legal',
