@@ -41,7 +41,7 @@ export type AvatarsRecord = {
 }
 
 export enum DreamsTagsOptions {
-	"Choices (humour" = "Choices (humour",
+	"humour" = "humour",
 	"amour" = "amour",
 	"drôle" = "drôle",
 	"étrange" = "étrange",
@@ -51,19 +51,19 @@ export enum DreamsTagsOptions {
 }
 
 export enum DreamsTypeOptions {
-	"Choices (reve" = "Choices (reve",
-	"cauchemar)" = "cauchemar)",
+	"Rêve" = "Rêve",
+	"Cauchemar" = "Cauchemar",
 }
 export type DreamsRecord = {
 	date?: IsoDateString
 	description?: string
-	extrait?: string
+	favoris?: boolean
+	partage?: boolean
 	recurrent?: boolean
 	tags?: DreamsTagsOptions
 	title?: string
 	type?: DreamsTypeOptions
 	userId?: RecordIdString
-	favoris?: boolean
 }
 
 export type UsersRecord = {
