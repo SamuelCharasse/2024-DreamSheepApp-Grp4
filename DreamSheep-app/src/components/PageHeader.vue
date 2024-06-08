@@ -8,7 +8,7 @@ import Star_1Icon from './icons/Star_1Icon.vue';
 </script>
 
 <template>
-    <div v-if="$route.path === '/'" class="flex flex-col gap-4 p-2 h-16 bg-blue-950 text-slate-50">
+    <div v-if="$route.path === '/home'" class="flex flex-col gap-4 p-2 h-16 bg-blue-950 text-slate-50">
         <div class="flex justify-around items-center">
             <h2>Communauté</h2>
             <div class="flex items-center gap-4"> <!-- faut finir de mettre en forme ici  -->

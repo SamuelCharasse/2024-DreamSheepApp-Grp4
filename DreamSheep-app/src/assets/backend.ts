@@ -58,7 +58,8 @@ export async function createDream(dreamData: { title: string; description: strin
             ...dreamData,
             userId: userId,
             categories: dreamData.tags, // Assurez-vous que les catégories sont envoyées correctement
-            extrait: extrait
+            extrait: dreamData,
+            
         });
 
         return newDream;

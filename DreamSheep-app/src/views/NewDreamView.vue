@@ -91,8 +91,8 @@ const handleCreateDream = async () => {
         >type</label
       >
       <select class="text-black" id="type" v-model="type" required>
-        <option value="reve">Rêve</option>
-        <option value="cauchemar">Cauchemar</option>
+        <option value="Rêve">Rêve</option>
+        <option value="Cauchemar">Cauchemar</option>
       </select>
     </div>
     <div>

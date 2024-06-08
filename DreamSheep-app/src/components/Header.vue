@@ -4,7 +4,7 @@ import {RouterLink} from 'vue-router';
 </script>
 
 <template>
-    <div v-if="$route.path === '/'" class="flex items-center justify-center p-4 gap-4 bg-indigo-900">
+    <div v-if="$route.path === '/home'" class="flex items-center justify-center p-4 gap-4 bg-indigo-900">
         <DreamSheep_Logo_Vector/>
         <h1 class="text-slate-50">Dreamsheep</h1>
     </div>

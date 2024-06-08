@@ -8,7 +8,7 @@ const router = createRouter({
       redirect: '/signup'  // Rediriger vers la page de signup
     },
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: () => import('../views/HomeView.vue')
     },

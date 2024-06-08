@@ -12,10 +12,10 @@ import SettingsIcon from '@/components/icons/SettingsIcon.vue';
     <nav class="fixed bottom-0 inset-x-0 bg-indigo-900 rounded-t-lg h-15" v-if="$route.path !== '/signup' && $route.path !== '/login'">
         <ul class="grid grid-cols-5 justify-between items-center p-4 text-slate-50">
             <li>
-                <router-link to="/" class="flex flex-col items-center">
+                <router-link to="/home" class="flex flex-col items-center">
                 <HomeIcon class="h-6 w-6 text-slate-50"/>
                 <span>Home</span>
-                <EllipseMenu v-if="$route.path === '/'" class="h-4 w-4"/>
+                <EllipseMenu v-if="$route.path === '/home'" class="h-4 w-4"/>
             </router-link>
             </li>
             <li>
