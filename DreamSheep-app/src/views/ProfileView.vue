@@ -1,4 +1,9 @@
+<script setup lang="ts">
+
+</script>
+
 <template>
-    <div class="profile">
-    </div>
+  <div class="profile">
+    
+  </div>
 </template>

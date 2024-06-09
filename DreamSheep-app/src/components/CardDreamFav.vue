@@ -3,6 +3,8 @@ import CommentIcon from './icons/CommentIcon.vue';
 import HeartIcon from './icons/HeartIcon.vue';
 import FlagIcon from './icons/FlagIcon.vue';
 import PinIcon from './icons/PinIcon.vue';
+
+
 </script>
 
 <template>

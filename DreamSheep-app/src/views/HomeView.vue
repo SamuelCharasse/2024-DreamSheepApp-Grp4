@@ -5,6 +5,6 @@ import CardDreamFav from '@/components/CardDreamFav.vue';
 <template>
     <div class="login">
       <CardDreamFav/>
-      <CardHome/>
+      <CardHome />
     </div>
 </template>
