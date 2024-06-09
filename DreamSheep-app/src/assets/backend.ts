@@ -52,13 +52,14 @@ export async function createDream(dreamData: { title: string; description: strin
             throw new Error('ID utilisateur non disponible');
         }
 
-        const extrait = generateExcerpt(dreamData.description, 147);
+        const extrait = generateExcerpt(dreamData.description, 20);
 
         const newDream = await pb.collection('dreams').create({
             ...dreamData,
             userId: userId,
             categories: dreamData.tags, // Assurez-vous que les catégories sont envoyées correctement
-            extrait: extrait
+            extrait: dreamData,
+            
         });
 
         return newDream;
@@ -73,4 +74,16 @@ function generateExcerpt(text: string, charLimit: number): string {
         return text;
     }
     return text.slice(0, charLimit) + '...';
+}
+
+export async function deleteDreams(dreamId: string) {
+    try {
+        if (!pb.authStore.isValid) {
+            throw new Error('Utilisateur non connecté');
+        }
+
+        await pb.collection('dreams').delete(dreamId);
+    } catch (error) {
+        throw error;
+    }
 }

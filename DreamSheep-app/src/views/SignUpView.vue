@@ -38,6 +38,13 @@ const handleSignUp = async () => {
 </script>
 
 <template>
+  <section>
+    <div class="text-white text-center py-8">
+      <h2>Bienvenue sur</h2>
+      <h1>DreamSheep</h1>
+    </div>
+  </section>
+  <main>
   <div class="m-5">
     <form @submit.prevent="handleSignUp">
       <div class="pb-4 flex flex-col">
@@ -112,14 +119,26 @@ const handleSignUp = async () => {
       <div v-if="errorMessage" class="error-message">
         {{ errorMessage }}
       </div>
-      <div class="flex justify-center pt-8 pb-5">
-        <button class="text-white" type="submit" >S'inscrire</button>
+      <div class="flex justify-center py-4">
+        <button
+          class="text-black bg-yellow-200 px-3 py-2 rounded-md"
+          type="submit"
+        >
+          S'inscrire
+        </button>
       </div>
-      <p class="text-white text-sm">Vous avez déjà un compte ? <router-link to="/login">Connectez-vous</router-link></p>
+      <p class="text-white text-sm text-center">
+        Vous avez déjà un compte ?
+        <router-link to="/login" class="text-LightPurple font-bold"
+          >Connectez-vous</router-link
+        >
+      </p>
+    
     </form>
-    <div class="flex  justify-center pt-6">
-<CloudIcon class="m-2"/>
-<MoonIcon class="m-12"/>
-    </div>
   </div>
+  </main>
+    <div class="flex justify-center pt-6">
+      <CloudIcon class="m-2" />
+      <MoonIcon class="m-12" />
+    </div>
 </template>
