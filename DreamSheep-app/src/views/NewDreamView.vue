@@ -106,6 +106,15 @@ const handleCreateDream = async () => {
           v-model="recurrent"
         />
       </div>
+      <div >
+        <label for="partage" class="text-white">Partager ce rêve à la communauté :</label>
+        <input
+          class="text-black "
+          type="checkbox"
+          id="partage"
+          v-model="partage"
+        />
+      </div>
       <div v-if="errorMessage" class="error-message">
         {{ errorMessage }}
       </div>
