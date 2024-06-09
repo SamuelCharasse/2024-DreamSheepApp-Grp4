@@ -129,8 +129,8 @@ const handleSignUp = async () => {
       </div>
       <p class="text-white text-sm text-center">
         Vous avez déjà un compte ?
-        <router-link to="/login" class="text-LightPurple font-bold"
-          >Connectez-vous</router-link
+        <RouterLink to="/login" class="text-LightPurple font-bold"
+          >Connectez-vous</RouterLink
         >
       </p>
     

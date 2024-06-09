@@ -11,9 +11,9 @@ import PageHeader from '@/components/PageHeader.vue';
   <PageHeader/>
   <main>
     <RouterView v-slot="{ Component }">
-      <transition name="fade" mode="out-in">
+      
         <component :is="Component"/>
-      </transition>
+    
     </RouterView>
   </main>
   <Menu/>
