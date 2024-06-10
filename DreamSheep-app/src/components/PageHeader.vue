@@ -107,4 +107,5 @@ const isDreamDetails = computed(() => route.params.id !== undefined);
     </div>
     <span class="border border-slate-50 w-full"></span>
   </div>
+  
 </template>

@@ -44,8 +44,8 @@ export type AvatarsRecord = {
 
 export type CommentairesRecord = {
 	Message?: string
-	post?: RecordIdString
-	utilisateur?: RecordIdString
+	dreamId?: RecordIdString
+	userId?: RecordIdString
 }
 
 export enum DreamsTagsOptions {

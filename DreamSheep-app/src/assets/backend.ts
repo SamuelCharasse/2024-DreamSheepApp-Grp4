@@ -146,3 +146,28 @@ export async function getDreamsWithUsernames() {
     username: userMap.get(dream.userId)?.username || 'Utilisateur inconnu',
   }));
 }
+
+export async function addComment(userId: string, dreamId: string, Message: string) {
+  try {
+    await pb.collection('commentaires').create({
+      userId: userId,
+      dreamId: dreamId,
+      Message: Message,
+    });
+  } catch (error) {
+    throw new Error(`Failed to add comment: ${error.message}`);
+  }
+}
+
+// Fonction pour récupérer les commentaires d'un rêve
+export async function getComments(dreamId: string) {
+  try {
+    const comments = await pb.collection('commentaires').getFullList({
+      filter: `dreamId="${dreamId}"`,
+      expand: 'userId'
+    });
+    return comments;
+  } catch (error) {
+    throw new Error(`Failed to fetch comments: ${error.message}`);
+  }
+}
