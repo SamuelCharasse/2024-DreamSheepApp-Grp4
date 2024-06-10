@@ -106,6 +106,12 @@ const router = createRouter({
     name: 'contact',
     component: () => import('../views/SettingsPages/ContactView.vue')
   },
+  {
+    path: '/editdream/:id',
+    name: 'editdream',
+    component: () => import('../views/EditDreamView.vue'), // Utilisez le même composant que pour la création
+    props: true // Permet de passer les paramètres de route comme props au composant
+  },
   ]
 })
 
