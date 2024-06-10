@@ -39,6 +39,7 @@ const handleCreateDream = async () => {
 };
 </script>
 <template>
+  <div class="pb-32">
   <form method="post" @submit.prevent="handleCreateDream">
     <div class="m-3">
       <div class="pb-4 flex flex-col">
@@ -97,37 +98,37 @@ const handleCreateDream = async () => {
           <option value="Cauchemar">Cauchemar</option>
         </select>
       </div>
-      <div >
-        <label for="recurent" class="text-white">Rêve récurrent :</label>
-        <input
-          class="text-black "
-          type="checkbox"
-          id="recurent"
-          v-model="recurrent"
-        />
-      </div>
-      <div >
-        <label for="partage" class="text-white">Partager ce rêve à la communauté :</label>
-        <input
-          class="text-black "
-          type="checkbox"
-          id="partage"
-          v-model="partage"
-        />
-      </div>
+      <div class="flex space-x-2 flex-col mb-3">
+  <label for="recurrent" class="text-white">Rêve récurrent :</label>
+  <div class="flex space-x-2 justify-center mb-3">
+  <button
+    :class="{'bg-blue-500 text-white': recurrent, 'bg-gray-200 text-gray-800': !recurrent}"
+    class="px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+    @click.prevent="recurrent = true">
+    <p>Oui</p>
+  </button>
+  <button
+    :class="{'bg-red-500 text-white': !recurrent, 'bg-gray-200 text-gray-800': recurrent}"
+    class="px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-150 ease-in-out"
+    @click.prevent="recurrent = false">
+    <p>Non</p>
+  </button>
+</div>
+</div>
       <div v-if="errorMessage" class="error-message">
         {{ errorMessage }}
       </div>
 
-      <div class="flex justify-center pb-4">
+      <div class="flex justify-center py-4">
         <button
-          class="text-white bg-teal-700 rounded-md px-3 py-2"
+          class="text-black bg-yellow-200 rounded-md px-3 py-2"
           type="submit"
           :disabled="isLoading"
         >
-          Créer
+          Enregistrer
         </button>
       </div>
     </div>
   </form>
+</div>
 </template>
