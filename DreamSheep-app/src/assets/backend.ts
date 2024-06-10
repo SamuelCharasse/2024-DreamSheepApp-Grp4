@@ -105,3 +105,14 @@ export async function updateDream(dreamId:string, dreamData) {
     throw new Error(`Failed to update dream: ${error.message}`);
   }
 }
+export async function getUserDreams(userId) {
+  try {
+    const response = await pb.collection("dreams").getFullList({
+      filter: `userId = "${userId}"`,
+    });
+    return response;
+  } catch (error) {
+    console.error("Failed to fetch user dreams:", error);
+    throw error;
+  }
+}
