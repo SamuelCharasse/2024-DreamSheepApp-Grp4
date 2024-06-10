@@ -34,6 +34,7 @@ const fetchDreams = async () => {
 onMounted(fetchDreams);
 </script>
 <template>
+  <div class="pb-32">
   <div class="mx-2 flex justify-between items-center">
     <p class="text-white text-xs">Les 7 derniers jours</p>
     <div class="flex justify-center items-center">
@@ -59,5 +60,6 @@ onMounted(fetchDreams);
   <div v-if="errorMessage">
     <p class="text-red-500">{{ errorMessage }}</p>
   </div>
+</div>
 </template>
 

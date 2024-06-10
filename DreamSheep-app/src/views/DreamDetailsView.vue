@@ -32,6 +32,10 @@ function formatDate(dateString) {
 }
 
 onMounted(fetchDreamDetails);
+const goToEditPage = () => {
+  // Remplacez 'editdream' par le nom de la route de l'édition et assurez-vous d'avoir l'ID du rêve si nécessaire
+  router.push({ name: 'editdream', params: { id: route.params.id }});
+};
 </script>
 
 <template>
@@ -76,7 +80,7 @@ onMounted(fetchDreamDetails);
       </div>
     </div>
     <div class="flex justify-center py-5 ">
-        <button class="text-black bg-yellow-200 rounded-md py-2 px-3">Modifier</button>
+        <button class="text-black bg-yellow-200 rounded-md py-2 px-3" @click="goToEditPage">Modifier</button>
     </div>
       
     </div>
