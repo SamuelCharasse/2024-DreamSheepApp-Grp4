@@ -7,6 +7,7 @@ import type { RecordService } from 'pocketbase'
 
 export enum Collections {
 	Avatars = "Avatars",
+	Commentaires = "commentaires",
 	Dreams = "dreams",
 	Users = "users",
 }
@@ -38,6 +39,12 @@ export type AuthSystemFields<T = never> = {
 export type AvatarsRecord = {
 	Name?: string
 	Skin?: string
+}
+
+export type CommentairesRecord = {
+	Message?: string
+	post?: RecordIdString
+	utilisateur?: RecordIdString
 }
 
 export enum DreamsTagsOptions {
@@ -74,6 +81,7 @@ export type UsersRecord = {
 
 // Response types include system fields and match responses from the PocketBase API
 export type AvatarsResponse<Texpand = unknown> = Required<AvatarsRecord> & BaseSystemFields<Texpand>
+export type CommentairesResponse<Texpand = unknown> = Required<CommentairesRecord> & BaseSystemFields<Texpand>
 export type DreamsResponse<Texpand = unknown> = Required<DreamsRecord> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
 
@@ -81,12 +89,14 @@ export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSyste
 
 export type CollectionRecords = {
 	Avatars: AvatarsRecord
+	commentaires: CommentairesRecord
 	dreams: DreamsRecord
 	users: UsersRecord
 }
 
 export type CollectionResponses = {
 	Avatars: AvatarsResponse
+	commentaires: CommentairesResponse
 	dreams: DreamsResponse
 	users: UsersResponse
 }
@@ -96,6 +106,7 @@ export type CollectionResponses = {
 
 export type TypedPocketBase = PocketBase & {
 	collection(idOrName: 'Avatars'): RecordService<AvatarsResponse>
+	collection(idOrName: 'commentaires'): RecordService<CommentairesResponse>
 	collection(idOrName: 'dreams'): RecordService<DreamsResponse>
 	collection(idOrName: 'users'): RecordService<UsersResponse>
 }
