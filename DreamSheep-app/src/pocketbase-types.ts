@@ -9,6 +9,7 @@ export enum Collections {
 	Avatars = "Avatars",
 	Commentaires = "commentaires",
 	Dreams = "dreams",
+	Likes = "likes",
 	Users = "users",
 }
 
@@ -73,6 +74,11 @@ export type DreamsRecord = {
 	userId?: RecordIdString
 }
 
+export type LikesRecord = {
+	dreamId?: RecordIdString
+	userId?: RecordIdString
+}
+
 export type UsersRecord = {
 	avatar?: string
 	name?: string
@@ -83,6 +89,7 @@ export type UsersRecord = {
 export type AvatarsResponse<Texpand = unknown> = Required<AvatarsRecord> & BaseSystemFields<Texpand>
 export type CommentairesResponse<Texpand = unknown> = Required<CommentairesRecord> & BaseSystemFields<Texpand>
 export type DreamsResponse<Texpand = unknown> = Required<DreamsRecord> & BaseSystemFields<Texpand>
+export type LikesResponse<Texpand = unknown> = Required<LikesRecord> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
 
 // Types containing all Records and Responses, useful for creating typing helper functions
@@ -91,6 +98,7 @@ export type CollectionRecords = {
 	Avatars: AvatarsRecord
 	commentaires: CommentairesRecord
 	dreams: DreamsRecord
+	likes: LikesRecord
 	users: UsersRecord
 }
 
@@ -98,6 +106,7 @@ export type CollectionResponses = {
 	Avatars: AvatarsResponse
 	commentaires: CommentairesResponse
 	dreams: DreamsResponse
+	likes: LikesResponse
 	users: UsersResponse
 }
 
@@ -108,5 +117,6 @@ export type TypedPocketBase = PocketBase & {
 	collection(idOrName: 'Avatars'): RecordService<AvatarsResponse>
 	collection(idOrName: 'commentaires'): RecordService<CommentairesResponse>
 	collection(idOrName: 'dreams'): RecordService<DreamsResponse>
+	collection(idOrName: 'likes'): RecordService<LikesResponse>
 	collection(idOrName: 'users'): RecordService<UsersResponse>
 }

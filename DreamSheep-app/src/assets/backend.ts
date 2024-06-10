@@ -105,14 +105,44 @@ export async function updateDream(dreamId:string, dreamData) {
     throw new Error(`Failed to update dream: ${error.message}`);
   }
 }
-export async function getUserDreams(userId) {
-  try {
-    const response = await pb.collection("dreams").getFullList({
-      filter: `userId = "${userId}"`,
-    });
-    return response;
-  } catch (error) {
-    console.error("Failed to fetch user dreams:", error);
-    throw error;
-  }
+export async function getUserDreams(userId: string) {
+  const dreams = await pb.collection("dreams").getFullList({
+    filter: `userId="${userId}"`,
+  });
+  return dreams;
+}
+
+export async function likeDream(dreamId: string, userId: string) {
+  await pb.collection("likes").create({
+    dreamId,
+    userId,
+  });
+}
+
+export async function unlikeDream(likeId: string) {
+  await pb.collection("likes").delete(likeId);
+}
+
+export async function getLikes(dreamId: string) {
+  const likes = await pb.collection("likes").getFullList({
+    filter: `dreamId="${dreamId}"`,
+  });
+  return likes;
+}
+
+export async function getUserLikes(userId: string) {
+  const likes = await pb.collection("likes").getFullList({
+    filter: `userId="${userId}"`,
+  });
+  return likes;
+}
+export async function getDreamsWithUsernames() {
+  const dreams = await pb.collection("dreams").getFullList();
+  const users = await pb.collection("users").getFullList();
+  const userMap = new Map(users.map(user => [user.id, user]));
+
+  return dreams.map(dream => ({
+    ...dream,
+    username: userMap.get(dream.userId)?.username || 'Utilisateur inconnu',
+  }));
 }
