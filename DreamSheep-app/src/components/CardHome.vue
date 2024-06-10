@@ -14,7 +14,6 @@ const props = defineProps({
   date: String,
   username: String
 });
-
 </script>
 
 <template>
@@ -27,7 +26,7 @@ const props = defineProps({
       <h3 class="text-black overflow-auto">{{ title }}</h3>
       <p class="text-black text-base overflow-auto">{{ description }}</p>
     </div>
-    <div class="flex justify-self-start flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-4">
+    <div class="flex justify-self-start flex-grow-0 flex-shrink-0 relative gap-2 px-2 py-2">
       <CommentIcon/>
       <p class="text-black text-sm pl-0.5">Nbr Commentaires</p>
       <HeartIcon/>
