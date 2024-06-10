@@ -1,5 +1,5 @@
 import PocketBase from "pocketbase";
-import { type TypedPocketBase } from "./pocketbase-types";
+import { type TypedPocketBase } from "@/pocketbase-types";
 
 export const pb = new PocketBase("http://127.0.0.1:8090") as TypedPocketBase;
 
@@ -87,4 +87,21 @@ export async function deleteDreams(dreamId: string) {
     } catch (error) {
         throw error;
     }
+}
+export async function fetchDreamDetails(dreamId:string) {
+  try {
+    const response = await pb.collection("dreams").getOne(dreamId);
+    return response;
+  } catch (error) {
+    throw new Error(`Failed to fetch dream details: ${error.message}`);
+  }
+}
+
+export async function updateDream(dreamId:string, dreamData) {
+  try {
+    const updatedDream = await pb.collection("dreams").update(dreamId, dreamData);
+    return updatedDream;
+  } catch (error) {
+    throw new Error(`Failed to update dream: ${error.message}`);
+  }
 }
