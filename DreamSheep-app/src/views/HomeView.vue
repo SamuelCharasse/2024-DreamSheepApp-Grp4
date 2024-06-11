@@ -14,7 +14,6 @@ const searchQuery = ref('');
 const fetchSharedDreams = async () => {
   try {
     const response = await pb.collection("dreams").getFullList({
-      filter: "partage === true",
       expand: "userId",
       filter: 'partage = true',
     });
@@ -90,17 +89,6 @@ onMounted(fetchSharedDreams);
     </div>
     <div v-else>
       <p>Aucun rêve partagé disponible.</p>
-  <div class="pb-32">
-    <CardHome/>
-    <div v-for="dream in dreams" :key="dream.id">
-      <CardHome
-        :id="dream.id"
-        :title="dream.title"
-        :description="dream.description"
-        :tags="dream.tags"
-        :date="formatDate(dream.date)"
-        :username="dream.username"
-      />
     </div>
   </div>
 </template>

@@ -10,11 +10,6 @@ import TagIcon from "./icons/TagIcon.vue";
 import { useRouter } from "vue-router";
 import { defineProps } from 'vue';
 import { RouterLink } from 'vue-router';
-import ProfileIcon from './icons/ProfileIcon.vue';
-import CommentIcon from './icons/CommentIcon.vue';
-import HeartIcon from './icons/HeartIcon.vue';
-import FlagIcon from './icons/FlagIcon.vue';
-import TagIcon from './icons/TagIcon.vue';
 
 const props = defineProps({
   id: String,
@@ -75,9 +70,7 @@ onMounted(() => {
       <h3 class="text-black overflow-auto">{{ title }}</h3>
       <p class="text-black text-base overflow-auto">{{ description }}</p>
     </div>
-    <div
-      class="flex justify-self-start flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-4"
-    >
+    <div class="flex justify-self-start flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-4">
       <div class="comments cursor-pointer flex gap-3" @click="goToComments">
         <CommentIcon />
         <span>{{ commentCount.length }}</span>
@@ -85,23 +78,11 @@ onMounted(() => {
       <div @click="toggleLike" class="cursor-pointer">
         <component :is="hasLiked ? HeartFullIcon : HeartIcon" />
       </div>
+      <div>
       <p class="text-black text-sm pl-0.5">{{ likes.length }}</p>
-      <FlagIcon />
-      <p class="text-black text-sm pl-0.5">Signaler</p>
-    <div class="flex justify-self-start flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-4">
-      <CommentIcon/>
-      <p class="text-black text-sm pl-0.5">Nbr Commentaires</p>
-      <HeartIcon/>
-      <p class="text-black text-sm pl-0.5">Nbr Likes</p>
-      <FlagIcon/>
       <RouterLink to="/report">Signaler</RouterLink>
-    </div>
-    <div
-      class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-5 px-2 pb-4"
-    >
-      <div
-        class="bg-violet-200 rounded-lg flex items-center space-x-1 px-2 py-1"
-      >
+      </div>
+      <div class="bg-violet-200 rounded-lg flex items-center space-x-1 px-2 py-1">
         <TagIcon />
         <p class="text-black text-xs">{{ tags }}</p>
       </div>
