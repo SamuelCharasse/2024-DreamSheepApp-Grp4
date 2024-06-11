@@ -105,6 +105,74 @@ export async function updateDream(dreamId:string, dreamData) {
     throw new Error(`Failed to update dream: ${error.message}`);
   }
 }
+export async function getUserDreams(userId: string) {
+  const dreams = await pb.collection("dreams").getFullList({
+    filter: `userId="${userId}"`,
+  });
+  return dreams;
+}
+
+export async function likeDream(dreamId: string, userId: string) {
+  await pb.collection("likes").create({
+    dreamId,
+    userId,
+  });
+}
+
+export async function unlikeDream(likeId: string) {
+  await pb.collection("likes").delete(likeId);
+}
+
+export async function getLikes(dreamId: string) {
+  const likes = await pb.collection("likes").getFullList({
+    filter: `dreamId="${dreamId}"`,
+  });
+  return likes;
+}
+
+export async function getUserLikes(userId: string) {
+  const likes = await pb.collection("likes").getFullList({
+    filter: `userId="${userId}"`,
+  });
+  return likes;
+}
+export async function getDreamsWithUsernames() {
+  const dreams = await pb.collection("dreams").getFullList();
+  const users = await pb.collection("users").getFullList();
+  const userMap = new Map(users.map(user => [user.id, user]));
+
+  return dreams.map(dream => ({
+    ...dream,
+    username: userMap.get(dream.userId)?.username || 'Utilisateur inconnu',
+  }));
+}
+
+export async function addComment(userId: string, dreamId: string, Message: string) {
+  try {
+    await pb.collection('commentaires').create({
+      userId: userId,
+      dreamId: dreamId,
+      Message: Message,
+    });
+  } catch (error) {
+    throw new Error(`Failed to add comment: ${error.message}`);
+  }
+}
+
+// Fonction pour récupérer les commentaires d'un rêve
+export async function getComments(dreamId: string) {
+  try {
+    const comments = await pb.collection('commentaires').getFullList({
+      filter: `dreamId="${dreamId}"`,
+      expand: 'userId'
+    });
+    return comments;
+  } catch (error) {
+    throw new Error(`Failed to fetch comments: ${error.message}`);
+  }
+}
+
+export async function submitReport(reportData: {nature: string; message: string; create: string; cible: string; }, dreamId: string){
 export async function reportDream() {
   try {
     const report = await pb.collection("reports").create({
