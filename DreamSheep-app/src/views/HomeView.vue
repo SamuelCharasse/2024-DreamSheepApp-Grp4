@@ -1,12 +1,12 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import CardHome from "@/components/CardHome.vue";
-import { fetchSharedDreams } from '@/assets/backend';
-import SearchBar from '@/components/SearchBar.vue';
-
+import { fetchSharedDreams } from "@/assets/backend";
+import SearchBar from "@/components/SearchBar.vue";
+import FilterIcon from "@/components/icons/FilterIcon.vue";
 const dreams = ref([]);
 const filteredDreams = ref([]);
-const searchQuery = ref('');
+const searchQuery = ref("");
 
 // Chargement des rêves au montage du composant
 onMounted(async () => {
@@ -15,7 +15,7 @@ onMounted(async () => {
     dreams.value = result;
     filteredDreams.value = result; // Initialise filteredDreams avec tous les rêves au départ
   } catch (error) {
-    console.error('Error loading dreams:', error);
+    console.error("Error loading dreams:", error);
   }
 });
 
@@ -26,9 +26,10 @@ const filterDreams = (query) => {
     filteredDreams.value = dreams.value;
   } else {
     const lowerCaseQuery = query.toLowerCase();
-    filteredDreams.value = dreams.value.filter(dream =>
-      dream.title.toLowerCase().includes(lowerCaseQuery) ||
-      dream.description.toLowerCase().includes(lowerCaseQuery)
+    filteredDreams.value = dreams.value.filter(
+      (dream) =>
+        dream.title.toLowerCase().includes(lowerCaseQuery) ||
+        dream.description.toLowerCase().includes(lowerCaseQuery)
     );
   }
 };
@@ -36,7 +37,13 @@ const filterDreams = (query) => {
 
 <template>
   <div class="container mx-auto p-4 mb-32">
-    <SearchBar @search="filterDreams" />
+    <div>
+      <SearchBar @search="filterDreams" />
+      <div class="flex justify-end">
+        <p class="text-white">Filtrer</p>
+        <FilterIcon />
+      </div>
+    </div>
     <div v-if="filteredDreams.length > 0">
       <div v-for="dream in filteredDreams" :key="dream.id">
         <CardHome v-bind="dream" />

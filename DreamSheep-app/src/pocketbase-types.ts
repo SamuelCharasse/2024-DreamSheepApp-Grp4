@@ -46,7 +46,7 @@ export type AvatarsRecord = {
 export type CommentairesRecord = {
 	Message?: string
 	dreamId?: RecordIdString
-	userId?: RecordIdString
+	userId?: RecordIdString[]
 }
 
 export enum DreamsTagsOptions {
@@ -87,8 +87,8 @@ export enum ReportNatureOptions {
 export type ReportRecord = {
 	cible?: RecordIdString
 	create?: RecordIdString
-	message: string
-	nature: ReportNatureOptions
+	message?: string
+	nature?: ReportNatureOptions
 }
 
 export type UsersRecord = {

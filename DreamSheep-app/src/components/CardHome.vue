@@ -83,8 +83,9 @@ const username = computed(() => props.user?.username || "Utilisateur inconnu");
         <component :is="hasLiked ? HeartFullIcon : HeartIcon" />
       </div>
       <p class="text-black text-sm pl-0.5">{{ likes }}</p>
+      <RouterLink to="/report">
       <FlagIcon />
-      <RouterLink to="/report">Signaler</RouterLink>
+      </RouterLink>
       <div
         class="bg-violet-200 rounded-lg flex items-center space-x-1 px-2 py-1"
       >
