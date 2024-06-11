@@ -81,7 +81,7 @@ onMounted(() => {
       <div class="flex gap-2">
       <p class="text-black text-sm pl-0.5">{{ likes.length }}</p>
       <FlagIcon/>
-      <RouterLink to="/report">Signaler</RouterLink>
+      <RouterLink :to="`/report/${props.id}`">Signaler</RouterLink>
       </div>
       <div class="bg-violet-200 rounded-lg flex items-center space-x-1 px-2 py-1">
         <TagIcon />

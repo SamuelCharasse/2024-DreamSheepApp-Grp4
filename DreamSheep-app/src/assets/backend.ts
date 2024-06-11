@@ -173,13 +173,14 @@ export async function getComments(dreamId: string) {
 }
 
 
-export async function reportDream() {
+export async function reportDream(dreamId: string, userId: string, message: string, nature: string) {
   try {
-    const report = await pb.collection("reports").create({
-      cible: "dreamId",
-      create: "userId",
-      message: "message",
-      nature: "nature",
+    console.log(`DreamId: ${dreamId}, UserId: ${userId}, Message: ${message}, Nature: ${nature}`);
+    const report = await pb.collection("report").create({
+      cible: dreamId,
+      create: userId,
+      message: message,
+      nature: nature,
     });
     return report;
   } catch (error) {
