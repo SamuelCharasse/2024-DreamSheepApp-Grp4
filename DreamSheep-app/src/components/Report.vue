@@ -1,28 +1,33 @@
 <script setup lang="ts">
-import { submitReport } from '@/assets/backend';
-import { ref } from 'vue';
+import { reportDream } from '@/assets/backend';
+import { ReportNatureOptions } from '@/pocketbase-types';
 
-const reportForm = ref({
-  nature: '',
-  message: '',
-  userId: '',
-  postId: ''
+const props = defineProps({
+  nature: {
+    type: String as () => keyof typeof ReportNatureOptions,
+    required: true,
+  },
+  message: String,
 });
+
+const reportTypes = Object.values(ReportNatureOptions);
+
 </script>
+
 <template>
-    <div>
-      <h2>Signaler une publication</h2>
-      <form @submit.prevent="submitReport">
+  <div class="bg-LightPurple overflow-hidden p-2 rounded-lg m-4">
+    <form @submit.prevent="reportDream">
+      <div class="flex flex-col gap-2">
         <label for="nature">Nature du signalement :</label>
-        <input v-model="reportForm.nature" id="nature" type="text" required />
+        <select id="nature" v-model="props.nature" required>
+          <option v-for="type in reportTypes" :key="type" :value="type">{{ type }}</option>
+        </select>
 
         <label for="message">Message :</label>
-        <textarea v-model="reportForm.message" id="message" required></textarea>
-
-        <input v-model="reportForm.userId" type="hidden" />
-        <input v-model="reportForm.postId" type="hidden" />
+        <textarea id="message" v-model="props.message" required></textarea>
 
         <button type="submit">Envoyer le signalement</button>
-      </form>
-    </div>
-  </template>
+      </div>
+    </form>
+  </div>
+</template>

@@ -121,6 +121,9 @@ const router = createRouter({
     path: '/dreams/:id/comments',
     name: 'comments',
     component: () => import('../views/CommentView.vue'), 
+    path: '/report',
+    name: 'report',
+    component: () => import('../components/Report.vue'),
   }
   ]
 })

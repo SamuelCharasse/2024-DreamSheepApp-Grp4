@@ -8,6 +8,13 @@ import FlagIcon from "./icons/FlagIcon.vue";
 import ProfileIcon from "./icons/ProfileIcon.vue";
 import TagIcon from "./icons/TagIcon.vue";
 import { useRouter } from "vue-router";
+import { defineProps } from 'vue';
+import { RouterLink } from 'vue-router';
+import ProfileIcon from './icons/ProfileIcon.vue';
+import CommentIcon from './icons/CommentIcon.vue';
+import HeartIcon from './icons/HeartIcon.vue';
+import FlagIcon from './icons/FlagIcon.vue';
+import TagIcon from './icons/TagIcon.vue';
 
 const props = defineProps({
   id: String,
@@ -81,6 +88,13 @@ onMounted(() => {
       <p class="text-black text-sm pl-0.5">{{ likes.length }}</p>
       <FlagIcon />
       <p class="text-black text-sm pl-0.5">Signaler</p>
+    <div class="flex justify-self-start flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-4">
+      <CommentIcon/>
+      <p class="text-black text-sm pl-0.5">Nbr Commentaires</p>
+      <HeartIcon/>
+      <p class="text-black text-sm pl-0.5">Nbr Likes</p>
+      <FlagIcon/>
+      <RouterLink to="/report">Signaler</RouterLink>
     </div>
     <div
       class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-5 px-2 pb-4"

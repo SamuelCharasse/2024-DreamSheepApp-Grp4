@@ -173,23 +173,15 @@ export async function getComments(dreamId: string) {
 }
 
 export async function submitReport(reportData: {nature: string; message: string; create: string; cible: string; }, dreamId: string){
+export async function reportDream() {
   try {
-    if(!pb.authStore.isValid) {
-      throw new Error('Utilisateur non connecté');
-    }
-    const userId = pb.authStore.model?.id;
-    if (!userId) {
-        throw new Error('ID utilisateur non disponible');
-    }
-    const dream = await pb.collection('dreams').getOne(dreamId);
-    if (!dream) {
-        throw new Error('Publication non disponible');
-    }
-    const newReport = await pb.collection('report').create({
-      ...reportData,
-      create: userId,
-      cible: dream.id,
+    const report = await pb.collection("reports").create({
+      cible: "dreamId",
+      create: "userId",
+      message: "message",
+      nature: "nature",
     });
+    return report;
   } catch (error) {
     throw error;
   }
