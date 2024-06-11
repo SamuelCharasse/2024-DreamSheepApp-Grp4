@@ -187,3 +187,21 @@ export async function reportDream(dreamId: string, userId: string, message: stri
     throw error;
   }
 }
+
+export async function changePassword(newPassword: string){
+  try {
+    const userId = pb.authStore.model?.id;
+    if (!userId) {
+        throw new Error('ID utilisateur non disponible');
+    }
+    const user: { password: string } = await pb.collection('users').getOne(userId);
+    if (!user) {
+        throw new Error('Utilisateur non trouvé');
+    }
+    user.password = newPassword;
+    await pb.collection('users').updateOne({ _id: userId }, { $set: { password: user.password } });
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
