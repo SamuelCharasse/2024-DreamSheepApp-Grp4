@@ -105,3 +105,16 @@ export async function updateDream(dreamId:string, dreamData) {
     throw new Error(`Failed to update dream: ${error.message}`);
   }
 }
+export async function reportDream() {
+  try {
+    const report = await pb.collection("reports").create({
+      cible: "dreamId",
+      create: "userId",
+      message: "message",
+      nature: "nature",
+    });
+    return report;
+  } catch (error) {
+    throw error;
+  }
+}

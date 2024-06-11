@@ -113,7 +113,7 @@ const router = createRouter({
     props: true // Permet de passer les paramètres de route comme props au composant
   },
   {
-    path: '/report/:id',
+    path: '/report',
     name: 'report',
     component: () => import('../components/Report.vue'),
   }
