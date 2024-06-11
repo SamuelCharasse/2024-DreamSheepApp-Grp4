@@ -1,5 +1,5 @@
 import PocketBase from "pocketbase";
-import { type TypedPocketBase } from "@/pocketbase-types";
+import { type DreamsResponse, type TypedPocketBase, Collections } from "@/pocketbase-types";
 
 export const pb = new PocketBase("http://127.0.0.1:8090") as TypedPocketBase;
 
@@ -211,5 +211,35 @@ export async function fetchUserLikedDreams(userId: string) {
     });
   } catch (error) {
     throw new Error(`Failed to fetch dreams liked by the user: ${error.message}`);
+  }
+}
+
+// test de fonction 
+export async function allDreamUserSort() { 
+  return await pb.collection(Collections.Dreams).getFullList<DreamsResponse>(
+        {expand: 'users',
+            filter: 'partage = true',
+            sort: 'created'
+        })
+}
+export async function fetchSharedDreams() {
+  try {
+      const dreams = await pb.collection('dreams').getFullList({
+          filter: 'partage = true',
+          expand: 'userId' // Assurez-vous d'inclure les détails de l'utilisateur
+      });
+
+      const dreamsWithUserDetails = dreams.map(dream => {
+          const user = dream.expand?.userId || { username: 'Utilisateur inconnu', avatar: null };
+          return {
+              ...dream,
+              user: user
+          };
+      });
+
+      return dreamsWithUserDetails;
+  } catch (error) {
+      console.error('Error fetching shared dreams:', error);
+      throw error;
   }
 }

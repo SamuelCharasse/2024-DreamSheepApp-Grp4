@@ -29,7 +29,6 @@ const switchTab = (tab) => {
   <div v-if="activeTab === 'posts'" class="mb-32">
     <CardHome v-for="dream in sharedDreams"
               :key="dream.id"
-              :id="dream.id"
               :title="dream.title"
               :description="dream.description"
               :tags="dream.tags"

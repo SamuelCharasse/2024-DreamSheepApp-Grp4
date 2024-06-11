@@ -1,6 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { pb, likeDream, unlikeDream, getLikes, getComments } from "@/assets/backend";
+import { ref, onMounted, computed } from "vue";
+import {
+  pb,
+  likeDream,
+  unlikeDream,
+  getLikes,
+  getComments,
+} from "@/assets/backend";
 import CommentIcon from "./icons/CommentIcon.vue";
 import HeartFullIcon from "./icons/HeartFullIcon.vue";
 import HeartIcon from "./icons/HeartIcon.vue";
@@ -8,54 +14,52 @@ import FlagIcon from "./icons/FlagIcon.vue";
 import ProfileIcon from "./icons/ProfileIcon.vue";
 import TagIcon from "./icons/TagIcon.vue";
 import { useRouter } from "vue-router";
-import { defineProps } from 'vue';
-import { RouterLink } from 'vue-router';
 
 const props = defineProps({
   id: String,
   title: String,
   description: String,
-  tags: String,
   date: String,
-  username: String,
+  tags: String,
+  user: Object,
+  likes: Number,
+  commentaires: Number,
 });
 
 const userId = pb.authStore.model?.id;
-const likes = ref([]);
-const commentCount = ref([]);
+const likes = ref(props.likes || 0);
+const commentCount = ref(props.commentaires || 0);
 const hasLiked = ref(false);
 const router = useRouter();
 
+onMounted(async () => {
+  fetchLikes();
+  fetchComments();
+});
+
 const fetchLikes = async () => {
-  likes.value = await getLikes(props.id);
-  hasLiked.value = likes.value.some((like) => like.userId === userId);
+  const result = await getLikes(props.id);
+  likes.value = result.length;
+  hasLiked.value = result.some((like) => like.userId === userId);
 };
 
 const fetchComments = async () => {
-  commentCount.value = await getComments(props.id);
+  const result = await getComments(props.id);
+  commentCount.value = result.length;
 };
 
 const toggleLike = async () => {
-  try {
-    if (hasLiked.value) {
-      const like = likes.value.find((like) => like.userId === userId);
-      await unlikeDream(like.id);
-    } else {
-      await likeDream(props.id, userId);
-    }
-    await fetchLikes();
-  } catch (error) {
-    console.error("Failed to toggle like:", error);
+  if (hasLiked.value) {
+    await unlikeDream(props.id);
+  } else {
+    await likeDream(props.id, userId);
   }
+  fetchLikes();
 };
-
-
 const goToComments = () => {
   router.push(`/dreams/${props.id}/comments`);
 };
-onMounted(() => {
-  fetchLikes();
-});
+const username = computed(() => props.user?.username || "Utilisateur inconnu");
 </script>
 
 <template>
@@ -67,25 +71,25 @@ onMounted(() => {
       </p>
     </div>
     <div class="p-3">
-      <h3 class="text-black overflow-auto">{{ title }}</h3>
-      <p class="text-black text-base overflow-auto">{{ description }}</p>
+      <h3 class="text-black overflow-auto">{{ props.title }}</h3>
+      <p class="text-black text-base overflow-auto">{{ props.description }}</p>
     </div>
-    <div class="flex justify-self-start flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-4">
-      <div class="comments cursor-pointer flex gap-3" @click="goToComments">
-        <CommentIcon />
-        <span>{{ commentCount.length }}</span>
-      </div>
+    <div
+      class="flex justify-self-start flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-4"
+    >
+      <CommentIcon @click="goToComments" />
+      <span>{{ commentCount }}</span>
       <div @click="toggleLike" class="cursor-pointer">
         <component :is="hasLiked ? HeartFullIcon : HeartIcon" />
       </div>
-      <div class="flex gap-2">
-      <p class="text-black text-sm pl-0.5">{{ likes.length }}</p>
-      <FlagIcon/>
+      <p class="text-black text-sm pl-0.5">{{ likes }}</p>
+      <FlagIcon />
       <RouterLink to="/report">Signaler</RouterLink>
-      </div>
-      <div class="bg-violet-200 rounded-lg flex items-center space-x-1 px-2 py-1">
+      <div
+        class="bg-violet-200 rounded-lg flex items-center space-x-1 px-2 py-1"
+      >
         <TagIcon />
-        <p class="text-black text-xs">{{ tags }}</p>
+        <p class="text-black text-xs">{{ props.tags }}</p>
       </div>
     </div>
   </div>
