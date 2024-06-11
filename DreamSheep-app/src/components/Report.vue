@@ -15,15 +15,19 @@ const reportTypes = Object.values(ReportNatureOptions);
 </script>
 
 <template>
-  <form @submit.prevent="reportDream" class="">
-    <label for="nature">Nature du signalement :</label>
-    <select id="nature" v-model="props.nature" required>
-      <option v-for="type in reportTypes" :key="type" :value="type">{{ type }}</option>
-    </select>
+  <div class="bg-LightPurple overflow-hidden p-2 rounded-lg m-4">
+    <form @submit.prevent="reportDream">
+      <div class="flex flex-col gap-2">
+        <label for="nature">Nature du signalement :</label>
+        <select id="nature" v-model="props.nature" required>
+          <option v-for="type in reportTypes" :key="type" :value="type">{{ type }}</option>
+        </select>
 
-    <label for="message">Message :</label>
-    <textarea id="message" v-model="props.message" required></textarea>
+        <label for="message">Message :</label>
+        <textarea id="message" v-model="props.message" required></textarea>
 
-    <button type="submit">Envoyer le signalement</button>
-  </form>
+        <button type="submit">Envoyer le signalement</button>
+      </div>
+    </form>
+  </div>
 </template>
