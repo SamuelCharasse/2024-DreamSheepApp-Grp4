@@ -27,10 +27,11 @@ const props = defineProps({
 });
 
 const userId = pb.authStore.model?.id;
-const likes = ref(props.likes || 0);
-const commentCount = ref(props.commentaires || 0);
+const likes = ref(props.likes );
+const commentCount = ref(props.commentaires );
 const hasLiked = ref(false);
 const router = useRouter();
+
 
 onMounted(async () => {
   fetchLikes();
@@ -39,12 +40,14 @@ onMounted(async () => {
 
 const fetchLikes = async () => {
   const result = await getLikes(props.id);
+  console.log("Likes fetched:", result);
   likes.value = result.length;
   hasLiked.value = result.some((like) => like.userId === userId);
 };
 
 const fetchComments = async () => {
   const result = await getComments(props.id);
+  console.log("Comments fetched:", result);
   commentCount.value = result.length;
 };
 
@@ -74,6 +77,13 @@ const username = computed(() => props.user?.username || "Utilisateur inconnu");
       <h3 class="text-black overflow-auto">{{ props.title }}</h3>
       <p class="text-black text-base overflow-auto">{{ props.description }}</p>
     </div>
+    <div class="flex flex-col">
+      <div
+        class="bg-violet-200 rounded-lg flex items-start  justify-start mx-auto py-1 px-3 w-auto"
+      >
+        <TagIcon />
+        <p class="text-black text-xs">{{ props.tags }}</p>
+      </div>
     <div
       class="flex justify-self-start flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-4"
     >
@@ -86,12 +96,8 @@ const username = computed(() => props.user?.username || "Utilisateur inconnu");
       <RouterLink to="/report">
       <FlagIcon />
       </RouterLink>
-      <div
-        class="bg-violet-200 rounded-lg flex items-center space-x-1 px-2 py-1"
-      >
-        <TagIcon />
-        <p class="text-black text-xs">{{ props.tags }}</p>
-      </div>
+      
+    </div>
     </div>
   </div>
 </template>

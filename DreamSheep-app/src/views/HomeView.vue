@@ -45,9 +45,18 @@ const filterDreams = (query) => {
       </div>
     </div>
     <div v-if="filteredDreams.length > 0">
-      <div v-for="dream in filteredDreams" :key="dream.id">
-        <CardHome v-bind="dream" />
-      </div>
+      <CardHome
+        v-for="dream in filteredDreams"
+        :key="dream.id"
+        :id="dream.id"
+        :title="dream.title"
+        :description="dream.description"
+        :tags="dream.tags"
+        :user="dream.user"
+        :date="dream.date"
+        :likes="dream.likes"
+        :commentaires="dream.commentaires"
+      />
     </div>
     <div v-else>
       <p>Aucun rêve partagé disponible.</p>
