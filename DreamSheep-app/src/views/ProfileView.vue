@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { pb, getUserLikedDreams } from '@/assets/backend';
+import { pb } from '@/assets/backend';
 import CardHome from '@/components/CardHome.vue';
 
 const userId = pb.authStore.model?.id;

@@ -14,8 +14,14 @@ const searchQuery = ref('');
 const fetchSharedDreams = async () => {
   try {
     const response = await pb.collection("dreams").getFullList({
+      filter: "partage === true",
+      expand: "userId",
       filter: 'partage = true',
     });
+    dreams.value = response.map((dream) => ({
+      ...dream,
+      username: dream.userId ? dream.userId.username : "Utilisateur inconnu",
+    }));
 
     const dreamsWithUsernames = await Promise.all(
       response.map(async (dream) => {
