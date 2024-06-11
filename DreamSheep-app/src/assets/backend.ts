@@ -172,7 +172,7 @@ export async function getComments(dreamId: string) {
   }
 }
 
-export async function submitReport(reportData: {nature: string; message: string; create: string; cible: string; }, dreamId: string){
+
 export async function reportDream() {
   try {
     const report = await pb.collection("reports").create({
