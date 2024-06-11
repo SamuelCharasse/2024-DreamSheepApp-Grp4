@@ -207,7 +207,7 @@ export async function fetchUserLikedDreams(userId: string) {
     if (dreamIds.length === 0) return [];
     return await pb.collection('dreams').getFullList({
       filter: `id in (${dreamIds.join(",")})`,
-      expand: 'userId'
+      // expand: 'userId'
     });
   } catch (error) {
     throw new Error(`Failed to fetch dreams liked by the user: ${error.message}`);
