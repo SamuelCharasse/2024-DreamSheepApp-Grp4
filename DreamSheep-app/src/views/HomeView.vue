@@ -4,6 +4,7 @@ import { pb } from "@/assets/backend";
 import CardHome from "@/components/CardHome.vue";
 import FilterIcon from "@/components/icons/FilterIcon.vue";
 import SearchBar from "@/components/SearchBar.vue";
+import Report from "@/components/Report.vue";
 
 const dreams = ref([]);
 const filteredDreams = ref([]);
