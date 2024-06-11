@@ -2,6 +2,7 @@
 import { ref, onMounted } from "vue";
 import CardHome from "@/components/CardHome.vue";
 import { pb } from "@/assets/backend";
+import Report from "@/components/Report.vue";
 
 const dreams = ref([]);
 

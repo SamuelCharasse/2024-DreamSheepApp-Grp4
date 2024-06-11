@@ -105,3 +105,26 @@ export async function updateDream(dreamId:string, dreamData) {
     throw new Error(`Failed to update dream: ${error.message}`);
   }
 }
+
+export async function submitReport(reportData: {nature: string; message: string; create: string; cible: string; }, dreamId: string){
+  try {
+    if(!pb.authStore.isValid) {
+      throw new Error('Utilisateur non connecté');
+    }
+    const userId = pb.authStore.model?.id;
+    if (!userId) {
+        throw new Error('ID utilisateur non disponible');
+    }
+    const dream = await pb.collection('dreams').getOne(dreamId);
+    if (!dream) {
+        throw new Error('Publication non disponible');
+    }
+    const newReport = await pb.collection('report').create({
+      ...reportData,
+      create: userId,
+      cible: dream.id,
+    });
+  } catch (error) {
+    throw error;
+  }
+}
