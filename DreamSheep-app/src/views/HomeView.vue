@@ -2,7 +2,6 @@
 import { ref, onMounted } from "vue";
 import CardHome from "@/components/CardHome.vue";
 import { pb } from "@/assets/backend";
-import Report from "@/components/Report.vue";
 
 const dreams = ref([]);
 
@@ -39,7 +38,7 @@ const formatDate = (dateString) => {
         :title="dream.title"
         :description="dream.description"
         :tags="dream.tags"
-        :date="formattedDate(dream.date)"
+        :date="formatDate(dream.date)"
         :username="dream.username"
       />
     </div>
