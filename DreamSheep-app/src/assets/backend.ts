@@ -186,3 +186,30 @@ export async function reportDream() {
     throw error;
   }
 }
+
+export async function fetchUserSharedDreams(userId: string) {
+  try {
+    const dreams = await pb.collection('dreams').getFullList({
+      filter: `userId="${userId}" && partage=true`, // Filtrer pour obtenir uniquement les rêves partagés par cet utilisateur
+      // expand: 'userId' // Expande les détails de l'utilisateur pour chaque rêve
+    });
+    return dreams; 
+  } catch (error) {
+    console.error(`Failed to fetch shared dreams: ${error.message}`);
+    throw new Error(`Failed to fetch shared dreams: ${error.message}`);
+  }
+}
+
+export async function fetchUserLikedDreams(userId: string) {
+  try {
+    const likes = await pb.collection('likes').getFullList({ filter: `userId="${userId}"` });
+    const dreamIds = likes.map(like => like.dreamId);
+    if (dreamIds.length === 0) return [];
+    return await pb.collection('dreams').getFullList({
+      filter: `id in (${dreamIds.join(",")})`,
+      expand: 'userId'
+    });
+  } catch (error) {
+    throw new Error(`Failed to fetch dreams liked by the user: ${error.message}`);
+  }
+}
