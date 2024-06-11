@@ -12,6 +12,12 @@ const props = defineProps({
 
 const reportTypes = Object.values(ReportNatureOptions);
 
+import { useRouter } from "vue-router";
+const router = useRouter();
+function goBack() {
+  router.back();
+}
+
 </script>
 
 <template>
@@ -26,7 +32,7 @@ const reportTypes = Object.values(ReportNatureOptions);
         <label for="message">Message :</label>
         <textarea id="message" v-model="props.message" required></textarea>
 
-        <button type="submit">Envoyer le signalement</button>
+        <button type="submit" @click="goBack">Envoyer le signalement</button>
       </div>
     </form>
   </div>
