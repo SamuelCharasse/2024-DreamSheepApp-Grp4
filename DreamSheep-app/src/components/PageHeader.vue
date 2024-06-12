@@ -2,15 +2,21 @@
 import { RouterLink } from "vue-router";
 import { computed } from "vue";
 import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 
 import NewDreamIcon from "@/components/icons/NewDreamIcon.vue";
 import StatisticIcon from "./icons/StatisticIcon.vue";
 import NotificationUpIcon from "./icons/NotificationUpIcon.vue";
 
 const route = useRoute();
+const router = useRouter();
 import NotificationIcon from "./icons/NotificationIcon.vue";
 import Star_1Icon from "./icons/Star_1Icon.vue";
+import BackArrowIconsvg from "./icons/BackArrowIconsvg.vue";
 const isDreamDetails = computed(() => route.params.id !== undefined);
+function goBack() {
+  router.back(); // Navigue à la page précédente dans l'historique du navigateur
+}
 </script>
 
 <template>
@@ -103,6 +109,7 @@ const isDreamDetails = computed(() => route.params.id !== undefined);
     class="flex flex-col gap-4 p-2 h-16 bg-blue-950 text-slate-50"
   >
     <div class="flex justify-around items-center">
+      <BackArrowIconsvg @click="goBack" class="cursor-pointer"/>
       <h2>Détails du rêve</h2>
       <Star_1Icon />
     </div>
@@ -123,6 +130,7 @@ const isDreamDetails = computed(() => route.params.id !== undefined);
     class="flex flex-col gap-4 p-2 h-16 bg-blue-950 text-slate-50"
   >
     <div class="flex justify-around items-center">
+      <BackArrowIconsvg @click="goBack" class="cursor-pointer"/>
       <h2>Partager un rêve</h2>
       <Star_1Icon />
     </div>

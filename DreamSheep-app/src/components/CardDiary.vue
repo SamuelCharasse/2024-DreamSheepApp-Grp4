@@ -64,11 +64,11 @@ const goToEdit =()=>{
         </div>
         <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-1 pb-2.5">
           <div class="flex items-center space-x-1 px-2 py-1" @click="goToEdit">
-            <EditIcon />
+            <EditIcon class="w-4 h-4"/>
             <p class="text-black text-xs">Modifier</p>
           </div>
           <div class="flex items-center space-x-1 px-2 py-1">
-            <CrossIcon @click="handleDelete" class="cursor-pointer" />
+            <CrossIcon @click="handleDelete" class="cursor-pointer w-5 h-5" />
             <p class="text-black text-xs cursor-pointer" @click="handleDelete">Supprimer</p>
           </div>
         </div>

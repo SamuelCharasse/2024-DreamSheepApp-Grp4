@@ -75,7 +75,7 @@ watch([sortBy, selectedTag], loadDreams);
   <div class="container mx-auto p-4 mb-32">
     <div class="flex justify-between gap-3 items-center">
       <SearchBar @search="filterDreams" />
-      <div class="flex items-center cursor-pointer border p-1.5 rounded-md" @click="showFilters = !showFilters">
+      <div class="flex items-center cursor-pointer border p-1.5 rounded-md bg-DarkPurple" @click="showFilters = !showFilters">
         <p class="text-white">Filtrer</p>
         <FilterIcon />
       </div>
