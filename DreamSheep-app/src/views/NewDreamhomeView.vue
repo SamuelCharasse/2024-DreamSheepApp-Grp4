@@ -1,12 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import FavouriteIcon from "@/components/icons/FavouriteIcon.vue";
-import DownArrowIcon from "@/components/icons/DownArrowIcon.vue";
-import SquareIcon from "@/components/icons/SquareIcon.vue";
-import Button from "@/components/Button.vue";
-import BackArrowIconsvg from "@/components/icons/BackArrowIconsvg.vue";
 import { createSharedDream } from "@/assets/backend";
 import { useRouter } from "vue-router";
+import BackArrowIconsvg from "@/components/icons/BackArrowIconsvg.vue";
 
 const router = useRouter();
 const title = ref("");
@@ -37,20 +33,17 @@ const handleCreateDream = async () => {
     isLoading.value = false;
   }
 };
-
 function goBack() {
   router.back(); // Navigue à la page précédente dans l'historique du navigateur
-}
-
+} 
 </script>
 
 <template>
-    <div class="m-2">
-    <BackArrowIconsvg @click="goBack" class="cursor-pointer" />
-  </div>
   <div class="pb-32">
-    
     <form method="post" @submit.prevent="handleCreateDream">
+        <div @click="goBack" class="cursor-pointer my-2">
+            <BackArrowIconsvg />
+        </div>
       <div class="m-3">
         <div class="pb-4 flex flex-col">
           <label class="text-white text-base font-medium pb-1" for="title">Titre du rêve</label>
