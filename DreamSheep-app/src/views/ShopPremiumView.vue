@@ -6,7 +6,7 @@ import Button from "@/components/Button.vue";
 </script>
 
 <template>
-    <main class="m-3">
+    <main class="mt-3 mb-32 mx-3">
     <div class="flex justify-between pb-4">
       <div class="relative inline-block text-center">
         <details class="group">

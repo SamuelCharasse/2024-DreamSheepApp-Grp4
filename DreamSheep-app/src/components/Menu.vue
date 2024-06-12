@@ -33,10 +33,10 @@ import SettingsIcon from '@/components/icons/SettingsIcon.vue';
                 </router-link>
             </li>
             <li>
-                <router-link to="/shop" class="flex flex-col items-center">
+                <router-link to="/shop-premium" class="flex flex-col items-center">
                 <ShopIcon class="h-6 w-6 text-slate-50"/>
                 <span>Shop</span>
-                <EllipseMenu v-if="$route.path === '/shop'" class="h-4 w-4"/>
+                <EllipseMenu v-if="$route.path === '/shop-premium'" class="h-4 w-4"/>
                 </router-link>
             </li>
             <li>

@@ -1,53 +1,65 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { pb } from '@/assets/backend';
-import CardHome from '@/components/CardHome.vue';
+import { pb } from "@/assets/backend";
+import CardHome from "@/components/CardHome.vue";
+import { ref, onMounted } from "vue";
+import { fetchUserSharedDreams, fetchUserLikedDreams } from "@/assets/backend";
 
-const userId = pb.authStore.model?.id;
+const userId = pb.authStore.model?.id; 
+const sharedDreams = ref([]);
 const likedDreams = ref([]);
-const isLoading = ref(true);
-const errorMessage = ref("");
+const activeTab = ref("posts");
 
-const fetchLikedDreams = async () => {
-  try {
-    if (!userId) {
-      throw new Error("Utilisateur non authentifié");
-    }
-    likedDreams.value = await getUserLikedDreams(userId);
-  } catch (error) {
-    console.error("Failed to fetch liked dreams:", error);
-    errorMessage.value = "Erreur lors de la récupération des rêves likés.";
-  } finally {
-    isLoading.value = false;
-  }
+const switchTab = (tab) => {
+  activeTab.value = tab;
 };
 
-onMounted(fetchLikedDreams);
+onMounted(async () => {
+  try {
+    sharedDreams.value = await fetchUserSharedDreams(userId);
+    likedDreams.value = await fetchUserLikedDreams(userId);
+  } catch (error) {
+    console.error('Error fetching dreams:', error);
+  }
+});
 </script>
 
 <template>
-  <div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4 text-white">Rêves Likés</h1>
-    <div v-if="isLoading">
-      <p class="text-center text-white">Chargement...</p>
+  <div class="text-white flex justify-center gap-28 my-4">
+    <div @click="switchTab('posts')" :class="{'border-b border-yellow-200 text-yellow-200': activeTab === 'posts'}">
+      <h3>Posts</h3>
     </div>
-    <div v-else-if="likedDreams.length > 0">
-      <div v-for="dream in likedDreams" :key="dream.id">
-        <CardHome
-          :id="dream.id"
-          :title="dream.title"
-          :description="dream.description"
-          :tags="dream.tags"
-          :date="dream.date"
-          :username="dream.expand.userId.username"
-        />
-      </div>
+    <div @click="switchTab('likes')" :class="{'border-b border-yellow-200 text-yellow-200': activeTab === 'likes'}">
+      <h3>J'aime</h3>
     </div>
-    <div v-else>
-      <p class="text-white text-center mt-20">Vous n'avez pas encore liké de rêve.</p>
-    </div>
-    <div v-if="errorMessage">
-      <p class="text-red-500">{{ errorMessage }}</p>
-    </div>
+  </div>
+
+  <div v-if="activeTab === 'posts'"class="mb-32">
+    <CardHome
+      v-for="dream in sharedDreams"
+      :key="dream.id"
+      :id="dream.id"
+      :title="dream.title"
+      :description="dream.description"
+      :tags="dream.tags"
+      :date="dream.created"
+      :likes="dream.likes"
+      :commentaires="dream.commentaires"
+      :user="dream.userId"
+    />
+  </div>
+
+  <div v-if="activeTab === 'likes'" class="mb-32">
+    <CardHome
+      v-for="dream in likedDreams"
+      :key="dream.id"
+      :id="dream.id"
+      :title="dream.title"
+      :description="dream.description"
+      :tags="dream.tags"
+      :date="dream.created"
+      :likes="dream.likes"
+      :commentaires="dream.commentaires"
+      :user="dream.userId"
+    />
   </div>
 </template>

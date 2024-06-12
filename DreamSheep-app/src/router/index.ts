@@ -122,7 +122,12 @@ const router = createRouter({
     name: 'comments',
     component: () => import('../views/CommentView.vue'),
   },
+  
   {
+    path: '/newdreamhome',
+    name: 'newdreamhome',
+    component: () => import('../views/NewDreamhomeView.vue'),}
+    ,{
     path: '/report/:id',
     name: 'Report',
     component: () => import('@/components/Report.vue'),

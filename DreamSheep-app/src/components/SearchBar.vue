@@ -5,7 +5,7 @@
         v-model="query"
         @input="onSearch"
         placeholder="Rechercher des rêves..."
-        class="p-2 border rounded w-full"
+        class="p-1 border rounded w-full"
       />
     </div>
   </template>
