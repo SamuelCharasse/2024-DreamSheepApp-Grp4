@@ -16,6 +16,7 @@ const type = ref(""); // 'cauchemar' ou 'reve'
 const tags = ref("");
 const isLoading = ref(false);
 const errorMessage = ref("");
+const partage = ref(false);
 
 const handleCreateDream = async () => {
   isLoading.value = true;
@@ -28,6 +29,7 @@ const handleCreateDream = async () => {
       recurrent: recurrent.value,
       type: type.value,
       tags: tags.value,
+      partage: partage.value,
     });
     router.push("/diary");
   } catch (error) {
@@ -39,7 +41,7 @@ const handleCreateDream = async () => {
 };
 </script>
 <template>
-  <div class="pb-32">
+  <div class="pb-32 mb-4">
   <form method="post" @submit.prevent="handleCreateDream">
     <div class="m-3">
       <div class="pb-4 flex flex-col">
@@ -113,6 +115,23 @@ const handleCreateDream = async () => {
     @click.prevent="recurrent = false">
     <p>Non</p>
   </button>
+</div>
+<div class="flex space-x-2 flex-col mb-3">
+  <label for="partage" class="text-white">Partager à la communauté :</label>
+  <div class="flex space-x-2 justify-center items-center my-3">
+  <button
+    :class="{'bg-blue-500 text-white': partage, 'bg-gray-200 text-gray-800': !partage}"
+    class="px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+    @click.prevent="partage = true">
+    <p>Oui</p>
+  </button>
+  <button
+    :class="{'bg-red-500 text-white': !partage, 'bg-gray-200 text-gray-800': partage}"
+    class="px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-150 ease-in-out"
+    @click.prevent="partage = false">
+    <p>Non</p>
+  </button>
+</div>
 </div>
 </div>
       <div v-if="errorMessage" class="error-message">

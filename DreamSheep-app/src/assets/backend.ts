@@ -42,7 +42,7 @@ export async function logIn(email: string, password: string) {
 }
 
 // Créer rêve
-export async function createDream(dreamData: { title: string; description: string, date: string, recurrent: boolean, type: string, tags: string }) {
+export async function createDream(dreamData: { title: string; description: string, date: string, recurrent: boolean, type: string, tags: string, partage: boolean}) {
     try {
         if (!pb.authStore.isValid) {
             throw new Error('Utilisateur non connecté');
@@ -58,9 +58,8 @@ export async function createDream(dreamData: { title: string; description: strin
         const newDream = await pb.collection('dreams').create({
             ...dreamData,
             userId: userId,
-            categories: dreamData.tags, // Assurez-vous que les catégories sont envoyées correctement
-            extrait: dreamData,
-            
+            categories: dreamData.tags,
+            extrait: extrait, // Utiliser l'extrait généré
         });
 
         return newDream;
@@ -70,11 +69,11 @@ export async function createDream(dreamData: { title: string; description: strin
 }
 
 // Générer extrait rêve
-function generateExcerpt(text: string, charLimit: number): string {
-    if (text.length <= charLimit) {
-        return text;
-    }
-    return text.slice(0, charLimit) + '...';
+export function generateExcerpt(text: string, maxLength: number): string {
+  if (text.length <= maxLength) {
+      return text;
+  }
+  return text.substring(0, maxLength) + '...';
 }
 
 export async function deleteDreams(dreamId: string) {
@@ -179,27 +178,27 @@ export async function reportDream(dreamId: string, userId: string, message: stri
 export async function fetchUserSharedDreams(userId: string) {
   try {
     const dreams = await pb.collection('dreams').getFullList({
-      filter: `userId="${userId}" && partage=true`, // Filtrer pour obtenir uniquement les rêves partagés par cet utilisateur
-      // expand: 'userId' // Expande les détails de l'utilisateur pour chaque rêve
+      filter: `userId="${userId}" && partage=true`,
     });
-    return dreams; 
+    return dreams;
   } catch (error) {
-    console.error(`Failed to fetch shared dreams: ${error.message}`);
-    throw new Error(`Failed to fetch shared dreams: ${error.message}`);
+    console.error('Error fetching user shared dreams:', error);
+    throw error;
   }
 }
 
 export async function fetchUserLikedDreams(userId: string) {
   try {
-    const likes = await pb.collection('likes').getFullList({ filter: `userId="${userId}"` });
-    const dreamIds = likes.map(like => like.dreamId);
-    if (dreamIds.length === 0) return [];
-    return await pb.collection('dreams').getFullList({
-      filter: `id in (${dreamIds.join(",")})`,
-      // expand: 'userId'
+    const likes = await pb.collection('likes').getFullList({
+      filter: `userId="${userId}"`,
+      expand: 'dreamId',
     });
+
+    const likedDreams = likes.map(like => like.expand.dreamId);
+    return likedDreams;
   } catch (error) {
-    throw new Error(`Failed to fetch dreams liked by the user: ${error.message}`);
+    console.error('Error fetching user liked dreams:', error);
+    throw error;
   }
 }
 
@@ -396,7 +395,7 @@ export async function updateUserData(userId: string, userData: { name?: string; 
   }
 }
 
-export async function changePassword(userId: string, newPassword: string, confirmPassword: string) {
+
 export async function changePassword(userId: string, newPassword: string, confirmPassword: string) {
   console.log(newPassword);
   console.log(confirmPassword);

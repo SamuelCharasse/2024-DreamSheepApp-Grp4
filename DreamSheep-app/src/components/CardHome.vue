@@ -93,19 +93,7 @@ const username = computed(() => props.user?.username || "Utilisateur inconnu");
         <TagIcon />
         <p class="text-black text-xs">{{ props.tags }}</p>
       </div>
-      <div
-        class="flex justify-self-start flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-4"
-      >
-        <CommentIcon @click="goToComments" />
-        <span>{{ commentCount }}</span>
-        <div @click="toggleLike" class="cursor-pointer">
-          <component :is="hasLiked ? HeartFullIcon : HeartIcon" />
-        </div>
-        <p class="text-black text-sm pl-0.5">{{ likes }}</p>
-        <RouterLink to="/report">
-          <FlagIcon />
-        </RouterLink>
-      </div>
+      
     </div>
   </div>
 </template>
