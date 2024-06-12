@@ -4,6 +4,7 @@ import FavouriteIcon from "@/components/icons/FavouriteIcon.vue";
 import DownArrowIcon from "@/components/icons/DownArrowIcon.vue";
 import SquareIcon from "@/components/icons/SquareIcon.vue";
 import Button from "@/components/Button.vue";
+import BackArrowIconsvg from "@/components/icons/BackArrowIconsvg.vue";
 import { createSharedDream } from "@/assets/backend";
 import { useRouter } from "vue-router";
 
@@ -36,10 +37,19 @@ const handleCreateDream = async () => {
     isLoading.value = false;
   }
 };
+
+function goBack() {
+  router.back(); // Navigue à la page précédente dans l'historique du navigateur
+}
+
 </script>
 
 <template>
+    <div class="m-2">
+    <BackArrowIconsvg @click="goBack" class="cursor-pointer" />
+  </div>
   <div class="pb-32">
+    
     <form method="post" @submit.prevent="handleCreateDream">
       <div class="m-3">
         <div class="pb-4 flex flex-col">
