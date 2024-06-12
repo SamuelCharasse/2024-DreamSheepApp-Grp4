@@ -76,12 +76,12 @@ const username = computed(() => dream.value?.expand?.userId?.username || "Utilis
 
 <template>
   <div class="container mx-auto p-4 mb-32">
-    <div class="m-2">
+    <div class="m-1">
       <BackArrowIconsvg @click="goBack" class="cursor-pointer" />
     </div>
 
     <div v-if="dream">
-      <div class="bg-LightPurple overflow-hidden pt-2 rounded-lg mx-4 mt-4">
+      <div class="bg-LightPurple overflow-hidden pt-2 rounded-lg mx-1 mt-4">
         <div class="flex flex-grow-0 flex-shrink-0 py-3 pl-4">
           <ProfileIcon />
           <p class="text-indigo-900 font-normal text-xl pl-4 pt-3">
@@ -129,7 +129,7 @@ const username = computed(() => dream.value?.expand?.userId?.username || "Utilis
             :key="comment.id"
             class="bg-DarkPurple overflow-hidden pt-2 rounded-lg mb-2"
           >
-            <div class="flex items-center py-3 px-4">
+            <div class="flex items-center py-2 px-4">
               <ProfileIcon />
               <div class="ml-4">
                 <p class="text-indigo-900 font-normal text-xl">

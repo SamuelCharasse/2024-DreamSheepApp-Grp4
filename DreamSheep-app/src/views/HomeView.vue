@@ -99,8 +99,8 @@ watch([sortBy, selectedTag], loadDreams);
         </div>
       </div>
       <div class="flex gap-4 mt-4">
-        <button @click="saveFilters" class="bg-blue-500 text-white p-2 rounded">Enregistrer les choix</button>
-        <button @click="resetFilters" class="bg-red-500 text-white p-2 rounded">Réinitialiser les filtres</button>
+        <button @click="saveFilters" class="bg-blue-500 text-white p-1 rounded">Enregistrer</button>
+        <button @click="resetFilters" class="bg-red-500 text-white p-1 rounded">Réinitialiser</button>
       </div>
     </div>
     <div v-if="filteredDreams.length > 0">
