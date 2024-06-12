@@ -373,3 +373,22 @@ export async function createSharedDream(dreamData: { title: string; description:
       throw error;
   }
 }
+
+export async function getUserData(userId: string) {
+  try {
+    const user = await pb.collection('users').getOne(userId);
+    return user;
+  } catch (error) {
+    throw new Error(`Failed to fetch user data: ${error.message}`);
+  }
+}
+
+
+export async function updateUserData(userId: string, userData: { name?: string; username?: string; avatar?: string; email?: string }) {
+  try {
+    const updatedUser = await pb.collection('users').update(userId, userData);
+    return updatedUser;
+  } catch (error) {
+    throw new Error(`Failed to update user data: ${error.message}`);
+  }
+}
