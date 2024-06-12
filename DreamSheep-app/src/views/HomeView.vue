@@ -65,7 +65,7 @@ onMounted(fetchSharedDreams);
 </script>
 
 <template>
-  <div class="container mx-auto p-4">
+  <div class="container mx-auto p-4 mb-20">
     <SearchBar @search="filterDreams" />
     <div v-if="filteredDreams.length > 0">
       <div class="mx-2 flex justify-between items-center">
