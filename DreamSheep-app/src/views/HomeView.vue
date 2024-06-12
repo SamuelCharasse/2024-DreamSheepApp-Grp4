@@ -73,44 +73,34 @@ watch([sortBy, selectedTag], loadDreams);
 
 <template>
   <div class="container mx-auto p-4 mb-32">
-    <div>
+    <div class="flex justify-between gap-3 items-center">
       <SearchBar @search="filterDreams" />
-      <div class="flex justify-end items-center mt-4">
+      <div class="flex items-center cursor-pointer border p-1.5 rounded-md" @click="showFilters = !showFilters">
         <p class="text-white">Filtrer</p>
-        <FilterIcon @click="showFilters = !showFilters" class="cursor-pointer" />
+        <FilterIcon />
       </div>
-      <div v-if="showFilters" class="mt-4">
-        <div class="flex gap-4">
-          <div>
-            <label for="sort" class="text-white">Trier par date :</label>
-            <select id="sort" v-model="sortBy" class="p-2 border rounded">
-              <option value="">Aucun</option>
-              <option value="newest">Du plus récent au plus ancien</option>
-              <option value="oldest">Du plus ancien au plus récent</option>
-            </select>
-          </div>
-          <div>
-            <label for="tag" class="text-white">Filtrer par tag :</label>
-            <select id="tag" v-model="selectedTag" class="p-2 border rounded">
-              <option value="">Aucun</option>
-              <option v-for="tag in tags" :key="tag" :value="tag">{{ tag }}</option>
-            </select>
-          </div>
+    </div>
+    <div v-if="showFilters" class="mt-4">
+      <div class="flex gap-4">
+        <div>
+          <label for="sort" class="text-white">Trier par date :</label>
+          <select id="sort" v-model="sortBy" class="p-2 border rounded">
+            <option value="">Aucun</option>
+            <option value="newest">Du plus récent au plus ancien</option>
+            <option value="oldest">Du plus ancien au plus récent</option>
+          </select>
         </div>
-        <div class="flex gap-4 mt-4">
-          <button
-            @click="saveFilters"
-            class="bg-blue-500 text-white px-4 py-2 rounded"
-          >
-            Enregistrer les choix
-          </button>
-          <button
-            @click="resetFilters"
-            class="bg-red-500 text-white px-4 py-2 rounded"
-          >
-            Réinitialiser les filtres
-          </button>
+        <div>
+          <label for="tag" class="text-white">Filtrer par tag :</label>
+          <select id="tag" v-model="selectedTag" class="p-2 border rounded">
+            <option value="">Aucun</option>
+            <option v-for="tag in tags" :key="tag" :value="tag">{{ tag }}</option>
+          </select>
         </div>
+      </div>
+      <div class="flex gap-4 mt-4">
+        <button @click="saveFilters" class="bg-blue-500 text-white p-2 rounded">Enregistrer les choix</button>
+        <button @click="resetFilters" class="bg-red-500 text-white p-2 rounded">Réinitialiser les filtres</button>
       </div>
     </div>
     <div v-if="filteredDreams.length > 0">

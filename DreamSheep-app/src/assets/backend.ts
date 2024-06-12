@@ -347,3 +347,29 @@ export async function fetchSharedDreamsByTagAndDate(tag, order) {
   }
 }
 
+export async function createSharedDream(dreamData: { title: string; description: string; date: string; recurrent: boolean; type: string; tags: string }) {
+  try {
+      if (!pb.authStore.isValid) {
+          throw new Error('Utilisateur non connecté');
+      }
+
+      const userId = pb.authStore.model?.id;
+      if (!userId) {
+          throw new Error('ID utilisateur non disponible');
+      }
+
+      const extrait = generateExcerpt(dreamData.description, 20);
+
+      const newDream = await pb.collection('dreams').create({
+          ...dreamData,
+          userId: userId,
+          categories: dreamData.tags, // Assurez-vous que les catégories sont envoyées correctement
+          extrait: extrait,
+          partage: true, // Rêve partagé
+      });
+
+      return newDream;
+  } catch (error) {
+      throw error;
+  }
+}

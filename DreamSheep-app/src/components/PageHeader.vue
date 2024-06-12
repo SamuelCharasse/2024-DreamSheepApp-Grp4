@@ -21,8 +21,9 @@ const isDreamDetails = computed(() => route.params.id !== undefined);
     <div class="flex justify-around items-center">
       <h2>Communauté</h2>
       <div class="flex items-center gap-4">
-        <!-- faut finir de mettre en forme ici  -->
+        <RouterLink to="/newdreamhome">
         <NewDreamIcon />
+        </RouterLink>
         <NotificationIcon />
       </div>
     </div>
@@ -103,6 +104,16 @@ const isDreamDetails = computed(() => route.params.id !== undefined);
   >
     <div class="flex justify-around items-center">
       <h2>Statistiques</h2>
+      <Star_1Icon />
+    </div>
+    <span class="border border-slate-50 w-full"></span>
+  </div>
+  <div
+    v-if="$route.path === '/newdreamhome'"
+    class="flex flex-col gap-4 p-2 h-16 bg-blue-950 text-slate-50"
+  >
+    <div class="flex justify-around items-center">
+      <h2>Partager un rêve</h2>
       <Star_1Icon />
     </div>
     <span class="border border-slate-50 w-full"></span>
