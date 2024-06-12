@@ -141,7 +141,6 @@ export async function getComments(dreamId: string) {
       const comments = await pb.collection('commentaires').getFullList({
           filter: `dreamId="${dreamId}"`,
           expand: 'userId',
-          sorted: '-created',
       });
 
       const commentsWithUserDetails = comments.map(comment => {
@@ -157,6 +156,7 @@ export async function getComments(dreamId: string) {
       throw new Error(`Failed to fetch comments: ${error.message}`);
   }
 }
+
 
 
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useRoute } from "vue-router";
 import {
   pb,
@@ -70,6 +70,8 @@ function goBack() {
 }
 
 onMounted(fetchDreamAndComments);
+
+const username = computed(() => dream.value?.expand?.userId?.username || "Utilisateur inconnu");
 </script>
 
 <template>
@@ -83,7 +85,7 @@ onMounted(fetchDreamAndComments);
         <div class="flex flex-grow-0 flex-shrink-0 py-3 pl-4">
           <ProfileIcon />
           <p class="text-indigo-900 font-normal text-xl pl-4 pt-3">
-            {{ dream.userId?.username || "Utilisateur inconnu" }}
+            {{ username }}
           </p>
         </div>
         <div class="p-3">
@@ -110,13 +112,13 @@ onMounted(fetchDreamAndComments);
         <div class="flex justify-between gap-4 items-center">
           <textarea
             v-model="commentMessage"
-            class="w-full px-2 py-1 border rounded mb-2"
+            class="w-full px-2 py-1 border rounded mb-2 bg-DarkPurple text-white"
             rows="2"
             placeholder="Laisser un commentaire"
           ></textarea>
           <button
             @click="postComment"
-            class="bg-yellow-200 text-black h-8 px-4 rounded"
+            class="bg-yellow-200 text-black p-2 text-sm rounded"
           >
             Envoyer
           </button>

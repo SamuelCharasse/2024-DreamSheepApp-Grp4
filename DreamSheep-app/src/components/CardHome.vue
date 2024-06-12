@@ -79,13 +79,13 @@ const username = computed(() => props.user?.username || "Utilisateur inconnu");
     <div class="flex justify-self-start flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-4">
       <div class="comments cursor-pointer flex gap-3" @click="goToComments">
         <CommentIcon />
-        <span>{{ commentCount.length }}</span>
+        <span>{{ commentCount }}</span>
       </div>
       <div @click="toggleLike" class="cursor-pointer">
         <component :is="hasLiked ? HeartFullIcon : HeartIcon" />
       </div>
       <div class="flex gap-2">
-      <p class="text-black text-sm pl-0.5">{{ likes.length }}</p>
+      <p class="text-black text-sm pl-0.5">{{ likes }}</p>
       <FlagIcon/>
       <RouterLink :to="`/report/${props.id}`">Signaler</RouterLink>
       </div>
