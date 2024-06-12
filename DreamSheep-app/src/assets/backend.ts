@@ -193,7 +193,7 @@ export async function changePassword(userId: string, newPassword: string, confir
   console.log(confirmPassword);
   if (newPassword === confirmPassword) {
     await pb.collection('users').update(userId, {
-    password: newPassword,
+    password: newPassword, passwordConfirm: confirmPassword,
     })
   } else {
       throw new Error('Les nouveaux mots de passe ne correspondent pas.');
