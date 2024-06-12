@@ -33,7 +33,7 @@ onMounted(async () => {
     </div>
   </div>
 
-  <div v-if="activeTab === 'posts'"class="mb-32">
+  <div v-if="activeTab === 'posts'" class="mb-32">
     <CardHome
       v-for="dream in sharedDreams"
       :key="dream.id"
@@ -44,7 +44,7 @@ onMounted(async () => {
       :date="dream.created"
       :likes="dream.likes"
       :commentaires="dream.commentaires"
-      :user="dream.userId"
+      :user="dream.user"
     />
   </div>
 
@@ -59,7 +59,7 @@ onMounted(async () => {
       :date="dream.created"
       :likes="dream.likes"
       :commentaires="dream.commentaires"
-      :user="dream.userId"
+      :user="dream.user"
     />
   </div>
 </template>

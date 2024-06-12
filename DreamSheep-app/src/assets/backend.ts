@@ -9,25 +9,31 @@ export async function addUser(event: {
   passwordConfirm: string;
   username: string;
   name: string;
+  avatar?: File;
 }) {
   if (event.password !== event.passwordConfirm) {
     throw new Error("Les mots de passe ne correspondent pas.");
   }
 
   try {
-    const record = await pb.collection("users").create({
-      email: event.email,
-      username: event.username,
-      name: event.name,
-      password: event.password,
-      passwordConfirm: event.passwordConfirm,
-    });
+    const formData = new FormData();
+    formData.append("email", event.email);
+    formData.append("username", event.username);
+    formData.append("name", event.name);
+    formData.append("password", event.password);
+    formData.append("passwordConfirm", event.passwordConfirm);
+
+    if (event.avatar) {
+      formData.append("avatar", event.avatar);
+    }
+
+    const record = await pb.collection("users").create(formData);
+
     return record;
   } catch (error) {
     throw error;
   }
 }
-
 export async function logIn(email: string, password: string) {
   try {
     const authData = await pb
@@ -179,8 +185,18 @@ export async function fetchUserSharedDreams(userId: string) {
   try {
     const dreams = await pb.collection('dreams').getFullList({
       filter: `userId="${userId}" && partage=true`,
+      expand: 'userId'
     });
-    return dreams;
+
+    console.log(dreams); // Pour vérifier la structure des données reçues
+
+    // Transformation des rêves pour inclure le nom d'utilisateur de manière explicite
+    const dreamsWithUserDetails = dreams.map(dream => ({
+      ...dream,
+      username: dream.expand?.userId ? dream.expand.userId.username : 'Utilisateur inconnu'
+    }));
+
+    return dreamsWithUserDetails;
   } catch (error) {
     console.error('Error fetching user shared dreams:', error);
     throw error;
@@ -191,10 +207,18 @@ export async function fetchUserLikedDreams(userId: string) {
   try {
     const likes = await pb.collection('likes').getFullList({
       filter: `userId="${userId}"`,
-      expand: 'dreamId',
+      expand: 'dreamId.userId',
     });
 
-    const likedDreams = likes.map(like => like.expand.dreamId);
+    const likedDreams = likes.map(like => {
+      const dream = like.expand?.dreamId;
+      const user = dream?.expand?.userId || { username: 'Utilisateur inconnu', avatar: null };
+      return {
+        ...dream,
+        user: user
+      };
+    });
+
     return likedDreams;
   } catch (error) {
     console.error('Error fetching user liked dreams:', error);
