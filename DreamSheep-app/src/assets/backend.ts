@@ -188,20 +188,14 @@ export async function reportDream(dreamId: string, userId: string, message: stri
   }
 }
 
-export async function changePassword(newPassword: string){
-  try {
-    const userId = pb.authStore.model?.id;
-    if (!userId) {
-        throw new Error('ID utilisateur non disponible');
-    }
-    const user: { password: string } = await pb.collection('users').getOne(userId);
-    if (!user) {
-        throw new Error('Utilisateur non trouvé');
-    }
-    user.password = newPassword;
-    await pb.collection('users').updateOne({ _id: userId }, { $set: { password: user.password } });
-    return user;
-  } catch (error) {
-    throw error;
-  }
+export async function changePassword(userId: string, newPassword: string, confirmPassword: string) {
+  console.log(newPassword);
+  console.log(confirmPassword);
+  if (newPassword === confirmPassword) {
+    await pb.collection('users').update(userId, {
+    password: newPassword,
+    })
+  } else {
+      throw new Error('Les nouveaux mots de passe ne correspondent pas.');
+    };
 }
