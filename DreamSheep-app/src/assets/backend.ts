@@ -391,7 +391,8 @@ export async function updateUserData(userId: string, userData: { name?: string; 
   } catch (error) {
     throw new Error(`Failed to update user data: ${error.message}`);
   }
-  
+}
+
 export async function changePassword(userId: string, newPassword: string, confirmPassword: string) {
   if (newPassword === confirmPassword) {
     await pb.collection('users').update(userId, {
