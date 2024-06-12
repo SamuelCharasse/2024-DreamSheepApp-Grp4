@@ -2,10 +2,9 @@
 import { ref, onMounted, computed } from "vue";
 import {
   pb,
-  likeDream,
-  unlikeDream,
-  getLikes,
   getComments,
+  likeDream,
+  unlikeDream
 } from "@/assets/backend";
 import CommentIcon from "./icons/CommentIcon.vue";
 import HeartFullIcon from "./icons/HeartFullIcon.vue";
@@ -27,41 +26,41 @@ const props = defineProps({
 });
 
 const userId = pb.authStore.model?.id;
-const likes = ref(props.likes );
-const commentCount = ref(props.commentaires );
+const likes = ref(props.likes);
+const commentCount = ref(props.commentaires);
 const hasLiked = ref(false);
 const router = useRouter();
-
 
 onMounted(async () => {
   fetchLikes();
   fetchComments();
 });
-
 const fetchLikes = async () => {
-  const result = await getLikes(props.id);
-  console.log("Likes fetched:", result);
+  const result = await pb.collection('likes').getFullList({
+    filter: `dreamId="${props.id}"`,
+  });
   likes.value = result.length;
   hasLiked.value = result.some((like) => like.userId === userId);
 };
 
 const fetchComments = async () => {
   const result = await getComments(props.id);
-  console.log("Comments fetched:", result);
   commentCount.value = result.length;
 };
 
 const toggleLike = async () => {
   if (hasLiked.value) {
-    await unlikeDream(props.id);
+    await unlikeDream(props.id, userId);
   } else {
     await likeDream(props.id, userId);
   }
   fetchLikes();
 };
+
 const goToComments = () => {
   router.push(`/dreams/${props.id}/comments`);
 };
+
 const username = computed(() => props.user?.username || "Utilisateur inconnu");
 </script>
 
@@ -79,25 +78,24 @@ const username = computed(() => props.user?.username || "Utilisateur inconnu");
     </div>
     <div class="flex flex-col">
       <div
-        class="bg-violet-200 rounded-lg flex items-start  justify-start mx-auto py-1 px-3 w-auto"
+        class="bg-violet-200 rounded-lg flex items-start justify-start mx-auto py-1 px-3 w-auto"
       >
         <TagIcon />
         <p class="text-black text-xs">{{ props.tags }}</p>
       </div>
-    <div
-      class="flex justify-self-start flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-4"
-    >
-      <CommentIcon @click="goToComments" />
-      <span>{{ commentCount }}</span>
-      <div @click="toggleLike" class="cursor-pointer">
-        <component :is="hasLiked ? HeartFullIcon : HeartIcon" />
+      <div
+        class="flex justify-self-start flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-4"
+      >
+        <CommentIcon @click="goToComments" />
+        <span>{{ commentCount }}</span>
+        <div @click="toggleLike" class="cursor-pointer">
+          <component :is="hasLiked ? HeartFullIcon : HeartIcon" />
+        </div>
+        <p class="text-black text-sm pl-0.5">{{ likes }}</p>
+        <RouterLink to="/report">
+          <FlagIcon />
+        </RouterLink>
       </div>
-      <p class="text-black text-sm pl-0.5">{{ likes }}</p>
-      <RouterLink to="/report">
-      <FlagIcon />
-      </RouterLink>
-      
-    </div>
     </div>
   </div>
 </template>

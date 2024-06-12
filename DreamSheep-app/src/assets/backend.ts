@@ -112,30 +112,7 @@ export async function getUserDreams(userId: string) {
   return dreams;
 }
 
-export async function likeDream(dreamId: string, userId: string) {
-  await pb.collection("likes").create({
-    dreamId,
-    userId,
-  });
-}
 
-export async function unlikeDream(likeId: string) {
-  await pb.collection("likes").delete(likeId);
-}
-
-export async function getLikes(dreamId: string) {
-  const likes = await pb.collection("likes").getFullList({
-    filter: `dreamId="${dreamId}"`,
-  });
-  return likes;
-}
-
-export async function getUserLikes(userId: string) {
-  const likes = await pb.collection("likes").getFullList({
-    filter: `userId="${userId}"`,
-  });
-  return likes;
-}
 export async function getDreamsWithUsernames() {
   const dreams = await pb.collection("dreams").getFullList();
   const users = await pb.collection("users").getFullList();
@@ -147,31 +124,40 @@ export async function getDreamsWithUsernames() {
   }));
 }
 
-export async function addComment(userId: string, dreamId: string, Message: string) {
+export async function addComment(userId: string, dreamId: string, message: string) {
   try {
-    await pb.collection('commentaires').create({
-      userId: userId,
-      dreamId: dreamId,
-      Message: Message,
-    });
+      const newComment = await pb.collection('commentaires').create({
+          userId: userId,
+          dreamId: dreamId,
+          Message: message,
+      });
+      return newComment;
   } catch (error) {
-    throw new Error(`Failed to add comment: ${error.message}`);
+      throw new Error(`Failed to add comment: ${error.message}`);
   }
 }
 
-// Fonction pour récupérer les commentaires d'un rêve
 export async function getComments(dreamId: string) {
   try {
-    const comments = await pb.collection('commentaires').getFullList({
-      filter: `dreamId="${dreamId}"`,
-      expand: 'userId'
-    });
-    return comments;
+      const comments = await pb.collection('commentaires').getFullList({
+          filter: `dreamId="${dreamId}"`,
+          expand: 'userId',
+          sorted: '-created',
+      });
+
+      const commentsWithUserDetails = comments.map(comment => {
+          const user = comment.expand?.userId || { username: 'Utilisateur inconnu' };
+          return {
+              ...comment,
+              user: user
+          };
+      });
+
+      return commentsWithUserDetails;
   } catch (error) {
-    throw new Error(`Failed to fetch comments: ${error.message}`);
+      throw new Error(`Failed to fetch comments: ${error.message}`);
   }
 }
-
 
 export async function reportDream() {
   try {
@@ -241,5 +227,110 @@ export async function fetchSharedDreams() {
   } catch (error) {
       console.error('Error fetching shared dreams:', error);
       throw error;
+  }
+}
+
+export async function likeDream(dreamId: string, userId: string) {
+  try {
+    // Ajouter un enregistrement de like
+    await pb.collection('likes').create({
+      dreamId,
+      userId,
+    });
+
+    // Récupérer le rêve actuel pour mettre à jour le nombre de likes
+    const dream = await pb.collection('dreams').getOne(dreamId);
+    await pb.collection('dreams').update(dreamId, {
+      likes: dream.likes + 1,
+    });
+
+  } catch (error) {
+    console.error('Failed to like the dream:', error);
+    throw error;
+  }
+}
+
+export async function unlikeDream(dreamId: string, userId: string) {
+  try {
+    // Trouver et supprimer le like
+    const likes = await pb.collection('likes').getFullList({
+      filter: `dreamId="${dreamId}" && userId="${userId}"`,
+    });
+
+    if (likes.length > 0) {
+      await pb.collection('likes').delete(likes[0].id);
+
+      // Récupérer le rêve actuel pour mettre à jour le nombre de likes
+      const dream = await pb.collection('dreams').getOne(dreamId);
+      await pb.collection('dreams').update(dreamId, {
+        likes: dream.likes - 1,
+      });
+    }
+  } catch (error) {
+    console.error('Failed to unlike the dream:', error);
+    throw error;
+  }
+}
+export async function getLikes(dreamId: string) {
+  try {
+    const likes = await pb.collection('likes').getFullList({
+      filter: `dreamId="${dreamId}"`
+    });
+    return likes;
+  } catch (error) {
+    console.error("Error fetching likes:", error);
+    throw error;
+  }
+}
+
+export async function fetchSharedDreamsSorted(sortBy: string) {
+  try {
+    let sortQuery;
+    if (sortBy === "newest") {
+      sortQuery = "created DESC";
+    } else if (sortBy === "oldest") {
+      sortQuery = "created ASC";
+    }
+
+    const dreams = await pb.collection("dreams").getFullList({
+      filter: "partage = true",
+      sort: sortQuery,
+      expand: "userId"
+    });
+
+    const dreamsWithUserDetails = dreams.map(dream => {
+      const user = dream.expand?.userId || { username: "Utilisateur inconnu" };
+      return {
+        ...dream,
+        user: user
+      };
+    });
+
+    return dreamsWithUserDetails;
+  } catch (error) {
+    console.error("Error fetching shared dreams:", error);
+    throw error;
+  }
+}
+
+export async function fetchSharedDreamsByTag(tag: string) {
+  try {
+    const dreams = await pb.collection("dreams").getFullList({
+      filter: `partage = true && tags ~ "${tag}"`,
+      expand: "userId"
+    });
+
+    const dreamsWithUserDetails = dreams.map(dream => {
+      const user = dream.expand?.userId || { username: "Utilisateur inconnu" };
+      return {
+        ...dream,
+        user: user
+      };
+    });
+
+    return dreamsWithUserDetails;
+  } catch (error) {
+    console.error("Error fetching shared dreams by tag:", error);
+    throw error;
   }
 }

@@ -64,9 +64,11 @@ export enum DreamsTypeOptions {
 	"Cauchemar" = "Cauchemar",
 }
 export type DreamsRecord = {
+	commentaires?: number
 	date?: IsoDateString
 	description?: string
 	favoris?: boolean
+	likes?: number
 	partage?: boolean
 	recurrent?: boolean
 	tags?: DreamsTagsOptions
