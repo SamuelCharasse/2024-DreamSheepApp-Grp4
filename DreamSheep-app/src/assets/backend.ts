@@ -283,54 +283,67 @@ export async function getLikes(dreamId: string) {
   }
 }
 
-export async function fetchSharedDreamsSorted(sortBy: string) {
+export async function fetchSharedDreamsSorted(order) {
+  const sortOrder = order === "newest" ? "-created" : "created";
   try {
-    let sortQuery;
-    if (sortBy === "newest") {
-      sortQuery = "created DESC";
-    } else if (sortBy === "oldest") {
-      sortQuery = "created ASC";
-    }
-
     const dreams = await pb.collection("dreams").getFullList({
-      filter: "partage = true",
-      sort: sortQuery,
-      expand: "userId"
+      filter: 'partage = true',
+      sort: sortOrder,
+      expand: 'userId'
     });
-
     const dreamsWithUserDetails = dreams.map(dream => {
-      const user = dream.expand?.userId || { username: "Utilisateur inconnu" };
+      const user = dream.expand?.userId || { username: 'Utilisateur inconnu' };
       return {
         ...dream,
         user: user
       };
     });
-
     return dreamsWithUserDetails;
   } catch (error) {
-    console.error("Error fetching shared dreams:", error);
+    console.error("Error fetching sorted shared dreams:", error);
     throw error;
   }
 }
 
-export async function fetchSharedDreamsByTag(tag: string) {
+export async function fetchSharedDreamsByTag(tag) {
   try {
     const dreams = await pb.collection("dreams").getFullList({
-      filter: `partage = true && tags ~ "${tag}"`,
-      expand: "userId"
+      filter: `partage = true && tags ?~ "${tag}"`,
+      expand: 'userId'
     });
-
     const dreamsWithUserDetails = dreams.map(dream => {
-      const user = dream.expand?.userId || { username: "Utilisateur inconnu" };
+      const user = dream.expand?.userId || { username: 'Utilisateur inconnu' };
       return {
         ...dream,
         user: user
       };
     });
-
     return dreamsWithUserDetails;
   } catch (error) {
     console.error("Error fetching shared dreams by tag:", error);
     throw error;
   }
 }
+// Dans votre backend, ajoutez cette fonction pour filtrer les rêves par tag et date
+export async function fetchSharedDreamsByTagAndDate(tag, order) {
+  const sortOrder = order === "newest" ? "-created" : "created";
+  try {
+    const dreams = await pb.collection("dreams").getFullList({
+      filter: `partage = true && tags ?~ "${tag}"`,
+      sort: sortOrder,
+      expand: 'userId'
+    });
+    const dreamsWithUserDetails = dreams.map(dream => {
+      const user = dream.expand?.userId || { username: 'Utilisateur inconnu' };
+      return {
+        ...dream,
+        user: user
+      };
+    });
+    return dreamsWithUserDetails;
+  } catch (error) {
+    console.error("Error fetching shared dreams by tag and date:", error);
+    throw error;
+  }
+}
+
