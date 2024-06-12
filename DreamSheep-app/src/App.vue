@@ -10,11 +10,13 @@ import PageHeader from '@/components/PageHeader.vue';
   <Header/>
   <PageHeader/>
   <main>
-    <RouterView v-slot="{ Component }">
+    <Suspense>
+      <RouterView v-slot="{ Component }">
+        
+          <component :is="Component"/>
       
-        <component :is="Component"/>
-    
-    </RouterView>
+      </RouterView>
+    </Suspense>
   </main>
   <Menu/>
 </template>

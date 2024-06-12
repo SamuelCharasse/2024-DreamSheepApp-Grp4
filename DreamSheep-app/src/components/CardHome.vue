@@ -76,10 +76,20 @@ const username = computed(() => props.user?.username || "Utilisateur inconnu");
       <h3 class="text-black overflow-auto">{{ props.title }}</h3>
       <p class="text-black text-base overflow-auto">{{ props.description }}</p>
     </div>
-    <div class="flex flex-col">
-      <div
-        class="bg-violet-200 rounded-lg flex items-start justify-start mx-auto py-1 px-3 w-auto"
-      >
+    <div class="flex justify-self-start flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-4">
+      <div class="comments cursor-pointer flex gap-3" @click="goToComments">
+        <CommentIcon />
+        <span>{{ commentCount.length }}</span>
+      </div>
+      <div @click="toggleLike" class="cursor-pointer">
+        <component :is="hasLiked ? HeartFullIcon : HeartIcon" />
+      </div>
+      <div class="flex gap-2">
+      <p class="text-black text-sm pl-0.5">{{ likes.length }}</p>
+      <FlagIcon/>
+      <RouterLink :to="`/report/${props.id}`">Signaler</RouterLink>
+      </div>
+      <div class="bg-violet-200 rounded-lg flex items-center space-x-1 px-2 py-1">
         <TagIcon />
         <p class="text-black text-xs">{{ props.tags }}</p>
       </div>

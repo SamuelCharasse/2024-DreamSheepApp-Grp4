@@ -122,15 +122,16 @@ const router = createRouter({
     name: 'comments',
     component: () => import('../views/CommentView.vue'),
   },
-  {
-    path: '/report',
-    name: 'report',
-    component: () => import('../components/Report.vue'),
-  },
+  
   {
     path: '/newdreamhome',
     name: 'newdreamhome',
-    component: () => import('../views/NewDreamhomeView.vue'),
+    component: () => import('../views/NewDreamhomeView.vue'),}
+    ,{
+    path: '/report/:id',
+    name: 'Report',
+    component: () => import('@/components/Report.vue'),
+    props: true
   }
   ]
 })

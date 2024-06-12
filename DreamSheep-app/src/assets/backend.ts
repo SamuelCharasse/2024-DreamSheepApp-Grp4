@@ -159,13 +159,16 @@ export async function getComments(dreamId: string) {
   }
 }
 
-export async function reportDream() {
+
+
+export async function reportDream(dreamId: string, userId: string, message: string, nature: string) {
   try {
-    const report = await pb.collection("reports").create({
-      cible: "dreamId",
-      create: "userId",
-      message: "message",
-      nature: "nature",
+    console.log(`DreamId: ${dreamId}, UserId: ${userId}, Message: ${message}, Nature: ${nature}`);
+    const report = await pb.collection("report").create({
+      cible: dreamId,
+      create: userId,
+      message: message,
+      nature: nature,
     });
     return report;
   } catch (error) {
@@ -394,6 +397,9 @@ export async function updateUserData(userId: string, userData: { name?: string; 
 }
 
 export async function changePassword(userId: string, newPassword: string, confirmPassword: string) {
+export async function changePassword(userId: string, newPassword: string, confirmPassword: string) {
+  console.log(newPassword);
+  console.log(confirmPassword);
   if (newPassword === confirmPassword) {
     await pb.collection('users').update(userId, {
     password: newPassword, passwordConfirm: confirmPassword,
