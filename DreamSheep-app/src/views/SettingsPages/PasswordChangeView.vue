@@ -3,14 +3,14 @@ import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import BackArrowIconsvg from '@/components/icons/BackArrowIconsvg.vue';
 import Button from '@/components/Button.vue';
-import { changePassword } from '@/assets/backend'; // Assurez-vous que c'est le bon chemin pour importer changePassword
+import { changePassword } from '@/assets/backend';
+import { pb } from '@/assets/backend';
 
-const oldPassword = ref('');
 const newPassword = ref('');
 const confirmPassword = ref('');
 
 const onSubmit = async () => {
-  const userId = 'user-id'; // Remplacez ceci par l'ID de l'utilisateur actuel
+  const userId = pb.authStore.model?.id;
 
   try {
     await changePassword(userId, newPassword.value, confirmPassword.value);
