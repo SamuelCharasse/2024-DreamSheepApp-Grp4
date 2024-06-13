@@ -91,7 +91,7 @@ const handleSignUp = async () => {
         </div>
         <div class="pb-4 flex flex-col">
           <label class="text-white text-base font-medium pb-1" for="passwordConfirm">Confirmez le mot de passe:</label>
-          <input class="text-white rounded-md p-2" type="password" id="passwordConfirm" v-model="passwordConfirm" required />
+          <input class="text-black rounded-md p-2" type="password" id="passwordConfirm" v-model="passwordConfirm" required />
         </div>
         <div class="pb-4 flex flex-col">
           <label class="text-white text-base font-medium pb-1" for="avatar">Avatar:</label>
