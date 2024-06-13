@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import BackArrowIconsvg from '@/components/icons/BackArrowIconsvg.vue';
+import Profil_Lola from '@/components/icons/Profil_Lola.vue';
+import Profil_Samuel from '@/components/icons/Profil_Samuel.vue';
+import Profil_Ronan from '@/components/icons/Profil_Ronan.vue';
 </script>
 <template>
   <main class="settings mx-3 py-5 px-4 mb-20 overflow-auto">
@@ -9,13 +12,22 @@ import BackArrowIconsvg from '@/components/icons/BackArrowIconsvg.vue';
         À propos
       </h2>
     </div>
-    <!-- <div class="flex">
-        <Avatar/>
-        <Avatar/>
-        <Avatar/>
-    </div> -->
+    <div class="flex gap-2 pb-6">
+      <div class="flex flex-col items-center justify-start gap-2 text-center text-white font-light">
+        <Profil_Lola/>
+        <p>Lola R.</p>
+      </div>
+      <div class="flex flex-col items-center justify-start gap-2 text-center text-white font-light">
+        <Profil_Samuel/>
+        <p>Samuel C.</p>
+      </div>
+      <div class="flex flex-col items-center justify-start gap-2 text-center text-white font-light">
+        <Profil_Ronan/>
+        <p>Ronan L.</p>
+      </div>
+    </div>
     <div class="text-white pb-3">
-      <p class="pb-3">Bienvenue sur DreamSheep !</p>
+      <h3 class="pb-3">Bienvenue sur DreamSheep !</h3>
       <p class="pb-3">
         Nous sommes une équipe de trois étudiants en première année de MMI
         (Métiers du Multimédia et de l'Internet) à Montbéliard, passionnés par
