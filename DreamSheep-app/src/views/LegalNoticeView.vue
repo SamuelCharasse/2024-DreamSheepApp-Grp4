@@ -4,7 +4,7 @@ import { RouterLink } from "vue-router";
 </script>
 
 <template>
-  <main class="settings mb-20 mx-3 py-5 overflow-auto">
+  <main class="settings mb-20 mx-3 py-5 px-4 overflow-auto">
     <div class="flex justify-center items-center pb-5" >
       <RouterLink to="/more-info"><BackArrowIconsvg class="flex-grow-0"/></RouterLink>
       <h2 class="text-white text-base font-medium px-7 justify-center">Mentions Légales</h2>
