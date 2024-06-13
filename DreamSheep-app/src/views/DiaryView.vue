@@ -57,27 +57,27 @@ onMounted(fetchDreams);
         <div class="mx-2 flex justify-between items-center mt-4">
           <p class="text-white text-xs">Les 7 derniers jours</p>
         </div>
-        <router-link v-for="dream in dreamsLast7Days" :key="dream.id" :to="`/dreams/${dream.id}`">
+        <div v-for="dream in dreamsLast7Days" :key="dream.id" >
           <CardDiary v-bind="dream" />
-        </router-link>
+        </div>
       </template>
 
       <template v-if="dreamsLastMonth.length > 0">
         <div class="mx-2 flex justify-between items-center mt-4">
           <p class="text-white text-xs">Le mois dernier</p>
         </div>
-        <router-link v-for="dream in dreamsLastMonth" :key="dream.id" :to="`/dreams/${dream.id}`">
+        <div v-for="dream in dreamsLastMonth" :key="dream.id" >
           <CardDiary v-bind="dream" />
-        </router-link>
+        </div>
       </template>
 
       <template v-if="olderDreams.length > 0">
         <div class="mx-2 flex justify-between items-center mt-4">
           <p class="text-white text-xs">Plus anciens</p>
         </div>
-        <router-link v-for="dream in olderDreams" :key="dream.id" :to="`/dreams/${dream.id}`">
+        <div v-for="dream in olderDreams" :key="dream.id">
           <CardDiary v-bind="dream" />
-        </router-link>
+        </div>
       </template>
 
       <div v-else-if="dreams.length === 0">

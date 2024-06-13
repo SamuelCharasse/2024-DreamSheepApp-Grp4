@@ -32,7 +32,7 @@ function formatDate(dateString) {
 onMounted(fetchDreamDetails);
 
 const goToEditPage = () => {
-  router.push({ name: 'editdream', params: { id: route.params.id }});
+  router.push({ name: "editdream", params: { id: route.params.id } });
 };
 </script>
 
@@ -55,7 +55,9 @@ const goToEditPage = () => {
           </div>
           <div class="flex flex-col items-start mt-3 pb-4">
             <h2 class="mb-2">Tags :</h2>
-            <div class="bg-LightPurple rounded-lg flex items-start px-2 py-1 space-x-1">
+            <div
+              class="bg-LightPurple rounded-lg flex items-start px-2 py-1 space-x-1"
+            >
               <TagIcon />
               <p class="text-black text-xs">{{ dreamDetails.tags }}</p>
             </div>
@@ -64,14 +66,20 @@ const goToEditPage = () => {
             <h2>Récurrent :</h2>
             <div class="flex space-x-2 justify-center items-center mt-2">
               <button
-                :class="{'bg-blue-500 text-white': dreamDetails.recurrent, 'bg-DarkPurple text-white': !dreamDetails.recurrent}"
+                :class="{
+                  'bg-blue-500 text-white': dreamDetails.recurrent,
+                  'bg-DarkPurple text-white': !dreamDetails.recurrent,
+                }"
                 class="px-2 text-lg rounded"
                 disabled
               >
                 Oui
               </button>
               <button
-                :class="{'bg-DarkPurple text-white': dreamDetails.recurrent, 'bg-red-500 text-white': !dreamDetails.recurrent}"
+                :class="{
+                  'bg-DarkPurple text-white': dreamDetails.recurrent,
+                  'bg-red-500 text-white': !dreamDetails.recurrent,
+                }"
                 class="px-2 text-lg rounded"
                 disabled
               >
@@ -79,18 +87,24 @@ const goToEditPage = () => {
               </button>
             </div>
           </div>
-          <div class="flex flex-col  mt-3 pb-4">
+          <div class="flex flex-col mt-3 pb-4">
             <h2 class="pb-2">Favoris :</h2>
             <div class="flex space-x-2 justify-center items-center mt-2">
               <button
-                :class="{'bg-blue-500 text-white': dreamDetails.favoris, 'bg-DarkPurple text-white': !dreamDetails.favoris}"
+                :class="{
+                  'bg-blue-500 text-white': dreamDetails.favoris,
+                  'bg-DarkPurple text-white': !dreamDetails.favoris,
+                }"
                 class="px-2 text-lg rounded"
                 disabled
               >
                 Oui
               </button>
               <button
-                :class="{'bg-DarkPurple text-white': dreamDetails.favoris, 'bg-red-500 text-white': !dreamDetails.favoris}"
+                :class="{
+                  'bg-DarkPurple text-white': dreamDetails.favoris,
+                  'bg-red-500 text-white': !dreamDetails.favoris,
+                }"
                 class="px-2 text-lg rounded"
                 disabled
               >
@@ -98,18 +112,24 @@ const goToEditPage = () => {
               </button>
             </div>
           </div>
-          <div class="flex flex-col  mt-3 pb-4">
+          <div class="flex flex-col mt-3 pb-4">
             <h2>Partagé :</h2>
             <div class="flex space-x-2 justify-center items-center mt-2">
               <button
-                :class="{'bg-blue-500 text-white': dreamDetails.partage, 'bg-DarkPurple text-white': !dreamDetails.partage}"
+                :class="{
+                  'bg-blue-500 text-white': dreamDetails.partage,
+                  'bg-DarkPurple text-white': !dreamDetails.partage,
+                }"
                 class="px-2 text-lg rounded"
                 disabled
               >
                 Oui
               </button>
               <button
-                :class="{'bg-DarkPurple text-white': dreamDetails.partage, 'bg-red-500 text-white': !dreamDetails.partage}"
+                :class="{
+                  'bg-DarkPurple text-white': dreamDetails.partage,
+                  'bg-red-500 text-white': !dreamDetails.partage,
+                }"
                 class="px-2 text-lg rounded"
                 disabled
               >
@@ -117,9 +137,14 @@ const goToEditPage = () => {
               </button>
             </div>
           </div>
-        </div>
-        <div class="flex justify-center py-5">
-          <button class="text-black bg-yellow-200 rounded-md py-2 px-3" @click="goToEditPage">Modifier</button>
+          <div class="flex justify-end py-2 mr-4">
+            <button
+              class="text-white font-medium border rounded-md py-2 px-3"
+              @click="goToEditPage"
+            >
+              Modifier
+            </button>
+          </div>
         </div>
       </div>
       <div v-else>
