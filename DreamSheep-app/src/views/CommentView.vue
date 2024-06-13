@@ -129,7 +129,7 @@ const username = computed(() => dream.value?.expand?.userId?.username || "Utilis
             class="bg-DarkPurple overflow-hidden pt-2 rounded-lg mb-2"
           >
             <div class="flex items-center py-2 px-4">
-              <img :src="comment.user.avatar ? `http://127.0.0.1:8090/api/files/_pb_users_auth_/${comment.user.id}/${comment.user.avatar}` : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'" alt="avatar" class="w-10 h-10 rounded-full mr-3" />
+              <img :src="comment.user.avatar ? `https://dreamsheep-app.scharasse.fr/api/files/_pb_users_auth_/${comment.user.id}/${comment.user.avatar}` : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'" alt="avatar" class="w-10 h-10 rounded-full mr-3" />
               <div class="ml-4">
                 <p class="text-indigo-900 font-normal text-xl">
                   {{ comment.user.username }}

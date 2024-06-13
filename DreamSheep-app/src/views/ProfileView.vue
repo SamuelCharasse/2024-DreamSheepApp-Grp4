@@ -66,13 +66,13 @@ onMounted(() => {
 const username = computed(() => userProfile.value?.username || "Dreamer anonyme");
 const userAvatar = computed(() => {
   return userProfile.value && userProfile.value.avatar
-    ? `http://127.0.0.1:8090/api/files/users/${userProfile.value.id}/${userProfile.value.avatar}`
+    ? `https://dreamsheep-app.scharasse.fr/api/files/users/${userProfile.value.id}/${userProfile.value.avatar}`
     : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 });
 
 const userBanniere = computed(() => {
   return userProfile.value && userProfile.value.banniere
-    ? `http://127.0.0.1:8090/api/files/users/${userProfile.value.id}/${userProfile.value.banniere}`
+    ? `https://dreamsheep-app.scharasse.fr/api/files/users/${userProfile.value.id}/${userProfile.value.banniere}`
     : null;
 });
 </script>
