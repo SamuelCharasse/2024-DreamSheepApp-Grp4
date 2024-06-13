@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from "vue";
 import { useRoute } from "vue-router";
-import { pb, fetchUserSharedDreams, fetchLikedDreams, fetchUserProfile  } from "@/assets/backend";
+import { pb, fetchUserSharedDreams, fetchLikedDreams, fetchUserProfile, User } from "@/assets/backend";
 import CardHome from "@/components/CardHome.vue";
 
 // Définitions des propriétés
@@ -40,7 +40,7 @@ const fetchUserDreams = async () => {
 // Récupération des rêves aimés par l'utilisateur
 const loadLikedDreams = async () => {
   try {
-    const dreams = await fetchLikedDreams();
+    const dreams = await fetchLikedDreams(userId);
     likedDreams.value = dreams;
   } catch (error) {
     console.error('Error fetching liked dreams:', error);
@@ -63,21 +63,31 @@ onMounted(() => {
   loadUserProfile(); // Chargement des informations de l'utilisateur connecté
 });
 
-const username = computed(() => userProfile.value?.username || "Utilisateur inconnu");
+const username = computed(() => userProfile.value?.username || "Dreamer anonyme");
 const userAvatar = computed(() => {
   return userProfile.value && userProfile.value.avatar
     ? `http://127.0.0.1:8090/api/files/users/${userProfile.value.id}/${userProfile.value.avatar}`
     : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 });
 
+const userBanniere = computed(() => {
+  return userProfile.value && userProfile.value.banniere
+    ? `http://127.0.0.1:8090/api/files/users/${userProfile.value.id}/${userProfile.value.banniere}`
+    : null;
+});
 </script>
 
 <template>
-  <div class="flex justify-center text-center items-center mt-4">
-    <img :src="userAvatar" alt="avatar" class="w-10 h-10 rounded-full mr-3" />
-    <p class="text-white text-base">{{ username }}</p>
+  
+  <div class="relative w-full max-w-3xl mx-auto my-4rounded-lg">
+    <div v-if="userBanniere" class="w-full h-40 bg-cover rounded-t-lg" :style="{ backgroundImage: `url(${userBanniere})` }"></div>
+    <div class="absolute inset-0 flex items-center justify-center gap-8">
+      <img :src="userAvatar" alt="avatar" class="w-16 h-16 rounded-full mb-2" />
+      <p class="text-white text-xl font-bold">{{ username }}</p>
+    </div>
   </div>
-  <div class="text-white flex justify-center gap-28 my-4 cursor-pointer">
+  <div class="mx-3">
+  <div class="text-white flex justify-center gap-28 my-4">
     <div @click="switchTab('posts')" :class="{'border-b border-yellow-200 text-yellow-200': activeTab === 'posts'}">
       <h3>Posts</h3>
     </div>
@@ -117,4 +127,6 @@ const userAvatar = computed(() => {
       @deleteDream="loadLikedDreams"
     />
   </div>
+</div>
 </template>
+

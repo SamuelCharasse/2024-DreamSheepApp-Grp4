@@ -13,18 +13,17 @@ const name = ref("");
 const password = ref("");
 const passwordConfirm = ref("");
 const avatar = ref<File | null>(null);
-const avatarPreview = ref<string | null>(null);
+const banniere = ref<File | null>(null);
 const isLoading = ref(false);
 const errorMessage = ref("");
 
-const handleFileChange = (event: Event) => {
+const handleFileChange = (event: Event, type: "avatar" | "banniere") => {
   const target = event.target as HTMLInputElement;
-  if (target.files && target.files.length > 0) {
-    avatar.value = target.files[0];
-    avatarPreview.value = URL.createObjectURL(target.files[0]);
+  const file = target.files?.[0] || null;
+  if (type === "avatar") {
+    avatar.value = file;
   } else {
-    avatar.value = null;
-    avatarPreview.value = null;
+    banniere.value = file;
   }
 };
 
@@ -38,7 +37,8 @@ const handleSignUp = async () => {
       passwordConfirm: passwordConfirm.value,
       username: username.value,
       name: name.value,
-      avatar: avatar.value as File,
+      avatar: avatar.value!,
+      banniere: banniere.value!
     });
     router.push("/login");
   } catch (error) {
@@ -62,87 +62,38 @@ const handleSignUp = async () => {
     <form @submit.prevent="handleSignUp">
       <div class="pb-4 flex flex-col">
         <label class="text-white text-base font-medium pb-1" for="email">Email:</label>
-        <input
-          class="text-black rounded-md p-2"
-          type="email"
-          id="email"
-          v-model="email"
-          placeholder="Ex : exemple@gmail.com"
-          required
-        />
+        <input class="text-black rounded-md p-2" type="email" id="email" v-model="email" placeholder="Ex : exemple@gmail.com" required />
       </div>
       <div class="pb-4 flex flex-col">
         <label class="text-white text-base font-medium pb-1" for="username">Nom d'utilisateur:</label>
-        <input
-          class="text-black rounded-md p-2"
-          type="text"
-          id="username"
-          v-model="username"
-          placeholder="Ex : Dreamer25"
-          required
-        />
+        <input class="text-black rounded-md p-2" type="text" id="username" v-model="username" placeholder="Ex : Dreamer25" required />
       </div>
-
       <div class="pb-4 flex flex-col">
         <label class="text-white text-base font-medium pb-1" for="name">Nom:</label>
-        <input
-          class="text-black rounded-md p-2"
-          type="text"
-          id="name"
-          v-model="name"
-          placeholder="Ex : Durand"
-          required
-        />
+        <input class="text-black rounded-md p-2" type="text" id="name" v-model="name" placeholder="Ex : Julie" required />
       </div>
       <div class="pb-4 flex flex-col">
         <label class="text-white text-base font-medium pb-1" for="password">Mot de passe:</label>
-        <input
-          class="text-black rounded-md p-2"
-          type="password"
-          id="password"
-          placeholder="8 caractères minimum"
-          v-model="password"
-          required
-        />
+        <input class="text-black rounded-md p-2" type="password" id="password" placeholder="8 caractères minimum" v-model="password" required />
       </div>
       <div class="pb-4 flex flex-col">
         <label class="text-white text-base font-medium pb-1" for="passwordConfirm">Confirmez le mot de passe:</label>
-        <input
-          class="text-black rounded-md p-2"
-          type="password"
-          id="passwordConfirm"
-          v-model="passwordConfirm"
-          required
-        />
-      </div>
-      <div v-if="password !== passwordConfirm" class="error-message">
-        Les mots de passe ne correspondent pas
+        <input class="text-black rounded-md p-2" type="password" id="passwordConfirm" v-model="passwordConfirm" required />
       </div>
       <div class="pb-4 flex flex-col">
         <label class="text-white text-base font-medium pb-1" for="avatar">Avatar:</label>
-        <input
-          class="text-white"
-          type="file"
-          id="avatar"
-          @change="handleFileChange"
-        />
+        <input class="text-black rounded-md p-2" type="file" id="avatar" @change="event => handleFileChange(event, 'avatar')" />
       </div>
-      <div v-if="avatarPreview" class="pb-4 flex flex-col items-center">
-        <label class="text-white text-base font-medium pb-1">Prévisualisation de l'avatar:</label>
-        <img :src="avatarPreview" alt="Prévisualisation de l'avatar" class="w-24 h-24 rounded-full object-cover" />
+      <div class="pb-4 flex flex-col">
+        <label class="text-white text-base font-medium pb-1" for="banniere">Bannière:</label>
+        <input class="text-black rounded-md p-2" type="file" id="banniere" @change="event => handleFileChange(event, 'banniere')" />
       </div>
-      <div v-if="errorMessage" class="error-message">
-        {{ errorMessage }}
-      </div>
+      <div v-if="password !== passwordConfirm" class="error-message">Les mots de passe ne correspondent pas</div>
+      <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
       <div class="flex justify-center py-4">
-        <button class="text-black bg-yellow-200 px-3 py-2 rounded-md" type="submit">
-          S'inscrire
-        </button>
+        <button class="text-black bg-yellow-200 px-3 py-2 rounded-md" type="submit">S'inscrire</button>
       </div>
-      <p class="text-white text-sm text-center">
-        Vous avez déjà un compte ?
-        <RouterLink to="/login" class="text-LightPurple font-bold">Connectez-vous</RouterLink>
-      </p>
+      <p class="text-white text-sm text-center">Vous avez déjà un compte ? <RouterLink to="/login" class="text-LightPurple font-bold">Connectez-vous</RouterLink></p>
     </form>
   </div>
   </main>

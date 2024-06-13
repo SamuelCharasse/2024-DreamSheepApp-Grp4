@@ -2,7 +2,7 @@ import PocketBase from "pocketbase";
 import { type DreamsResponse, type TypedPocketBase, Collections } from "@/pocketbase-types";
 
 export const pb = new PocketBase(import.meta.env.VITE_URL_POCKETBASE) as TypedPocketBase;
-
+//ajout d'un utilisateur - Création de compte
 export async function addUser(event: {
   email: string;
   password: string;
@@ -10,6 +10,7 @@ export async function addUser(event: {
   username: string;
   name: string;
   avatar?: File;
+  banniere?: File;
 }) {
   if (event.password !== event.passwordConfirm) {
     throw new Error("Les mots de passe ne correspondent pas.");
@@ -27,6 +28,10 @@ export async function addUser(event: {
       formData.append("avatar", event.avatar);
     }
 
+    if (event.banniere) {
+      formData.append("banniere", event.banniere);
+    }
+
     const record = await pb.collection("users").create(formData);
 
     return record;
@@ -34,6 +39,8 @@ export async function addUser(event: {
     throw error;
   }
 }
+
+
 export async function logIn(email: string, password: string) {
   try {
     const authData = await pb
