@@ -101,9 +101,7 @@ const userAvatar = computed(() => {
           <component :is="hasLiked ? HeartFullIcon : HeartIcon" />
         </div>
         <p class="text-black text-sm pl-0.5">{{ likes }}</p>
-        <RouterLink to="/report">
-          <FlagIcon />
-        </RouterLink>
+        <RouterLink :to="`/report/${props.id}`" class="flex gap-2 items-center"><FlagIcon />Signaler</RouterLink>
       </div>
     </div>
   </div>
