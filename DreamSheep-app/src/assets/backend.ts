@@ -181,29 +181,9 @@ export async function reportDream(dreamId: string, userId: string, message: stri
   }
 }
 
-export async function fetchUserSharedDreams(userId: string) {
-  try {
-    const dreams = await pb.collection('dreams').getFullList({
-      filter: `userId="${userId}" && partage=true`,
-      expand: 'userId'
-    });
 
-    console.log(dreams); // Pour vérifier la structure des données reçues
 
-    // Transformation des rêves pour inclure le nom d'utilisateur de manière explicite
-    const dreamsWithUserDetails = dreams.map(dream => ({
-      ...dream,
-      username: dream.expand?.userId ? dream.expand.userId.username : 'Utilisateur inconnu'
-    }));
-
-    return dreamsWithUserDetails;
-  } catch (error) {
-    console.error('Error fetching user shared dreams:', error);
-    throw error;
-  }
-}
-
-export async function fetchUserLikedDreams(userId: string) {
+export async function fetchUserLikedDream(userId: string) {
   try {
     const likes = await pb.collection('likes').getFullList({
       filter: `userId="${userId}"`,
@@ -449,6 +429,90 @@ export async function getCurrentUser() {
     };
   } catch (error) {
     console.error("Error fetching current user:", error);
+    throw error;
+  }
+}
+
+//fonction pour afficher les rêves que l'utilisateur a posté
+export async function fetchUserSharedDreams() {
+  try {
+      if (!pb.authStore.isValid) {
+          throw new Error('Utilisateur non connecté');
+      }
+
+      const userId = pb.authStore.model?.id;
+      if (!userId) {
+          throw new Error('ID utilisateur non disponible');
+      }
+
+      const dreams = await pb.collection(Collections.Dreams).getFullList({
+          filter: `userId = '${userId}' && partage = true`,
+          expand: 'userId'
+      });
+
+      const dreamsWithUserDetails = dreams.map(dream => {
+          const user = dream.expand?.userId || { username: 'Utilisateur inconnu', avatar: null };
+          return {
+              ...dream,
+              user: user
+          };
+      });
+
+      return dreamsWithUserDetails;
+  } catch (error) {
+      console.error('Error fetching shared dreams:', error);
+      throw new Error('Unable to fetch shared dreams at this time.');
+  }
+}
+
+//page profil post liké par l'utilisateur
+export async function fetchLikedDreams() {
+  try {
+    if (!pb.authStore.isValid) {
+      throw new Error('Utilisateur non connecté');
+    }
+
+    const userId = pb.authStore.model?.id;
+    if (!userId) {
+      throw new Error('ID utilisateur non disponible');
+    }
+
+    const likes = await pb.collection(Collections.Likes).getFullList({
+      filter: `userId = '${userId}'`,
+      expand: 'dreamId,dreamId.userId'
+    });
+
+    const likedDreams = likes.map(like => {
+      const dream = like.expand?.dreamId;
+      if (dream && dream.expand?.userId) {
+        dream.user = dream.expand.userId;
+      }
+      return dream;
+    }).filter(dream => dream !== undefined);
+
+    return likedDreams;
+  } catch (error) {
+    console.error('Error fetching liked dreams:', error);
+    throw new Error('Unable to fetch liked dreams at this time.');
+  }
+}
+
+//
+export interface User {
+  id: string;
+  username: string;
+  avatar: string | null;
+}
+export async function fetchUserProfile(): Promise<User> {
+  try {
+    const user = pb.authStore.model; // Utilisateur actuellement connecté
+    if (user) {
+      return user as User;
+    } else {
+      throw new Error('No user is logged in');
+    }
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
     throw error;
   }
 }
