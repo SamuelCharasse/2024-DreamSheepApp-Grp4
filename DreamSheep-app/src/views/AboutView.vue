@@ -1,10 +1,13 @@
+<script setup lang="ts">
+import BackArrowIconsvg from '@/components/icons/BackArrowIconsvg.vue';
+</script>
 <template>
-  <main class="settings mx-3 py-5 overflow-auto">
-    <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 pb-4">
-      <BackArrowIconsvg class="flex" />
-      <p class="text-base text-center text-white flex-grow pb-5 pt-2 font-bold">
+  <main class="settings mx-3 py-5 px-4 mb-20 overflow-auto">
+    <div class="flex justify-center items-center pb-5">
+      <RouterLink to="/more-info"><BackArrowIconsvg/></RouterLink> 
+      <h2 class="text-white text-sm font-norma px-7 justify-center">
         À propos
-      </p>
+      </h2>
     </div>
     <!-- <div class="flex">
         <Avatar/>

@@ -7,7 +7,7 @@ import Button from '@/components/Button.vue';
 <template>
     <form action="" class="settings mb-20 mx-3 py-5 overflow-auto">
     <div class="flex justify-center items-center pb-5">
-      <RouterLink to="/settings"><BackArrowIconsvg/></RouterLink> 
+      <RouterLink to="/more-info"><BackArrowIconsvg/></RouterLink> 
       <h2 class="text-white text-sm font-norma px-7 justify-center">
         Contact
       </h2>

@@ -7,7 +7,7 @@ import { RouterLink } from "vue-router";
   <main class="settings mb-20 mx-3 py-5 px-4 overflow-auto">
     <div class="flex justify-center items-center pb-5">
       <RouterLink to="/more-info"><BackArrowIconsvg /></RouterLink>
-      <p class="text-base text-white px-7">Politique de confidentialité</p>
+      <h2 class="text-base text-white px-7">Politique de confidentialité</h2>
     </div>
     <div class="text-white pb-3">
       <h2 class="text-white text-center py-3 text-base">Artcile 1 préambule</h2>
