@@ -81,18 +81,18 @@ watch([sortBy, selectedTag], loadDreams);
       </div>
     </div>
     <div v-if="showFilters" class="mt-4">
-      <div class="flex gap-4">
+      <div class="flex flex-col gap-4">
         <div>
           <label for="sort" class="text-white">Trier par date :</label>
-          <select id="sort" v-model="sortBy" class="p-2 border rounded">
+          <select id="sort" v-model="sortBy" class="p-2 border rounded w-fit">
             <option value="">Aucun</option>
             <option value="newest">Du plus récent au plus ancien</option>
             <option value="oldest">Du plus ancien au plus récent</option>
           </select>
         </div>
-        <div>
+        <div class="flex flex-col gap-2">
           <label for="tag" class="text-white">Filtrer par tag :</label>
-          <select id="tag" v-model="selectedTag" class="p-2 border rounded">
+          <select id="tag" v-model="selectedTag" class="p-2 border rounded w-fit">
             <option value="">Aucun</option>
             <option v-for="tag in tags" :key="tag" :value="tag">{{ tag }}</option>
           </select>

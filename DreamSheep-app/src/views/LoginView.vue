@@ -9,7 +9,6 @@ const users = {
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { logIn } from "@/assets/backend";
-import Button from "@/components/Button.vue";
 import CloudIcon from "@/components/icons/CloudIcon.vue";
 import MoonIcon from "@/components/icons/MoonIcon.vue";
 import DreamSheep_Logo_vector from "@/components/icons/DreamSheep_Logo_vector.vue";
