@@ -523,3 +523,13 @@ export async function fetchUserProfile(): Promise<User> {
     throw error;
   }
 }
+
+// supprimer le compte d'un utilisateur
+export async function deleteUserAccount(userId: string) {
+  try {
+    await pb.collection('users').delete(userId);
+    return { success: true, message: 'Compte utilisateur supprimé avec succès.' };
+  } catch (error) {
+    return { success: false, message: 'Erreur lors de la suppression du compte utilisateur.' };
+  }
+}

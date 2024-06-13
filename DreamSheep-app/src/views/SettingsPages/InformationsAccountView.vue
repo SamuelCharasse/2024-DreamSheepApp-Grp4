@@ -14,6 +14,7 @@ const email = ref("");
 const router = useRouter();
 const isLoading = ref(false);
 const errorMessage = ref("");
+const banniere = ref("");
 
 const fetchUserData = async () => {
   if (!userId) return;
@@ -23,6 +24,7 @@ const fetchUserData = async () => {
     username.value = user.username || "";
     avatar.value = user.avatar || "";
     email.value = user.email || "";
+    banniere.value = user.banniere || "";
   } catch (error) {
     console.error("Failed to fetch user data:", error);
   }
@@ -39,10 +41,13 @@ const handleUpdateUserData = async () => {
       username: username.value,
       avatar: avatar.value,
       email: email.value,
+      banniere: banniere.value,
     });
     router.push("/settings");
   } catch (error) {
-    errorMessage.value = "Erreur lors de la mise à jour des informations utilisateur: " + (error as Error).message;
+    errorMessage.value =
+      "Erreur lors de la mise à jour des informations utilisateur: " +
+      (error as Error).message;
   } finally {
     isLoading.value = false;
   }
@@ -50,7 +55,7 @@ const handleUpdateUserData = async () => {
 </script>
 
 <template>
-  <main class="settings mx-3 py-5 overflow-auto">
+  <main class="settings mx-3 py-5 overflow-auto mb-32">
     <div class="flex justify-center items-center pb-5">
       <RouterLink to="/settings">
         <BackArrowIconsvg class="flex-grow-0" />
@@ -79,7 +84,15 @@ const handleUpdateUserData = async () => {
         v-model="username"
       />
     </div>
-
+    <div class="border-y border-slate-100 py-5">
+      <p class="pb-2.5 text-slate-50">Email</p>
+      <input
+        type="email"
+        placeholder="Votre adresse mail"
+        class="bg-white text-black rounded-md p-2.5 w-full"
+        v-model="email"
+      />
+    </div>
     <div class="border-y border-slate-100 py-5">
       <p class="pb-2.5 text-slate-50">Avatar</p>
       <input
@@ -89,14 +102,13 @@ const handleUpdateUserData = async () => {
         v-model="avatar"
       />
     </div>
-
     <div class="border-y border-slate-100 py-5">
-      <p class="pb-2.5 text-slate-50">Email</p>
+      <p class="pb-2.5 text-slate-50">Bannière</p>
       <input
-        type="email"
-        placeholder="Votre adresse mail"
+        type="text"
+        placeholder="Votre avatar"
         class="bg-white text-black rounded-md p-2.5 w-full"
-        v-model="email"
+        v-model="banniere"
       />
     </div>
 
