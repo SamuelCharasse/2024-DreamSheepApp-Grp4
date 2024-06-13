@@ -137,7 +137,12 @@ const router = createRouter({
     path:'/auth/confirm-password-reset/:token',
     name:'reset-password',
     component: () => import('../views/ResetPasswordView.vue'),
-  }
+  },
+  {
+    path: '/forgot-password',
+    name: 'forgot-password',
+    component: () => import('../views/ForgotPasswordView.vue'),
+  },
   ]
 })
 
