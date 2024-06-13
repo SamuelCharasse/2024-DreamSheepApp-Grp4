@@ -73,9 +73,9 @@ const userAvatar = computed(() => {
 
 <template>
   <div class="bg-LightPurple overflow-hidden pt-2 rounded-lg mx-4 mt-4">
-    <div class="flex flex-grow-0 flex-shrink-0 py-3 pl-4">
+    <div class="flex flex-grow-0 flex-shrink-0 items-center py-3 pl-4">
       <img :src="userAvatar" alt="avatar" class="w-10 h-10 rounded-full mr-3" />
-      <p class="text-indigo-900 font-normal text-xl pl-4 pt-3">
+      <p class="text-indigo-900 font-normal text-xl">
         {{ username }}
       </p>
     </div>

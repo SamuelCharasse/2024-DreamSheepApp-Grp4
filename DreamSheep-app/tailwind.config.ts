@@ -13,6 +13,11 @@ const config: Config = {
         DarkPurple:'#61609D'
       },
     },
+    fontFamily: {
+      'roboto': ['Roboto', 'sans-serif'],
+      'just-another-hand': ['"Just Another Hand"', 'cursive'],
+      'itim': ['Itim', 'cursive'],
+    }
   },
   plugins: [],
 }
