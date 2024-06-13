@@ -64,12 +64,17 @@ const goToComments = () => {
 };
 
 const username = computed(() => props.user?.username || "Utilisateur inconnu");
+const userAvatar = computed(() => {
+  return props.user && props.user.avatar
+    ? `http://127.0.0.1:8090/api/files/_pb_users_auth_/${props.user.id}/${props.user.avatar}`
+    : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+});
 </script>
 
 <template>
   <div class="bg-LightPurple overflow-hidden pt-2 rounded-lg mx-4 mt-4">
     <div class="flex flex-grow-0 flex-shrink-0 py-3 pl-4">
-      <ProfileIcon />
+      <img :src="userAvatar" alt="avatar" class="w-10 h-10 rounded-full mr-3" />
       <p class="text-indigo-900 font-normal text-xl pl-4 pt-3">
         {{ username }}
       </p>

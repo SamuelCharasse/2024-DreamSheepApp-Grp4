@@ -236,23 +236,24 @@ export async function allDreamUserSort() {
 }
 export async function fetchSharedDreams() {
   try {
-      const dreams = await pb.collection('dreams').getFullList({
-          filter: 'partage = true',
-          expand: 'userId' // Assurez-vous d'inclure les détails de l'utilisateur
-      });
+    const dreams = await pb.collection('dreams').getFullList({
+      filter: 'partage = true',
+      expand: 'userId'
+    });
 
-      const dreamsWithUserDetails = dreams.map(dream => {
-          const user = dream.expand?.userId || { username: 'Utilisateur inconnu', avatar: null };
-          return {
-              ...dream,
-              user: user
-          };
-      });
+    const dreamsWithUserDetails = dreams.map(dream => {
+      const user = dream.expand?.userId || { username: 'Utilisateur inconnu', avatar: null };
+      return {
+        ...dream,
+        user: user,
+        avatarUrl: user?.avatar ? pb.getFileUrl(user, user.avatar) : null // Ajout de l'URL de l'avatar
+      };
+    });
 
-      return dreamsWithUserDetails;
+    return dreamsWithUserDetails;
   } catch (error) {
-      console.error('Error fetching shared dreams:', error);
-      throw error;
+    console.error('Error fetching shared dreams:', error);
+    throw error;
   }
 }
 
@@ -430,4 +431,24 @@ export async function changePassword(userId: string, newPassword: string, confir
   } else {
       throw new Error('Les nouveaux mots de passe ne correspondent pas.');
     };
+}
+
+
+//récup les infos de l'utilisateur connecté 
+export async function getCurrentUser() {
+  try {
+    const user = await pb.authStore.model;
+    if (!user) {
+      throw new Error("Utilisateur non connecté");
+    }
+    return {
+      ...user,
+      avatarUrl: user.avatar
+        ? `http://127.0.0.1:8090/api/files/_pb_users_auth_/${user.id}/${user.avatar}`
+        : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+    };
+  } catch (error) {
+    console.error("Error fetching current user:", error);
+    throw error;
+  }
 }
