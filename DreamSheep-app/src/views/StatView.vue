@@ -79,18 +79,18 @@ onMounted(fetchUserDreams);
   <div class="container mx-auto p-4 mb-32">
     <div class="flex items-center mb-4">
       <BackArrowIconsvg @click="goBack" class="cursor-pointer mr-auto" />
-      <h1 class="text-xl font-bold text-center text-white flex-1">Statistiques de Rêve</h1>
+      <h1 class="text-xl font-bold text-center text-white flex-1">Statistiques</h1>
     </div>
 
     <div v-if="totalDreams > 0" class="space-y-8">
       <!-- Rapport Rêves/Cauchemars -->
-      <div class="bg-DarkPurple p-4 rounded-lg shadow-md">
+      <div class="bg-DarkPurple p-2 rounded-lg shadow-md">
         <h2 class="text-center text-xl font-semibold text-white mb-4">
           RAPPORT
         </h2>
         <div class="flex justify-around">
           <div class="flex flex-col items-center">
-            <div class="relative w-32 h-32 rounded-full bg-blue-200">
+            <div class="relative w-20 h-20 rounded-full bg-blue-200">
               <div
                 class="absolute inset-0 flex items-center justify-center text-2xl font-bold text-blue-900"
               >
@@ -100,7 +100,7 @@ onMounted(fetchUserDreams);
             <p class="text-white mt-2">Rêves</p>
           </div>
           <div class="flex flex-col items-center">
-            <div class="relative w-32 h-32 rounded-full bg-red-200">
+            <div class="relative w-20 h-20 rounded-full bg-red-200">
               <div
                 class="absolute inset-0 flex items-center justify-center text-2xl font-bold text-red-900"
               >
@@ -144,7 +144,7 @@ onMounted(fetchUserDreams);
           RÊVES RÉCURRENTS
         </h2>
         <div class="flex flex-col items-center">
-          <div class="relative w-32 h-32 rounded-full bg-green-200">
+          <div class="relative w-20 h-20 rounded-full bg-green-200">
             <div
               class="absolute inset-0 flex items-center justify-center text-2xl font-bold text-green-900"
             >
@@ -161,3 +161,4 @@ onMounted(fetchUserDreams);
     </div>
   </div>
 </template>
+

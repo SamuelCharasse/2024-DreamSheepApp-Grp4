@@ -95,11 +95,11 @@ const handleSignUp = async () => {
         </div>
         <div class="pb-4 flex flex-col">
           <label class="text-white text-base font-medium pb-1" for="avatar">Avatar:</label>
-          <input class="text-white rounded-md p-2" type="file" id="avatar" @change="event => handleFileChange(event, 'avatar')" />
+          <input class="text-white rounded-md p-2" type="file" id="avatar" @change="event => handleFileChange(event, 'avatar')" required/>
         </div>
         <div class="pb-4 flex flex-col">
           <label class="text-white text-base font-medium pb-1" for="banniere">Bannière:</label>
-          <input class="text-white rounded-md p-2" type="file" id="banniere" @change="event => handleFileChange(event, 'banniere')" />
+          <input class="text-white rounded-md p-2" type="file" id="banniere" @change="event => handleFileChange(event, 'banniere')" required/>
         </div>
 
         <div v-if="password !== passwordConfirm" class="error-message">Les mots de passe ne correspondent pas</div>
