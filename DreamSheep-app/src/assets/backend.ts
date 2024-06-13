@@ -138,15 +138,10 @@ export async function getDreamsWithUsernames() {
 
 export async function addComment(userId: string, dreamId: string, message: string) {
   try {
-    // Récupérer les informations de l'utilisateur connecté
-    const user = await pb.collection('users').getOne(userId);
-
     const newComment = await pb.collection('commentaires').create({
       userId: userId,
       dreamId: dreamId,
       Message: message,
-      username: user.username,
-      avatar: user.avatar,
     });
     return newComment;
   } catch (error) {
@@ -154,27 +149,28 @@ export async function addComment(userId: string, dreamId: string, message: strin
   }
 }
 
+// Récupérer les commentaires
 export async function getComments(dreamId: string) {
   try {
-      const comments = await pb.collection('commentaires').getFullList({
-          filter: `dreamId="${dreamId}"`,
-          expand: 'userId',
-      });
+    const comments = await pb.collection('commentaires').getFullList({
+      filter: `dreamId="${dreamId}"`,
+      expand: 'userId',
+    });
 
-      const commentsWithUserDetails = comments.map(comment => {
-          const user = comment.expand?.userId || { username: 'Utilisateur inconnu' };
-          return {
-              ...comment,
-              user: user
-          };
-      });
+    const commentsWithUserDetails = comments.map(comment => {
+      const user = comment.expand?.userId || { username: 'Utilisateur inconnu', avatar: null };
+      return {
+        id: comment.id,
+        message: comment.Message,
+        user: user
+      };
+    });
 
-      return commentsWithUserDetails;
+    return commentsWithUserDetails;
   } catch (error) {
-      throw new Error(`Failed to fetch comments: ${error.message}`);
+    throw new Error(`Failed to fetch comments: ${error.message}`);
   }
 }
-
 
 
 
