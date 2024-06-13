@@ -76,7 +76,9 @@ const username = computed(() => dream.value?.expand?.userId?.username || "Utilis
 
 <template>
   <div class="container mx-auto p-4 mb-32">
-   
+    <div class="m-1">
+      <BackArrowIconsvg @click="goBack" class="cursor-pointer" />
+    </div>
 
     <div v-if="dream">
       <div class="bg-LightPurple overflow-hidden pt-2 rounded-lg mx-1 mt-4">
@@ -105,7 +107,7 @@ const username = computed(() => dream.value?.expand?.userId?.username || "Utilis
           </div>
         </div>
       </div>
-      <div class="mt-8">
+      <div class="mt-6">
         <p class="text-lg mb-2 text-white">Commentaires</p>
         <div class="flex justify-between gap-4 items-center">
           <textarea

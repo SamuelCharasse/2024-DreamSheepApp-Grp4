@@ -138,14 +138,19 @@ export async function getDreamsWithUsernames() {
 
 export async function addComment(userId: string, dreamId: string, message: string) {
   try {
-      const newComment = await pb.collection('commentaires').create({
-          userId: userId,
-          dreamId: dreamId,
-          Message: message,
-      });
-      return newComment;
+    // Récupérer les informations de l'utilisateur connecté
+    const user = await pb.collection('users').getOne(userId);
+
+    const newComment = await pb.collection('commentaires').create({
+      userId: userId,
+      dreamId: dreamId,
+      Message: message,
+      username: user.username,
+      avatar: user.avatar,
+    });
+    return newComment;
   } catch (error) {
-      throw new Error(`Failed to add comment: ${error.message}`);
+    throw new Error(`Failed to add comment: ${error.message}`);
   }
 }
 
