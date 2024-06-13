@@ -4,14 +4,12 @@ import { getUserDreams } from "@/assets/backend";
 import { pb } from "@/assets/backend";
 import BackArrowIconsvg from "@/components/icons/BackArrowIconsvg.vue";
 import { useRouter } from "vue-router";
-// Assurez-vous que le chemin est correct
 
 const router = useRouter();
 
 function goBack() {
   router.back(); // Navigue à la page précédente dans l'historique du navigateur
 }
-
 
 const userId = pb.authStore.model?.id || "anonymous";
 const dreams = ref([]);
@@ -25,28 +23,23 @@ const fetchUserDreams = async () => {
 };
 
 const totalDreams = computed(() => dreams.value.length);
-const dreamCount = computed(
-  () => dreams.value.filter((dream) => dream.type === "Rêve").length
-);
-const nightmareCount = computed(
-  () => dreams.value.filter((dream) => dream.type === "Cauchemar").length
-);
-const recurrentDreamCount = computed(
-  () => dreams.value.filter((dream) => dream.recurrent).length
-);
+const dreamCount = computed(() => dreams.value.filter(dream => dream.type === "Rêve").length);
+const nightmareCount = computed(() => dreams.value.filter(dream => dream.type === "Cauchemar").length);
+const recurrentDreamCount = computed(() => dreams.value.filter(dream => dream.recurrent).length);
+
+const dreamPercentage = computed(() => totalDreams.value > 0 ? (dreamCount.value / totalDreams.value) * 100 : 0);
+const nightmarePercentage = computed(() => totalDreams.value > 0 ? (nightmareCount.value / totalDreams.value) * 100 : 0);
+const recurrentPercentage = computed(() => totalDreams.value > 0 ? (recurrentDreamCount.value / totalDreams.value) * 100 : 0);
 
 const tagCounts = computed(() => {
   const tagMap = {};
   dreams.value.forEach((dream) => {
-    const tags = dream.tags.split(",");
-    tags.forEach((tag) => {
-      tag = tag.trim();
-      if (tagMap[tag]) {
-        tagMap[tag]++;
-      } else {
-        tagMap[tag] = 1;
-      }
-    });
+    const tag = dream.tags.trim();
+    if (tagMap[tag]) {
+      tagMap[tag]++;
+    } else {
+      tagMap[tag] = 1;
+    }
   });
   return tagMap;
 });
@@ -82,76 +75,50 @@ onMounted(fetchUserDreams);
       <h1 class="text-xl font-bold text-center text-white flex-1">Statistiques</h1>
     </div>
 
-    <div v-if="totalDreams > 0" class="space-y-8">
-      <!-- Rapport Rêves/Cauchemars -->
-      <div class="bg-DarkPurple p-2 rounded-lg shadow-md">
-        <h2 class="text-center text-xl font-semibold text-white mb-4">
-          RAPPORT
-        </h2>
-        <div class="flex justify-around">
-          <div class="flex flex-col items-center">
-            <div class="relative w-20 h-20 rounded-full bg-blue-200">
-              <div
-                class="absolute inset-0 flex items-center justify-center text-2xl font-bold text-blue-900"
-              >
-                {{ dreamCount }}
-              </div>
-            </div>
-            <p class="text-white mt-2">Rêves</p>
-          </div>
-          <div class="flex flex-col items-center">
-            <div class="relative w-20 h-20 rounded-full bg-red-200">
-              <div
-                class="absolute inset-0 flex items-center justify-center text-2xl font-bold text-red-900"
-              >
-                {{ nightmareCount }}
-              </div>
-            </div>
-            <p class="text-white mt-2">Cauchemars</p>
-          </div>
-        </div>
+    <div v-if="totalDreams > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- Carte pour le nombre total de rêves -->
+      <div class="bg-DarkPurple p-4 rounded-lg shadow-md text-center">
+        <h2 class="text-white text-lg font-semibold">Total des Rêves</h2>
+        <p class="text-3xl font-bold text-blue-200">{{ totalDreams }}</p>
       </div>
 
-      <!-- Statistiques par Tags -->
-      <div class="bg-DarkPurple p-4 rounded-lg shadow-md">
-        <h2 class="text-center text-xl font-semibold text-white mb-4">
-          TYPE DE RÊVE
-        </h2>
-        <div>
-          <div v-for="(count, tag) in tagCounts" :key="tag" class="mb-2">
-            <div class="flex items-center">
+      <!-- Carte pour les rêves -->
+      <div class="bg-DarkPurple p-4 rounded-lg shadow-md text-center">
+        <h2 class="text-white text-lg font-semibold">Rêves</h2>
+        <p class="text-3xl font-bold text-green-200">{{ dreamCount }}</p>
+        <p class="text-sm text-green-200">{{ dreamPercentage.toFixed(2) }}%</p>
+      </div>
+
+      <!-- Carte pour les cauchemars -->
+      <div class="bg-DarkPurple p-4 rounded-lg shadow-md text-center">
+        <h2 class="text-white text-lg font-semibold">Cauchemars</h2>
+        <p class="text-3xl font-bold text-red-200">{{ nightmareCount }}</p>
+        <p class="text-sm text-red-200">{{ nightmarePercentage.toFixed(2) }}%</p>
+      </div>
+
+      <!-- Carte pour les rêves récurrents -->
+      <div class="bg-DarkPurple p-4 rounded-lg shadow-md text-center">
+        <h2 class="text-white text-lg font-semibold">Rêves Récurrents</h2>
+        <p class="text-3xl font-bold text-teal-200">{{ recurrentDreamCount }}</p>
+        <p class="text-sm text-teal-200">{{ recurrentPercentage.toFixed(2) }}%</p>
+      </div>
+
+      <!-- Carte pour les statistiques par tags -->
+      <div class="bg-DarkPurple p-4 rounded-lg shadow-md col-span-1 md:col-span-2 lg:col-span-3">
+        <h2 class="text-center text-lg font-semibold text-white mb-4">Type de Rêve</h2>
+        <div class="flex flex-wrap gap-2 justify-center">
+          <div v-for="(count, tag) in tagCounts" :key="tag" class="flex items-center gap-2 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+            <div :class="`${getTagColor(tag)} w-4 h-4 rounded-full`"></div>
+            <span class="text-white text-sm font-semibold">{{ tag }}</span>
+            <div class="flex-1 h-4 bg-gray-200 rounded-full overflow-hidden">
               <div
+                class="h-4 rounded-full"
                 :class="getTagColor(tag)"
-                class="w-4 h-4 rounded-full mr-2"
+                :style="{ width: totalDreams.value > 0 ? (count / totalDreams.value) * 100 + '%' : '0%' }"
               ></div>
-              <span class="text-white font-semibold mr-2">{{ tag }}</span>
-              <div class="flex-1 h-4 bg-gray-200 rounded">
-                <div
-                  class="h-4 rounded"
-                  :class="getTagColor(tag)"
-                  :style="{ width: (count / totalDreams.value) * 100 + '%' }"
-                ></div>
-              </div>
-              <span class="ml-2 text-white">{{ count }}</span>
             </div>
+            <span class="ml-2 text-white text-sm">{{ totalDreams.value > 0 ? ((count / totalDreams.value) * 100).toFixed(2) : 0 }}%</span>
           </div>
-        </div>
-      </div>
-
-      <!-- Statistiques de Rêves Récurrents -->
-      <div class="bg-DarkPurple p-4 rounded-lg shadow-md">
-        <h2 class="text-center text-xl font-semibold text-white mb-4">
-          RÊVES RÉCURRENTS
-        </h2>
-        <div class="flex flex-col items-center">
-          <div class="relative w-20 h-20 rounded-full bg-green-200">
-            <div
-              class="absolute inset-0 flex items-center justify-center text-2xl font-bold text-green-900"
-            >
-              {{ recurrentDreamCount }}
-            </div>
-          </div>
-          <p class="text-white mt-2">Récurrents</p>
         </div>
       </div>
     </div>
@@ -161,4 +128,3 @@ onMounted(fetchUserDreams);
     </div>
   </div>
 </template>
-

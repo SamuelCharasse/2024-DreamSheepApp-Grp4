@@ -10,7 +10,7 @@ const props = defineProps<{
     id: string
     title: string
     description: string
-    tags: string[]
+    tags: string
     date: string
 }>();
 
