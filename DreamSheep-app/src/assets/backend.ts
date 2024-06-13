@@ -2,31 +2,44 @@ import PocketBase from "pocketbase";
 import { type DreamsResponse, type TypedPocketBase, Collections } from "@/pocketbase-types";
 
 export const pb = new PocketBase(import.meta.env.VITE_URL_POCKETBASE) as TypedPocketBase;
-
+//ajout d'un utilisateur - Création de compte
 export async function addUser(event: {
   email: string;
   password: string;
   passwordConfirm: string;
   username: string;
   name: string;
+  avatar?: File;
+  banniere?: File;
 }) {
   if (event.password !== event.passwordConfirm) {
     throw new Error("Les mots de passe ne correspondent pas.");
   }
 
   try {
-    const record = await pb.collection("users").create({
-      email: event.email,
-      username: event.username,
-      name: event.name,
-      password: event.password,
-      passwordConfirm: event.passwordConfirm,
-    });
+    const formData = new FormData();
+    formData.append("email", event.email);
+    formData.append("username", event.username);
+    formData.append("name", event.name);
+    formData.append("password", event.password);
+    formData.append("passwordConfirm", event.passwordConfirm);
+
+    if (event.avatar) {
+      formData.append("avatar", event.avatar);
+    }
+
+    if (event.banniere) {
+      formData.append("banniere", event.banniere);
+    }
+
+    const record = await pb.collection("users").create(formData);
+
     return record;
   } catch (error) {
     throw error;
   }
 }
+
 
 export async function logIn(email: string, password: string) {
   try {
@@ -125,36 +138,37 @@ export async function getDreamsWithUsernames() {
 
 export async function addComment(userId: string, dreamId: string, message: string) {
   try {
-      const newComment = await pb.collection('commentaires').create({
-          userId: userId,
-          dreamId: dreamId,
-          Message: message,
-      });
-      return newComment;
+    const newComment = await pb.collection('commentaires').create({
+      userId: userId,
+      dreamId: dreamId,
+      Message: message,
+    });
+    return newComment;
   } catch (error) {
-      throw new Error(`Failed to add comment: ${error.message}`);
+    throw new Error(`Failed to add comment: ${error.message}`);
   }
 }
 
+// Récupérer les commentaires
 export async function getComments(dreamId: string) {
   try {
-      const comments = await pb.collection('commentaires').getFullList({
-          filter: `dreamId="${dreamId}"`,
-          expand: 'userId',
-          sorted: '-created',
-      });
+    const comments = await pb.collection('commentaires').getFullList({
+      filter: `dreamId="${dreamId}"`,
+      expand: 'userId',
+    });
 
-      const commentsWithUserDetails = comments.map(comment => {
-          const user = comment.expand?.userId || { username: 'Utilisateur inconnu' };
-          return {
-              ...comment,
-              user: user
-          };
-      });
+    const commentsWithUserDetails = comments.map(comment => {
+      const user = comment.expand?.userId || { username: 'Utilisateur inconnu', avatar: null };
+      return {
+        id: comment.id,
+        message: comment.Message,
+        user: user
+      };
+    });
 
-      return commentsWithUserDetails;
+    return commentsWithUserDetails;
   } catch (error) {
-      throw new Error(`Failed to fetch comments: ${error.message}`);
+    throw new Error(`Failed to fetch comments: ${error.message}`);
   }
 }
 
@@ -175,26 +189,24 @@ export async function reportDream(dreamId: string, userId: string, message: stri
   }
 }
 
-export async function fetchUserSharedDreams(userId: string) {
-  try {
-    const dreams = await pb.collection('dreams').getFullList({
-      filter: `userId="${userId}" && partage=true`,
-    });
-    return dreams;
-  } catch (error) {
-    console.error('Error fetching user shared dreams:', error);
-    throw error;
-  }
-}
 
-export async function fetchUserLikedDreams(userId: string) {
+
+export async function fetchUserLikedDream(userId: string) {
   try {
     const likes = await pb.collection('likes').getFullList({
       filter: `userId="${userId}"`,
-      expand: 'dreamId',
+      expand: 'dreamId.userId',
     });
 
-    const likedDreams = likes.map(like => like.expand.dreamId);
+    const likedDreams = likes.map(like => {
+      const dream = like.expand?.dreamId;
+      const user = dream?.expand?.userId || { username: 'Utilisateur inconnu', avatar: null };
+      return {
+        ...dream,
+        user: user
+      };
+    });
+
     return likedDreams;
   } catch (error) {
     console.error('Error fetching user liked dreams:', error);
@@ -212,23 +224,24 @@ export async function allDreamUserSort() {
 }
 export async function fetchSharedDreams() {
   try {
-      const dreams = await pb.collection('dreams').getFullList({
-          filter: 'partage = true',
-          expand: 'userId' // Assurez-vous d'inclure les détails de l'utilisateur
-      });
+    const dreams = await pb.collection('dreams').getFullList({
+      filter: 'partage = true',
+      expand: 'userId'
+    });
 
-      const dreamsWithUserDetails = dreams.map(dream => {
-          const user = dream.expand?.userId || { username: 'Utilisateur inconnu', avatar: null };
-          return {
-              ...dream,
-              user: user
-          };
-      });
+    const dreamsWithUserDetails = dreams.map(dream => {
+      const user = dream.expand?.userId || { username: 'Utilisateur inconnu', avatar: null };
+      return {
+        ...dream,
+        user: user,
+        avatarUrl: user?.avatar ? pb.getFileUrl(user, user.avatar) : null // Ajout de l'URL de l'avatar
+      };
+    });
 
-      return dreamsWithUserDetails;
+    return dreamsWithUserDetails;
   } catch (error) {
-      console.error('Error fetching shared dreams:', error);
-      throw error;
+    console.error('Error fetching shared dreams:', error);
+    throw error;
   }
 }
 
@@ -386,7 +399,7 @@ export async function getUserData(userId: string) {
 }
 
 
-export async function updateUserData(userId: string, userData: { name?: string; username?: string; avatar?: string; email?: string }) {
+export async function updateUserData(userId: string, userData: { name?: string; username?: string; avatar?: string; email?: string; banniere?: string}) {
   try {
     const updatedUser = await pb.collection('users').update(userId, userData);
     return updatedUser;
@@ -406,4 +419,118 @@ export async function changePassword(userId: string, newPassword: string, confir
   } else {
       throw new Error('Les nouveaux mots de passe ne correspondent pas.');
     };
+}
+
+
+//récup les infos de l'utilisateur connecté 
+export async function getCurrentUser() {
+  try {
+    const user = await pb.authStore.model;
+    if (!user) {
+      throw new Error("Utilisateur non connecté");
+    }
+    return {
+      ...user,
+      avatarUrl: user.avatar
+        ? `http://127.0.0.1:8090/api/files/_pb_users_auth_/${user.id}/${user.avatar}`
+        : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+    };
+  } catch (error) {
+    console.error("Error fetching current user:", error);
+    throw error;
+  }
+}
+
+//fonction pour afficher les rêves que l'utilisateur a posté
+export async function fetchUserSharedDreams() {
+  try {
+      if (!pb.authStore.isValid) {
+          throw new Error('Utilisateur non connecté');
+      }
+
+      const userId = pb.authStore.model?.id;
+      if (!userId) {
+          throw new Error('ID utilisateur non disponible');
+      }
+
+      const dreams = await pb.collection(Collections.Dreams).getFullList({
+          filter: `userId = '${userId}' && partage = true`,
+          expand: 'userId'
+      });
+
+      const dreamsWithUserDetails = dreams.map(dream => {
+          const user = dream.expand?.userId || { username: 'Utilisateur inconnu', avatar: null };
+          return {
+              ...dream,
+              user: user
+          };
+      });
+
+      return dreamsWithUserDetails;
+  } catch (error) {
+      console.error('Error fetching shared dreams:', error);
+      throw new Error('Unable to fetch shared dreams at this time.');
+  }
+}
+
+//page profil post liké par l'utilisateur
+export async function fetchLikedDreams() {
+  try {
+    if (!pb.authStore.isValid) {
+      throw new Error('Utilisateur non connecté');
+    }
+
+    const userId = pb.authStore.model?.id;
+    if (!userId) {
+      throw new Error('ID utilisateur non disponible');
+    }
+
+    const likes = await pb.collection(Collections.Likes).getFullList({
+      filter: `userId="${userId}"`,
+      expand: 'dreamId,dreamId.userId'
+    });
+
+    const likedDreams = likes.map(like => {
+      const dream = like.expand?.dreamId;
+      if (dream) {
+        dream.user = dream.expand?.userId || { username: 'Dreamer anonyme', avatar: null };
+      }
+      return dream;
+    }).filter(dream => dream !== undefined);
+
+    return likedDreams;
+  } catch (error) {
+    console.error('Error fetching liked dreams:', error);
+    throw new Error('Unable to fetch liked dreams at this time.');
+  }
+}
+
+//
+export interface User {
+  id: string;
+  username: string;
+  avatar: string | null;
+}
+export async function fetchUserProfile(): Promise<User> {
+  try {
+    const user = pb.authStore.model; // Utilisateur actuellement connecté
+    if (user) {
+      return user as User;
+    } else {
+      throw new Error('No user is logged in');
+    }
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    throw error;
+  }
+}
+
+// supprimer le compte d'un utilisateur
+export async function deleteUserAccount(userId: string) {
+  try {
+    await pb.collection('users').delete(userId);
+    return { success: true, message: 'Compte utilisateur supprimé avec succès.' };
+  } catch (error) {
+    return { success: false, message: 'Erreur lors de la suppression du compte utilisateur.' };
+  }
 }

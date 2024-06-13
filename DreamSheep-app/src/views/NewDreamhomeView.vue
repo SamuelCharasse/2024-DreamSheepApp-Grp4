@@ -41,9 +41,6 @@ function goBack() {
 <template>
   <div class="pb-32">
     <form method="post" @submit.prevent="handleCreateDream">
-        <div @click="goBack" class="cursor-pointer my-2">
-            <BackArrowIconsvg />
-        </div>
       <div class="m-3">
         <div class="pb-4 flex flex-col">
           <label class="text-white text-base font-medium pb-1" for="title">Titre du rêve</label>

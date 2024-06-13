@@ -31,6 +31,7 @@ const commentCount = ref(props.commentaires);
 const hasLiked = ref(false);
 const router = useRouter();
 
+
 onMounted(async () => {
   fetchLikes();
   fetchComments();
@@ -42,6 +43,7 @@ const fetchLikes = async () => {
   likes.value = result.length;
   hasLiked.value = result.some((like) => like.userId === userId);
 };
+
 
 const fetchComments = async () => {
   const result = await getComments(props.id);
@@ -62,12 +64,17 @@ const goToComments = () => {
 };
 
 const username = computed(() => props.user?.username || "Utilisateur inconnu");
+const userAvatar = computed(() => {
+  return props.user && props.user.avatar
+    ? `http://127.0.0.1:8090/api/files/_pb_users_auth_/${props.user.id}/${props.user.avatar}`
+    : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+});
 </script>
 
 <template>
   <div class="bg-LightPurple overflow-hidden pt-2 rounded-lg mx-4 mt-4">
     <div class="flex flex-grow-0 flex-shrink-0 py-3 pl-4">
-      <ProfileIcon />
+      <img :src="userAvatar" alt="avatar" class="w-10 h-10 rounded-full mr-3" />
       <p class="text-indigo-900 font-normal text-xl pl-4 pt-3">
         {{ username }}
       </p>
@@ -76,24 +83,28 @@ const username = computed(() => props.user?.username || "Utilisateur inconnu");
       <h3 class="text-black overflow-auto">{{ props.title }}</h3>
       <p class="text-black text-base overflow-auto">{{ props.description }}</p>
     </div>
-    <div class="flex justify-self-start flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-4">
-      <div class="comments cursor-pointer flex gap-3" @click="goToComments">
-        <CommentIcon />
-        <span>{{ commentCount.length }}</span>
-      </div>
-      <div @click="toggleLike" class="cursor-pointer">
-        <component :is="hasLiked ? HeartFullIcon : HeartIcon" />
-      </div>
-      <div class="flex gap-2">
-      <p class="text-black text-sm pl-0.5">{{ likes.length }}</p>
-      <FlagIcon/>
-      <RouterLink :to="`/report/${props.id}`">Signaler</RouterLink>
-      </div>
-      <div class="bg-violet-200 rounded-lg flex items-center space-x-1 px-2 py-1">
+    <div class="flex flex-col">
+      <div
+        class="bg-violet-200 rounded-lg flex items-start justify-start ml-2 py-1 px-3 w-[fit-content] gap-2"
+      >
         <TagIcon />
         <p class="text-black text-xs">{{ props.tags }}</p>
       </div>
-      
+      <div
+        class="flex justify-self-start flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-4"
+      >
+        <div class="comments cursor-pointer flex gap-3" @click="goToComments">
+          <CommentIcon />
+          <span>{{ commentCount }}</span>
+        </div>
+        <div @click="toggleLike" class="cursor-pointer">
+          <component :is="hasLiked ? HeartFullIcon : HeartIcon" />
+        </div>
+        <p class="text-black text-sm pl-0.5">{{ likes }}</p>
+        <RouterLink to="/report">
+          <FlagIcon />
+        </RouterLink>
+      </div>
     </div>
   </div>
 </template>

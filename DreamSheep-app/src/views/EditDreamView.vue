@@ -53,10 +53,9 @@ const handleUpdateDream = async () => {
 </script>
 
 <template>
-  <div class="m-3">
-    <div class="flex text-white gap-20">
-      <BackArrowIconsvg @click="router.back()" class="cursor-pointer" />
-      <h1>Modifier le Rêve</h1>
+  <div class="mx-3 mb-32">
+    <div class="flex justify-center text-center text-white gap-20">
+      <h1 class="text-center ">Modifier le Rêve</h1>
     </div>
     <form @submit.prevent="handleUpdateDream">
       <div class="flex flex-col mt-6">
@@ -64,7 +63,7 @@ const handleUpdateDream = async () => {
         <input
           v-model="dreamDetails.title"
           placeholder="Titre du rêve"
-          class="rounded-sm mb-3 p-1 bg-LightPurple"
+          class="rounded-sm mb-3 p-1 bg-slate-200"
         />
       </div>
       <div class="flex flex-col mt-6">
@@ -72,7 +71,7 @@ const handleUpdateDream = async () => {
         <textarea
           v-model="dreamDetails.description"
           placeholder="Description du rêve"
-          class="rounded-sm mb-3 p-1 bg-LightPurple"
+          class="rounded-sm mb-3 p-1 bg-slate-200 h-auto"
         ></textarea>
       </div>
       <div class="flex flex-col mt-6">
@@ -81,14 +80,14 @@ const handleUpdateDream = async () => {
           type="date"
           v-model="dreamDetails.date"
           placeholder="Date du rêve"
-          class="rounded-sm mb-3 p-1 bg-LightPurple"
+          class="rounded-sm mb-3 p-2 bg-slate-200"
         />
       </div>
       <div class="flex flex-col mt-6">
         <h2 class="text-white">Type de rêve</h2>
         <select
           v-model="dreamDetails.type"
-          class="rounded-sm mb-3 p-1 bg-LightPurple"
+          class="rounded-sm mb-3 p-2 bg-slate-200"
         >
           <option value="Rêve">Rêve</option>
           <option value="Cauchemar">Cauchemar</option>
@@ -98,7 +97,7 @@ const handleUpdateDream = async () => {
         <h2 class="text-white">Tags</h2>
         <select
           v-model="dreamDetails.tags"
-          class="rounded-sm mb-3 p-1 bg-LightPurple"
+          class="rounded-sm mb-3 p-2 bg-slate-200"
         >
           <option value="humour">humour</option>
           <option value="amour">Amour</option>
@@ -144,8 +143,8 @@ const handleUpdateDream = async () => {
   </div>
       </div>
       <div class="flex justify-center mt-3">
-      <button :disabled="isLoading" class="text-black rounded-md bg-yellow-200 p-2 mt-3 font-medium">
-        Sauvegarder les modifications
+      <button :disabled="isLoading" class="text-black rounded-md bg-yellow-200 p-2 mt-10">
+        Sauvegarder 
       </button>
     </div>
     </form>

@@ -97,6 +97,7 @@ export type UsersRecord = {
 	avatar?: string
 	name?: string
 	users_avatar?: RecordIdString
+	banniere?: string
 }
 
 // Response types include system fields and match responses from the PocketBase API

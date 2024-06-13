@@ -6,6 +6,7 @@ import HomeIcon from '@/components/icons/HomeIcon.vue';
 import ProfileIcon from '@/components/icons/ProfileIcon.vue';
 import ShopIcon from '@/components/icons/ShopIcon.vue';
 import SettingsIcon from '@/components/icons/SettingsIcon.vue';
+import UserIcon from '@/components/icons/UserIcon.vue';
 </script>
 
 <template>
@@ -27,7 +28,7 @@ import SettingsIcon from '@/components/icons/SettingsIcon.vue';
             </li>
             <li>
                 <router-link to="/profile" class="flex flex-col items-center">
-                <ProfileIcon class="h-6 w-6 text-slate-50"/>
+                <UserIcon class="h-6 w-6 text-slate-50"/>
                 <span>Profile</span>
                 <EllipseMenu v-if="$route.path === '/profile'" class="h-4 w-4"/>
                 </router-link>

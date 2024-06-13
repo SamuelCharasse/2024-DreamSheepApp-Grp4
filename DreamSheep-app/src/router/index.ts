@@ -132,6 +132,11 @@ const router = createRouter({
     name: 'Report',
     component: () => import('@/components/Report.vue'),
     props: true
+  },
+  {
+    path:'/auth/reset-password/:token',
+    name:'reset-password',
+    component: () => import('../views/ResetPasswordView.vue'),
   }
   ]
 })
