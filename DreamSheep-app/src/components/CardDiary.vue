@@ -27,13 +27,15 @@ const formatDate = (dateString: string) => {
 const formattedDate = computed(() => formatDate(props.date));
 
 const handleDelete = async () => {
-    try {
-        await deleteDreams(props.id);
-        alert('Rêve supprimé avec succès');
-        // Optionnel : ajouter une logique pour mettre à jour l'affichage des rêves après la suppression
-    } catch (error) {
-        console.error('Erreur lors de la suppression du rêve:', error);
-        alert('Erreur lors de la suppression du rêve');
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce rêve ?')) {
+        try {
+            await deleteDreams(props.id);
+            alert('Rêve supprimé avec succès');
+            // Optionnel : ajouter une logique pour mettre à jour l'affichage des rêves après la suppression
+        } catch (error) {
+            console.error('Erreur lors de la suppression du rêve:', error);
+            alert('Erreur lors de la suppression du rêve');
+        }
     }
 };
 
@@ -62,7 +64,7 @@ const goToEdit =()=>{
             <p class="text-black text-xs overflow-auto">{{ tags }}</p>
           </div>
         </div>
-        <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-1 pb-2.5">
+        <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 relative gap-5 px-2 py-1 pb-2.5">
           <div class="flex items-center space-x-1 px-2 py-1" @click="goToEdit">
             <EditIcon class="w-4 h-4"/>
             <p class="text-black text-xs">Modifier</p>
@@ -70,6 +72,9 @@ const goToEdit =()=>{
           <div class="flex items-center space-x-1 px-2 py-1">
             <CrossIcon @click="handleDelete" class="cursor-pointer w-5 h-5" />
             <p class="text-black text-xs cursor-pointer" @click="handleDelete">Supprimer</p>
+          </div>
+          <div class="flex items-center space-x-1 px-2 py-1">
+            <p class="text-blue-500 text-xs cursor-pointer" @click="goToDetails">Voir les détails</p>
           </div>
         </div>
       </div>
