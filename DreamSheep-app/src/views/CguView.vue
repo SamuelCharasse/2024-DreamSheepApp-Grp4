@@ -6,9 +6,9 @@ import { RouterLink } from "vue-router";
   <main class="settings mb-20 mx-3 py-5 px-4 overflow-auto">
     <div class="flex justify-center items-center pb-5">
       <RouterLink to="/more-info"><BackArrowIconsvg /></RouterLink>
-      <p class="text-base text-white px-7">
+      <h2 class="text-base text-white px-7">
         Conditions générales d'utilisation
-      </p>
+      </h2>
     </div>
     <div class="text-white pb-3">
       <p class="pb-2.5">En vigueur au 07/02/2024</p>

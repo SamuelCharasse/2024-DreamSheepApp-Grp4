@@ -4,12 +4,12 @@ import { RouterLink } from "vue-router";
 </script>
 
 <template>
-  <main class="settings mx-3 py-5 px-4 mb-20 overflow-auto">
-    <div class="flex justify-between items-center flex-grow-0 flex-shrink-0">
-      <RouterLink to="/more-info"><BackArrowIconsvg /></RouterLink>
-      <p class="text-base text-center text-white flex-grow pb-5">
+  <main class="settings mx-3 py-5 px-4 mb-20">
+    <div class="flex justify-center items-center pb-5">
+      <RouterLink to="/more-info"><BackArrowIconsvg/></RouterLink> 
+      <h2 class="text-white text-sm font-norma px-7 justify-center">
         Politique de cookies
-      </p>
+      </h2>
     </div>
     <div class="text-white pb-3">
       <p class="pb-2.5">
