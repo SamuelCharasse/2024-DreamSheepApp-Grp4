@@ -9,12 +9,12 @@ import Button from "@/components/Button.vue";
 const userId = pb.authStore.model?.id;
 const name = ref("");
 const username = ref("");
-const avatar = ref("");
 const email = ref("");
+const avatar = ref<File | null>(null);
+const banniere = ref<File | null>(null);
 const router = useRouter();
 const isLoading = ref(false);
 const errorMessage = ref("");
-const banniere = ref("");
 
 const fetchUserData = async () => {
   if (!userId) return;
@@ -22,9 +22,7 @@ const fetchUserData = async () => {
     const user = await getUserData(userId);
     name.value = user.name || "";
     username.value = user.username || "";
-    avatar.value = user.avatar || "";
     email.value = user.email || "";
-    banniere.value = user.banniere || "";
   } catch (error) {
     console.error("Failed to fetch user data:", error);
   }
@@ -32,17 +30,34 @@ const fetchUserData = async () => {
 
 onMounted(fetchUserData);
 
+const handleFileChange = (event: Event, type: "avatar" | "banniere") => {
+  const target = event.target as HTMLInputElement;
+  const file = target.files?.[0] || null;
+  if (type === "avatar") {
+    avatar.value = file;
+  } else {
+    banniere.value = file;
+  }
+};
+
 const handleUpdateUserData = async () => {
   isLoading.value = true;
   errorMessage.value = "";
   try {
-    await updateUserData(userId, {
-      name: name.value,
-      username: username.value,
-      avatar: avatar.value,
-      email: email.value,
-      banniere: banniere.value,
-    });
+    const formData = new FormData();
+    formData.append("name", name.value);
+    formData.append("username", username.value);
+    formData.append("email", email.value);
+
+    if (avatar.value) {
+      formData.append("avatar", avatar.value);
+    }
+
+    if (banniere.value) {
+      formData.append("banniere", banniere.value);
+    }
+
+    await updateUserData(userId, formData);
     router.push("/settings");
   } catch (error) {
     errorMessage.value =
@@ -53,6 +68,7 @@ const handleUpdateUserData = async () => {
   }
 };
 </script>
+
 
 <template>
   <main class="settings mx-3 py-5 overflow-auto mb-32">
@@ -96,19 +112,17 @@ const handleUpdateUserData = async () => {
     <div class="border-y border-slate-100 py-5">
       <p class="pb-2.5 text-slate-50">Avatar</p>
       <input
-        type="text"
-        placeholder="Votre avatar"
+        type="file"
         class="bg-white text-black rounded-md p-2.5 w-full"
-        v-model="avatar"
+        @change="event => handleFileChange(event, 'avatar')"
       />
     </div>
     <div class="border-y border-slate-100 py-5">
       <p class="pb-2.5 text-slate-50">Bannière</p>
       <input
-        type="text"
-        placeholder="Votre avatar"
+        type="file"
         class="bg-white text-black rounded-md p-2.5 w-full"
-        v-model="banniere"
+        @change="event => handleFileChange(event, 'banniere')"
       />
     </div>
 

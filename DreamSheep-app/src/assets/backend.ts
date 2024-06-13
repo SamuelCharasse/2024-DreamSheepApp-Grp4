@@ -398,7 +398,7 @@ export async function getUserData(userId: string) {
 }
 
 
-export async function updateUserData(userId: string, userData: { name?: string; username?: string; avatar?: string; email?: string }) {
+export async function updateUserData(userId: string, userData: { name?: string; username?: string; avatar?: string; email?: string; banniere?: string}) {
   try {
     const updatedUser = await pb.collection('users').update(userId, userData);
     return updatedUser;
@@ -485,14 +485,14 @@ export async function fetchLikedDreams() {
     }
 
     const likes = await pb.collection(Collections.Likes).getFullList({
-      filter: `userId = '${userId}'`,
+      filter: `userId="${userId}"`,
       expand: 'dreamId,dreamId.userId'
     });
 
     const likedDreams = likes.map(like => {
       const dream = like.expand?.dreamId;
-      if (dream && dream.expand?.userId) {
-        dream.user = dream.expand.userId;
+      if (dream) {
+        dream.user = dream.expand?.userId || { username: 'Dreamer anonyme', avatar: null };
       }
       return dream;
     }).filter(dream => dream !== undefined);

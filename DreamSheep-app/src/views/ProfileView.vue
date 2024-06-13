@@ -78,55 +78,58 @@ const userBanniere = computed(() => {
 </script>
 
 <template>
-  
-  <div class="relative w-full max-w-3xl mx-auto my-4rounded-lg">
+  <div class="relative w-full max-w-3xl mx-auto my-4 rounded-lg">
     <div v-if="userBanniere" class="w-full h-40 bg-cover rounded-t-lg" :style="{ backgroundImage: `url(${userBanniere})` }"></div>
     <div class="absolute inset-0 flex items-center justify-center gap-8">
       <img :src="userAvatar" alt="avatar" class="w-16 h-16 rounded-full mb-2" />
       <p class="text-white text-xl font-bold">{{ username }}</p>
     </div>
   </div>
+  <div class="flex justify-center text-center mb-8">
+    <RouterLink to="/info" class="text-white">
+      <button class="text-black bg-yellow-200 px-2 py-1 rounded-md">Modifier le profil</button>
+    </RouterLink>
+  </div>
   <div class="mx-3">
-  <div class="text-white flex justify-center gap-28 my-4">
-    <div @click="switchTab('posts')" :class="{'border-b border-yellow-200 text-yellow-200': activeTab === 'posts'}">
-      <h3>Posts</h3>
+    <div class="text-white flex justify-center gap-28 my-4">
+      <div @click="switchTab('posts')" :class="{'border-b border-yellow-200 text-yellow-200': activeTab === 'posts'}">
+        <h3>Posts</h3>
+      </div>
+      <div @click="switchTab('likes')" :class="{'border-b border-yellow-200 text-yellow-200': activeTab === 'likes'}">
+        <h3>J'aime</h3>
+      </div>
     </div>
-    <div @click="switchTab('likes')" :class="{'border-b border-yellow-200 text-yellow-200': activeTab === 'likes'}">
-      <h3>J'aime</h3>
+
+    <div v-if="activeTab === 'posts'" class="mb-32">
+      <CardHome
+        v-for="dream in userDreams"
+        :key="dream.id"
+        :id="dream.id"
+        :title="dream.title"
+        :description="dream.description"
+        :date="dream.created"
+        :tags="dream.tags"
+        :user="dream.user"
+        :likes="dream.likes || 0"
+        :commentaires="dream.commentaires || 0"
+        @deleteDream="fetchUserDreams"
+      />
+    </div>
+
+    <div v-if="activeTab === 'likes'" class="mb-32">
+      <CardHome
+        v-for="dream in likedDreams"
+        :key="dream.id"
+        :id="dream.id"
+        :title="dream.title"
+        :description="dream.description"
+        :date="dream.created"
+        :tags="dream.tags"
+        :user="dream.user"
+        :likes="dream.likes || 0"
+        :commentaires="dream.commentaires || 0"
+        @deleteDream="loadLikedDreams"
+      />
     </div>
   </div>
-
-  <div v-if="activeTab === 'posts'" class="mb-32">
-    <CardHome
-      v-for="dream in userDreams"
-      :key="dream.id"
-      :id="dream.id"
-      :title="dream.title"
-      :description="dream.description"
-      :date="dream.created"
-      :tags="dream.tags"
-      :user="dream.user"
-      :likes="dream.likes || 0"
-      :commentaires="dream.commentaires || 0"
-      @deleteDream="fetchUserDreams"
-    />
-  </div>
-
-  <div v-if="activeTab === 'likes'" class="mb-32">
-    <CardHome
-      v-for="dream in likedDreams"
-      :key="dream.id"
-      :id="dream.id"
-      :title="dream.title"
-      :description="dream.description"
-      :date="dream.created"
-      :tags="dream.tags"
-      :user="dream.user"
-      :likes="dream.likes || 0"
-      :commentaires="dream.commentaires || 0"
-      @deleteDream="loadLikedDreams"
-    />
-  </div>
-</div>
 </template>
-
