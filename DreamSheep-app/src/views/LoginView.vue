@@ -37,6 +37,17 @@ const handleSignIn = async () => {
         isLoading.value = false;
     }
 };
+
+
+const handleForgotPassword = async () => {
+  try {
+    await pb.collection('users').requestPasswordReset(email.value);
+    alert('Un lien de réinitialisation de mot de passe a été envoyé à votre adresse email.');
+  } catch (error) {
+    console.error('Error requesting password reset:', error);
+    alert('Erreur lors de la demande de réinitialisation du mot de passe.');
+  }
+};
 </script>
 
 <template>
@@ -59,6 +70,13 @@ const handleSignIn = async () => {
         <div v-if="errorMessage" class="error-message">
             {{ errorMessage }}
         </div>
+        <div>
+    <h1>Mot de passe oublié</h1>
+    <form @submit.prevent="handleForgotPassword">
+      <input v-model="email" type="email" placeholder="Votre adresse email" required />
+      <button type="submit">Envoyer le lien de réinitialisation</button>
+    </form>
+  </div>
         <div class="flex justify-center pt-8 pb-5">
         <button class="text-black bg-yellow-200 px-3 py-2 rounded-md" type="submit" :disabled="isLoading">Se connecter</button>
     </div>
